@@ -9,3 +9,23 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id  Int   @id @default(autoincrement())
+  email String  @unique
+  dateCreated DateTime @default(now()) 
+  username String @unique @db.VarChar(60)
+  password  String  @db.VarChar(60)
+}
+
+model Zoop {
+  id Int @id @default(autoincrement())
+  dateCreated DateTime  @unique
+  dateUpdated DateTime @updatedAt
+  content String
+  // TODO: fix error with relations
+  author  User  @relation("Authors", fields: [authorId], references: [id])
+  authorId Int
+  receiver User @relation("Receivers", fields: [receiverId], references: [id])
+  receiverId Int
+}
