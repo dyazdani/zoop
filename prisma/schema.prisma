@@ -16,8 +16,8 @@ model User {
   dateCreated   DateTime @default(now())
   username      String   @unique @db.VarChar(60)
   password      String   @db.VarChar(60)
-  writtenZoops  Zoop[]   @relation("Author")
-  receivedZoops Zoop[]   @relation("Receiver")
+  zoopsWritten  Zoop[]   @relation("Author")
+  zoopsReceived Zoop[]   @relation("Receiver")
   faves         Fave[]   @relation("Faver")
 }
 
@@ -43,6 +43,6 @@ model Fave {
   faver   User @relation("Faver", fields: [faverId], references: [id])
   faverId Int
 
-  zoop Zoop @relation("Zoop", fields: [zoopId], references: [id])
+  zoop   Zoop @relation("Zoop", fields: [zoopId], references: [id])
   zoopId Int
 }
