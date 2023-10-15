@@ -9,3 +9,40 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id            Int      @id @default(autoincrement())
+  email         String   @unique
+  dateCreated   DateTime @default(now())
+  username      String   @unique @db.VarChar(60)
+  password      String   @db.VarChar(60)
+  zoopsWritten  Zoop[]   @relation("Author")
+  zoopsReceived Zoop[]   @relation("Receiver")
+  faves         Fave[]   @relation("Faver")
+}
+
+model Zoop {
+  id          Int      @id @default(autoincrement())
+  dateCreated DateTime @unique
+  dateUpdated DateTime @updatedAt
+  content     String   @db.VarChar(255)
+
+  author   User @relation("Author", fields: [authorId], references: [id])
+  authorId Int
+
+  receiver   User @relation("Receiver", fields: [receiverId], references: [id])
+  receiverId Int
+
+  faves Fave[] @relation("Zoop")
+}
+
+model Fave {
+  id          Int      @id @default(autoincrement())
+  dateCreated DateTime @default(now())
+
+  faver   User @relation("Faver", fields: [faverId], references: [id])
+  faverId Int
+
+  zoop   Zoop @relation("Zoop", fields: [zoopId], references: [id])
+  zoopId Int
+}
