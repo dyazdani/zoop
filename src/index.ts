@@ -17,6 +17,9 @@ app.get("/", (req: Request, res: Response, next: NextFunction): void => {
   }
 });
 
+import apiRouter from "./api";
+app.use("/api", apiRouter);
+
 app.get("/users", async (req, res, next) => {
   try {
     const users = await prisma.user.findMany();
