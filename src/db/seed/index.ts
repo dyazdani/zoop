@@ -1,7 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
-// import { User, Zoop, Fave } from '@prisma/client'
 const { users, zoops, faves } = require('./seedData.json');
-// TODO: We're getting an error, "cannot find module './seedData.json'"
 const prisma = new PrismaClient();
 
 const load = async () => {
@@ -41,9 +39,9 @@ const load = async () => {
 
     } catch(e) {
         console.error(e);
-        process.exit(1);
     } finally {
         await prisma.$disconnect()
+        process.exit(1);
     }
 }
 
