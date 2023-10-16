@@ -6,7 +6,7 @@
             "password": "whateveraspidercan"
         },
         {
-            "email": "tony.start@stark.com",
+            "email": "tony.stark@stark.com",
             "username": "ironman",
             "password": "billionaireplayboyphilanthropist"
         },
@@ -19,36 +19,36 @@
     "zoops": [
         {
             "content": "Hey Tony, can I join the Avengers?",
-            "authorId": "1",
-            "receiverId": "2"
+            "authorId": 1,
+            "receiverId": 2
         },
         {
             "content": "No, you're too young",
-            "authorId": "2",
-            "receiverId": "1"
+            "authorId": 2,
+            "receiverId": 1
         },
         {
             "content": "Pleeeeeaaaaasssseeeeeee",
-            "authorId": "1",
-            "receiverId": "2"
+            "authorId": 1,
+            "receiverId": 2
         }
     ],
     "faves": [
         {
-            "faverId": "2",
-            "zoopId": "1"
+            "faverId": 2,
+            "zoopId": 1
         },
         {
-            "faverId": "3",
-            "zoopId": "1"
+            "faverId": 3,
+            "zoopId": 1
         },
         {
-            "faverId": "1",
-            "zoopId": "2"
+            "faverId": 1,
+            "zoopId": 2
         },
         {
-            "faverId": "3",
-            "zoopId": "3"
+            "faverId": 3,
+            "zoopId": 3
         }
         
     ]

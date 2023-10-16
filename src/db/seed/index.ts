@@ -1,5 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
-import { User, Zoop, Fave } from '@prisma/client'
+// import { User, Zoop, Fave } from '@prisma/client'
 const { users, zoops, faves } = require('./seedData.json');
 // TODO: We're getting an error, "cannot find module './seedData.json'"
 const prisma = new PrismaClient();
@@ -15,13 +15,13 @@ const load = async () => {
         await prisma.user.deleteMany();
         console.log("Deleted records in users table");
 
-        await prisma.$queryRaw<User>`ALTER TABLE User AUTO_INCREMENT = 1`
+        await prisma.$executeRaw`ALTER SEQUENCE "User_id_seq" RESTART WITH 1;`;
         console.log("reset user auto increment to 1")
 
-        await prisma.$queryRaw<Zoop>`ALTER TABLE Zoop AUTO_INCREMENT = 1`
+        await prisma.$executeRaw`ALTER SEQUENCE "Zoop_id_seq" RESTART WITH 1;`;
         console.log("reset zoop auto increment to 1")
 
-        await prisma.$queryRaw<Fave>`ALTER TABLE Fave AUTO_INCREMENT = 1`
+        await prisma.$executeRaw`ALTER SEQUENCE "Fave_id_seq" RESTART WITH 1;`;
         console.log("reset fave auto increment to 1")
 
         await prisma.user.createMany({
