@@ -23,7 +23,7 @@ model User {
 
 model Zoop {
   id          Int      @id @default(autoincrement())
-  dateCreated DateTime @unique
+  dateCreated DateTime @default(now())
   dateUpdated DateTime @updatedAt
   content     String   @db.VarChar(255)
 
