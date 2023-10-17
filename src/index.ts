@@ -20,27 +20,6 @@ app.get("/", (req: Request, res: Response, next: NextFunction): void => {
 import apiRouter from "./api";
 app.use("/api", apiRouter);
 
-app.get("/users", async (req, res, next) => {
-  try {
-    const users = await prisma.user.findMany();
-    res.send({ users });
-  } catch (e) {
-    next(e);
-  }
-});
-
-app.post("/users", async (req, res) => {
-  const { email, username, password } = req.body;
-  const user = await prisma.user.create({
-    data: {
-      email,
-      username,
-      password,
-    },
-  });
-  res.send({ user });
-});
-
 const { PORT = 3000 } = process.env;
 
 app.listen(PORT, () => {
