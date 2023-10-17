@@ -16,4 +16,18 @@ zoopsRouter.get("/", async (req, res, next): Promise<void> => {
     }
 })
 
+// POST /api/zoops
+
+zoopsRouter.post("/", async (req, res)=> {
+        const {content, authorId, receiverId} = req.body;
+        const zoop = await prisma.zoop.create({
+            data: {
+                content,
+                authorId,
+                receiverId
+            }
+        })
+        res.send({zoop});
+})
+
 export default zoopsRouter;
