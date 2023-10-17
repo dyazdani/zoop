@@ -1,6 +1,7 @@
 import express from 'express';
 const jwt = require('jsonwebtoken');
 
+// TODO: Test out this middle where once login endpoint is done and returns a JSON web token
 const authenticateJWT = (req: any, res: any, next: () => void) => {
     const authHeader = req.headers.authorization;
 
