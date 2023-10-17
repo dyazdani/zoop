@@ -1,13 +1,15 @@
 import express, { Request, Response, NextFunction } from "express";
 import path from "path";
 import { PrismaClient } from "@prisma/client";
+require('dotenv').config();
 
 const prisma = new PrismaClient();
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.get("/", (req: Request, res: Response, next: NextFunction): void => {
   try {
