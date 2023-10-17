@@ -6,7 +6,6 @@ const prisma = new PrismaClient();
 const zoopsRouter = express.Router();
 
 // GET /api/zoops
-
 zoopsRouter.get("/", async (req, res, next): Promise<void> => {
     try {
         const zoops = await prisma.zoop.findMany();
@@ -17,7 +16,7 @@ zoopsRouter.get("/", async (req, res, next): Promise<void> => {
 })
 
 // POST /api/zoops
-
+// TODO: add auth
 zoopsRouter.post("/", async (req, res)=> {
         const {content, authorId, receiverId} = req.body;
         const zoop = await prisma.zoop.create({
