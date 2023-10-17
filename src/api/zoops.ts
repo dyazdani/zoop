@@ -30,4 +30,20 @@ zoopsRouter.post("/", async (req, res)=> {
         res.send({zoop});
 })
 
+// PUT /api/zoops/:id
+//TODO: add auth middleware function when auth.ts file is available for import
+zoopsRouter.put("/:id", async (req, res, next)=> {
+    try {
+        const {id} = req.params;
+        const {content} = req.body;
+        const zoop = await prisma.zoop.update({
+            where: {id: Number(id)},
+            data: {content}
+        })
+        res.send({zoop});
+    } catch (e) {
+        next(e);
+    }
+})
+
 export default zoopsRouter;
