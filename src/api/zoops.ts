@@ -1,15 +1,9 @@
-import express, {Request, Response, NextFunction} from "express";
+import express from "express";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 const zoopsRouter = express.Router();
-
-export interface ReqWithUser extends Request {
-    user: {
-        id: number | string
-    }
-}
 
 // GET /api/zoops
 zoopsRouter.get("/", async (req, res, next): Promise<void> => {
@@ -51,25 +45,6 @@ zoopsRouter.put("/:id", async (req, res, next)=> {
             data: {content}
         })
         res.send({zoop});
-    } catch (e) {
-        next(e);
-    }
-})
-
-// POST /api/zoops/:id/faves
-//TODO: add auth middleware function when auth.ts file is available for import
-//TODO: Fix TS error with ReqWithUser type
-zoopsRouter.post("/:id/faves", async (req: ReqWithUser, res, next): Promise<void> => {
-    try {
-        const id = Number(req.params.id);
-        const userId = Number(req.user.id)
-        const fave = await prisma.fave.create({
-            data: {
-                faverId: userId,
-                zoopId: id
-            }
-        })
-        res.send({fave});
     } catch (e) {
         next(e);
     }
