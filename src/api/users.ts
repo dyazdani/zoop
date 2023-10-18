@@ -1,6 +1,7 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
 const bcrypt = require("bcrypt")
+const jwt = require('jsonwebtoken');
 
 const SALT_ROUNDS = 10;
 
