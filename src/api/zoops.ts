@@ -20,7 +20,7 @@ zoopsRouter.get("/", async (req, res, next): Promise<void> => {
 zoopsRouter.get("/:id", async (req, res, next) => {
   try {
     const zoopId = Number(req.params.id);
-    const zoop = await prisma.zoop.findFirst({
+    const zoop = await prisma.zoop.findUniqueOrThrow({
       where: {
         id: zoopId,
       },
