@@ -33,9 +33,18 @@ usersRouter.post("/register", async (req, res, next) => {
                 password: hash
             }
         })
+        // JSON Web Token returned to client
+        const token = jwt.sign({
+            username: user.username,
+            id: user.id,
+        }, ACCESS_TOKEN_SECRET);
+        
         res.send({
-            email: user.email,
-            username: user.username
+            token,
+            user: {
+                email: user.email,
+                username: user.username
+            }
         });
     })
     } catch (e) {
