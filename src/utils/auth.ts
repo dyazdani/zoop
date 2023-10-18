@@ -1,20 +1,17 @@
 import express from 'express';
 const jwt = require('jsonwebtoken');
 
-// TODO: Test out this middle where once login endpoint is done and returns a JSON web token
-const authenticateJWT = (req: any, res: any, next: () => void) => {
+// TODO: Test out this middleware once login endpoint is done and returns a JSON web token
+const authenticateJWT = async (req: any, next: any) => {
     const authHeader = req.headers.authorization;
 
     if (authHeader) {
         const token = authHeader.split(' ')[1];
         try {
-            jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-            .then( () => {
-                next();
-            })
-
-        } catch (e: any) {
-            throw new Error(e);
+            const user = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+            req.user = user.id
+        } catch (e) {
+            next(e);
         }
     }
 }
