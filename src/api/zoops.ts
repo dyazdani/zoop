@@ -36,10 +36,11 @@ zoopsRouter.post("/", async (req, res, next): Promise<void> => {
 // DELETE /api/zoops/:id
 // TODO: Add auth middleware to check if user is logged in once it is available from merging of login endpoint branch
 zoopsRouter.delete(`/:id`, async (req, res, next) => {
-    const userId = Number(req.headers.id);
+    //TODO: Create req.user with middleware that sends json web token
+    const userId = req.user.id;
     try {
         const { id } = req.params
-        const zoop = await prisma.zoop.findFirstOrThrow({
+        const zoop = await prisma.zoop.findUniqueOrThrow({
             where: {id: Number(id)}
         })
         if (userId === zoop.authorId || userId === zoop.receiverId) {
