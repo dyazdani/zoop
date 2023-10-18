@@ -17,8 +17,9 @@ zoopsRouter.get("/", async (req, res, next): Promise<void> => {
 
 // POST /api/zoops
 // TODO: add auth
-//TODO: change from where authorId is obtained
-zoopsRouter.post("/", async (req, res)=> {
+// TODO: change from where authorId is obtained
+zoopsRouter.post("/", async (req, res, next): Promise<void> => {
+    try {
         const {content, authorId, receiverId} = req.body;
         const zoop = await prisma.zoop.create({
             data: {
@@ -28,6 +29,9 @@ zoopsRouter.post("/", async (req, res)=> {
             }
         })
         res.send({zoop});
+    } catch (e) {
+        next(e)
+    }
 })
 
 export default zoopsRouter;
