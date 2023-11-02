@@ -5,15 +5,31 @@ const prisma = new PrismaClient();
 
 const zoopsRouter = express.Router();
 
+
 // GET /api/zoops
 zoopsRouter.get("/", async (req, res, next): Promise<void> => {
-    try {
-        const zoops = await prisma.zoop.findMany();
-        res.send({zoops});
-    } catch (e) {
-        next(e);
-    }
+  try {
+    const zoops = await prisma.zoop.findMany();
+    res.send({zoops});
+  } catch (e) {
+    next(e);
+  }
 })
+
+// Get /api/zoops/:id
+zoopsRouter.get("/:id", async (req, res, next) => {
+  try {
+    const zoopId = Number(req.params.id);
+    const zoop = await prisma.zoop.findUniqueOrThrow({
+      where: {
+        id: zoopId,
+      },
+    });
+    res.send({ zoop });
+  } catch (e) {
+    next(e);
+  }
+});
 
 // POST /api/zoops
 // TODO: add auth
@@ -49,6 +65,7 @@ zoopsRouter.put("/:id", async (req, res, next)=> {
         next(e);
     }
 })
+
 
 // DELETE /api/zoops/:id
 // TODO: Add auth middleware to check if user is logged in once it is available from merging of login endpoint branch
