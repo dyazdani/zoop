@@ -16,7 +16,7 @@ export interface ReqWithUser extends Request {
 }
 
 // TODO: Test out this middleware once login endpoint is done and returns a JSON web token
-const authenticateJWT = async (req: ReqWithUser, next: NextFunction, prisma: PrismaClient) => {
+const authenticateJWT = async (req: ReqWithUser, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
 
     if (authHeader) {
