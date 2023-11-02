@@ -20,6 +20,7 @@ app.get("/", (req: Request, res: Response, next: NextFunction): void => {
 });
 
 import apiRouter from "./api";
+import authenticateJWT from "./utils/auth";
 app.use("/api", apiRouter);
 
 app.use((req, res): void => {
