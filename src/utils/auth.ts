@@ -5,18 +5,8 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 
-export interface ReqWithUser extends Request {
-    user: {
-        id: number;
-        email: string;
-        dateCreated: Date;
-        username: string;
-        password?: string;
-    }
-}
-
 // TODO: Test out this middleware once login endpoint is done and returns a JSON web token
-const authenticateJWT = async (req: ReqWithUser, res: Response, next: NextFunction) => {
+const authenticateJWT = async (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
 
     if (authHeader && authHeader.startsWith("Bearer ")) {
@@ -29,7 +19,9 @@ const authenticateJWT = async (req: ReqWithUser, res: Response, next: NextFuncti
             }
         })
 
-        delete req.user.password;
+        if (req.user) {
+            delete req.user.password;
+        }
 
         req.user = user;
         } catch (e) {

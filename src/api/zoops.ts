@@ -54,7 +54,7 @@ zoopsRouter.put("/:id", async (req, res, next)=> {
 // TODO: Add auth middleware to check if user is logged in once it is available from merging of login endpoint branch
 zoopsRouter.delete(`/:id`, async (req, res, next) => {
     //TODO: Create req.user with middleware that sends json web token
-    const userId = req.user.id;
+    const userId = req.user && req.user.id;
     try {
         const { id } = req.params
         const zoop = await prisma.zoop.findUniqueOrThrow({
