@@ -9,7 +9,7 @@ const zoopsRouter = express.Router();
 export interface ReqWithUser extends Request {
     user: {
         id: number | string
-    }
+    } | void | null
 }
 
 // GET /api/zoops
