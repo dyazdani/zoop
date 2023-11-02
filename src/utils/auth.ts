@@ -22,15 +22,16 @@ const authenticateJWT = async (req: ReqWithUser, res: Response, next: NextFuncti
     if (authHeader && authHeader.startsWith("Bearer ")) {
         const token = authHeader.split(' ')[1];
         try {
-            const user = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-            req.user = await prisma.user.findUniqueOrThrow({
+            const {id} = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+            const user = await prisma.user.findUniqueOrThrow({
                 where: {
-                    id: user.id
+                    id: id
             }
         })
 
         delete req.user.password;
 
+        req.user = user;
         } catch (e) {
             next(e);
         } 
