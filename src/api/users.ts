@@ -27,11 +27,11 @@ usersRouter.post("/register", async (req, res, next) => {
         const { email, username, password } = req.body;
         bcrypt.hash(password, SALT_ROUNDS, async function(err: Error | undefined, hash: string) {
             const user = await prisma.user.create({
-            data: {
-                email,
-                username,
-                password: hash
-            }
+                data: {
+                    email,
+                    username,
+                    password: hash
+                }
         })
         // JSON Web Token returned to client
         const token = jwt.sign({
