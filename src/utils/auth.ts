@@ -33,7 +33,9 @@ const authenticateJWT = async (req: ReqWithUser, res: Response, next: NextFuncti
 
         } catch (e) {
             next(e);
-        }
+        } 
+    } else {
+        next()
     }
 }
 
