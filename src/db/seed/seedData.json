@@ -1,0 +1,55 @@
+{
+    "users": [
+        {
+            "email": "peter.parker@nyu.edu",
+            "username": "spiderman",
+            "password": "whateveraspidercan"
+        },
+        {
+            "email": "tony.stark@stark.com",
+            "username": "ironman",
+            "password": "billionaireplayboyphilanthropist"
+        },
+        {
+            "email": "bruce.banner@gmail.com",
+            "username": "TheIncredibleHulk",
+            "password": "dont_make_me_angry"
+        }
+    ],
+    "zoops": [
+        {
+            "content": "Hey Tony, can I join the Avengers?",
+            "authorId": 1,
+            "receiverId": 2
+        },
+        {
+            "content": "No, you're too young",
+            "authorId": 2,
+            "receiverId": 1
+        },
+        {
+            "content": "Pleeeeeaaaaasssseeeeeee",
+            "authorId": 1,
+            "receiverId": 2
+        }
+    ],
+    "faves": [
+        {
+            "faverId": 2,
+            "zoopId": 1
+        },
+        {
+            "faverId": 3,
+            "zoopId": 1
+        },
+        {
+            "faverId": 1,
+            "zoopId": 2
+        },
+        {
+            "faverId": 3,
+            "zoopId": 3
+        }
+        
+    ]
+}
