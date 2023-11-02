@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 const zoopsRouter = express.Router();
 
+//TODO: Declare a custom type that extends Request for Express to use
 export interface ReqWithUser extends Request {
     user: {
         id: number | string
@@ -58,18 +59,30 @@ zoopsRouter.put("/:id", async (req, res, next)=> {
 
 // POST /api/zoops/:id/faves
 //TODO: add auth middleware function when auth.ts file is available for import
-//TODO: Fix TS error with ReqWithUser type
-zoopsRouter.post("/:id/faves", async (req: ReqWithUser, res, next): Promise<void> => {
+zoopsRouter.post("/:id/faves", async (req: any, res, next): Promise<void> => {
     try {
+        console.log("starting fave")
         const id = Number(req.params.id);
-        const userId = Number(req.user.id)
-        const fave = await prisma.fave.create({
-            data: {
-                faverId: userId,
-                zoopId: id
-            }
-        })
-        res.send({fave});
+        console.log("zoop ID: ", id)
+        const zoop = await prisma.zoop.findUniqueOrThrow({
+            where: {id: id}
+        });
+        console.log("got zoop here: ", zoop)
+        const faverId = Number(req.user.id);
+        console.log("Faver ID: ", faverId)
+        if (Number(zoop.authorId) !== faverId) {
+            console.log("Faver is not Zooper")
+            const fave = await prisma.fave.create({
+                data: {
+                    faverId: faverId,
+                    zoopId: id
+                }
+            })
+            res.send({fave});
+        } else {
+            res.status(403)
+                .send({message: 'Cannot fave your own Zoops'})
+        }
     } catch (e) {
         next(e);
     }
