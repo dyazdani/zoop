@@ -1,5 +1,6 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
+import authenticateJWT from "../utils/auth";
 
 const prisma = new PrismaClient();
 
@@ -16,7 +17,6 @@ zoopsRouter.get("/", async (req, res, next): Promise<void> => {
 })
 
 // POST /api/zoops
-// TODO: add auth
 // TODO: change from where authorId is obtained
 zoopsRouter.post("/", async (req, res, next): Promise<void> => {
     try {

@@ -1,6 +1,6 @@
-import express, {Request, NextFunction} from 'express';
+import express, {Request, Response, NextFunction} from 'express';
 const jwt = require('jsonwebtoken');
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, User } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -13,17 +13,15 @@ const authenticateJWT = async (req: Request, res: Response, next: NextFunction) 
         const token = authHeader.split(' ')[1];
         try {
             const {id} = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-            const user = await prisma.user.findUniqueOrThrow({
-                where: {
-                    id: id
+
+            if (id) {
+                req.user = {id: Number(id)};
+            } else {
+                req.user = null;
             }
-        })
 
-        if (req.user) {
-            delete req.user.password;
-        }
+            next()
 
-        req.user = user;
         } catch (e) {
             next(e);
         } 

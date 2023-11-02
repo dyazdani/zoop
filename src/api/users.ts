@@ -1,7 +1,9 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
+import authenticateJWT from "../utils/auth";
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken');
+import excludePassword from "../utils/exclude";
 
 const SALT_ROUNDS = 10;
 
@@ -22,6 +24,28 @@ usersRouter.get("/", async (req, res, next): Promise<void> => {
     } catch (e) {
         next(e);
     }
+})
+
+// GET /api/users/me
+//TODO: require user 
+usersRouter.get("/me", async (req, res, next): Promise<void> => {
+    if (!req.user) {
+        res.status(401);
+        next({name: "NotLoggedIn", message: "Must be logged in to access this route."});
+    } else {
+        try {
+            const user = await prisma.user.findUniqueOrThrow({ 
+                where: {
+                    id: req.user.id
+                }
+            });
+            
+            res.send({user: excludePassword(user)});
+        } catch (e) {
+            next(e);
+        }
+    }
+
 })
 
 // POST /api/users/register
