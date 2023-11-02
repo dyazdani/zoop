@@ -11,8 +11,14 @@ apiRouter.get("/", (req, res, next):void => {
     }
 })
 
+import zoopsRouter from './zoops';
+apiRouter.use("/zoops", zoopsRouter);
+
 import usersRouter from './users';
 apiRouter.use("/users", usersRouter);
+
+import zoopsRouter from './zoops';
+apiRouter.use("/zoops", zoopsRouter);
 
 apiRouter.use((req, res): void => {
     res.status(404)
