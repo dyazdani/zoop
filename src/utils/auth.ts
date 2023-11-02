@@ -29,6 +29,8 @@ const authenticateJWT = async (req: ReqWithUser, next: NextFunction, prisma: Pri
             }
         })
 
+        delete req.user.password;
+
         } catch (e) {
             next(e);
         }
