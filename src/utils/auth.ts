@@ -1,12 +1,18 @@
 import express, {Request, NextFunction} from 'express';
 const jwt = require('jsonwebtoken');
 import { PrismaClient } from '@prisma/client';
-import type { User } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+
 export interface ReqWithUser extends Request {
-    user: User
+    user: {
+        id: number;
+        email: string;
+        dateCreated: Date;
+        username: string;
+        password?: string;
+    }
 }
 
 // TODO: Test out this middleware once login endpoint is done and returns a JSON web token
@@ -22,6 +28,7 @@ const authenticateJWT = async (req: ReqWithUser, next: NextFunction, prisma: Pri
                     id: user.id
             }
         })
+
         } catch (e) {
             next(e);
         }
