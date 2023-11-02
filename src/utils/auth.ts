@@ -1,11 +1,12 @@
 import express, {Request, NextFunction} from 'express';
 const jwt = require('jsonwebtoken');
 import { PrismaClient } from '@prisma/client';
+import type { User } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
 export interface ReqWithUser extends Request {
-    user: {}
+    user: User
 }
 
 // TODO: Test out this middleware once login endpoint is done and returns a JSON web token
