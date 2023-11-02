@@ -19,7 +19,7 @@ export interface ReqWithUser extends Request {
 const authenticateJWT = async (req: ReqWithUser, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
 
-    if (authHeader) {
+    if (authHeader && authHeader.startsWith("Bearer ")) {
         const token = authHeader.split(' ')[1];
         try {
             const user = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
