@@ -1,6 +1,6 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
-import authenticateJWT from "../utils/auth";
+import requireUser from "../utils/requireUser";
 
 const prisma = new PrismaClient();
 
@@ -51,8 +51,7 @@ zoopsRouter.post("/", async (req, res, next): Promise<void> => {
 })
 
 // PUT /api/zoops/:id
-//TODO: add auth middleware function when auth.ts file is available for import
-zoopsRouter.put("/:id", async (req, res, next)=> {
+zoopsRouter.put("/:id", requireUser, async (req, res, next)=> {
     try {
         const {id} = req.params;
         const {content} = req.body;
@@ -68,9 +67,7 @@ zoopsRouter.put("/:id", async (req, res, next)=> {
 
 
 // DELETE /api/zoops/:id
-// TODO: Add auth middleware to check if user is logged in once it is available from merging of login endpoint branch
-zoopsRouter.delete(`/:id`, async (req, res, next) => {
-    //TODO: Create req.user with middleware that sends json web token
+zoopsRouter.delete(`/:id`, requireUser, async (req, res, next) => {
     const userId = req.user && req.user.id;
     try {
         const { id } = req.params
