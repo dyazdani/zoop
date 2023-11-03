@@ -33,21 +33,28 @@ zoopsRouter.get("/:id", async (req, res, next) => {
 });
 
 // POST /api/zoops
-// TODO: change from where authorId is obtained
-zoopsRouter.post("/", async (req, res, next): Promise<void> => {
-    try {
-        const {content, authorId, receiverId} = req.body;
-        const zoop = await prisma.zoop.create({
-            data: {
-                content,
-                authorId,
-                receiverId
-            }
-        })
-        res.send({zoop});
-    } catch (e) {
-        next(e)
+zoopsRouter.post("/", requireUser, async (req, res, next): Promise<void> => {
+    if (req.user) {
+        try {
+            const {content, receiverId} = req.body;
+            const authorId = req.user && req.user.id
+            console.log(authorId)
+            const zoop = await prisma.zoop.create({
+                data: {
+                    content,
+                    authorId,
+                    receiverId
+                }
+            })
+            res.send({zoop});
+        } catch (e) {
+            next(e)
+        }
+    } else {
+        console.log("no user")
+        next();
     }
+    
 })
 
 // PUT /api/zoops/:id
