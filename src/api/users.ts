@@ -89,7 +89,7 @@ usersRouter.post("/login", async (req, res, next) => {
                 res.status(500).send({ error: "Internal Server Error" });
                 return;
             }
-            if(res) {
+            if(result) {
                 // JSON Web Token returned to client
                const token = jwt.sign({
                    username: user.username,
@@ -103,11 +103,11 @@ usersRouter.post("/login", async (req, res, next) => {
                        username: user.username
                    }
                });
+            } else {
+                next({name: "IncorrectPassword", message: "The password you entered is incorrect"})
             }
         })
     } catch(e) {
-        // console.error("Error in registration:", e); // TODO: Remove
-        // res.status(500).send({ error: "Internal Server Error" });
         next(e);
     }
 })

@@ -28,7 +28,7 @@ app.use((req, res): void => {
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction):void => {
   res.status(500)
-    .send({ message: "Oops! Server Error" })
+    .send({ name: error.name, message: error.message })
 })
 
 
