@@ -49,10 +49,7 @@ zoopsRouter.post("/", requireUser, async (req, res, next): Promise<void> => {
         } catch (e) {
             next(e)
         }
-    } else {
-        console.log("no user")
-        next();
-    }
+    } 
     
 })
 
