@@ -47,11 +47,11 @@ usersRouter.post("/register", async (req, res, next) => {
         const { email, username, password } = req.body;
         bcrypt.hash(password, SALT_ROUNDS, async function(err: Error | undefined, hash: string) {
             const user = await prisma.user.create({
-            data: {
-                email,
-                username,
-                password: hash
-            }
+                data: {
+                    email,
+                    username,
+                    password: hash
+                }
         })
         // JSON Web Token returned to client
         const token = jwt.sign({
@@ -74,7 +74,6 @@ usersRouter.post("/register", async (req, res, next) => {
 
 usersRouter.post("/login", async (req, res, next) => {
     try {
-        // throw new Error("An error");
         const { email, password } = req.body;
 
         const user = await prisma.user.findUniqueOrThrow({
@@ -87,22 +86,20 @@ usersRouter.post("/login", async (req, res, next) => {
             if (err) {
                 console.error("Error in bcrypt.compare:", err);
                 res.status(500).send({ error: "Internal Server Error" });
-                return;
-            }
-            if(result) {
+            } else if (result) {
                 // JSON Web Token returned to client
-               const token = jwt.sign({
-                   username: user.username,
-                   id: user.id,
-               }, ACCESS_TOKEN_SECRET);
-               
-               res.send({
-                   token,
-                   user: {
-                       email: user.email,
-                       username: user.username
-                   }
-               });
+                const token = jwt.sign({
+                    username: user.username,
+                    id: user.id,
+                }, ACCESS_TOKEN_SECRET);
+                
+                res.send({
+                    token,
+                    user: {
+                        email: user.email,
+                        username: user.username
+                    }
+                });
             } else {
                 next({name: "IncorrectPassword", message: "The password you entered is incorrect"})
             }
