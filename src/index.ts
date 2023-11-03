@@ -3,6 +3,7 @@ import path from "path";
 import { PrismaClient } from "@prisma/client";
 require('dotenv').config();
 import authenticateJWT from "./utils/auth";
+import requireUser from "./utils/requireUser";
 
 const prisma = new PrismaClient();
 
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(authenticateJWT);
+app.use(requireUser)
 
 app.get("/", (req: Request, res: Response, next: NextFunction): void => {
   try {

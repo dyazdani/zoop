@@ -4,6 +4,7 @@ import authenticateJWT from "../utils/auth";
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken');
 import excludePassword from "../utils/exclude";
+import requireUser from "../utils/requireUser";
 
 const SALT_ROUNDS = 10;
 
@@ -27,12 +28,8 @@ usersRouter.get("/", async (req, res, next): Promise<void> => {
 })
 
 // GET /api/users/me
-//TODO: require user 
-usersRouter.get("/me", async (req, res, next): Promise<void> => {
-    if (!req.user) {
-        res.status(401);
-        next({name: "NotLoggedIn", message: "Must be logged in to access this route."});
-    } else {
+usersRouter.get("/me", requireUser, async (req, res, next): Promise<void> => {
+    if (req.user) {
         try {
             const user = await prisma.user.findUniqueOrThrow({ 
                 where: {
@@ -45,7 +42,6 @@ usersRouter.get("/me", async (req, res, next): Promise<void> => {
             next(e);
         }
     }
-
 })
 
 // POST /api/users/register
