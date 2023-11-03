@@ -3,7 +3,6 @@ import path from "path";
 import { PrismaClient } from "@prisma/client";
 require('dotenv').config();
 import authenticateJWT from "./utils/auth";
-import requireUser from "./utils/requireUser";
 
 const prisma = new PrismaClient();
 
