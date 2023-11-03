@@ -4,6 +4,7 @@ import { PrismaClient } from "@prisma/client";
 require('dotenv').config();
 import authenticateJWT from "./utils/auth";
 
+
 const prisma = new PrismaClient();
 
 const app = express();

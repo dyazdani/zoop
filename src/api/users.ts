@@ -64,4 +64,42 @@ usersRouter.post("/register", async (req, res, next) => {
     }
 })
 
+usersRouter.post("/login", async (req, res, next) => {
+    try {
+        const { email, password } = req.body;
+
+        const user = await prisma.user.findUniqueOrThrow({
+            where: {
+                email: email
+            }
+        })
+
+        bcrypt.compare(password, user.password, async function (err: Error | undefined, result: boolean) {
+            if (err) {
+                console.error("Error in bcrypt.compare:", err);
+                res.status(500).send({ error: "Internal Server Error" });
+            } else if (result) {
+                // JSON Web Token returned to client
+                const token = jwt.sign({
+                    username: user.username,
+                    id: user.id,
+                }, ACCESS_TOKEN_SECRET);
+                
+                res.send({
+                    token,
+                    user: {
+                        email: user.email,
+                        username: user.username
+                    }
+                });
+            } else {
+                next({name: "IncorrectPassword", message: "The password you entered is incorrect"})
+            }
+        })
+    } catch(e) {
+        next(e);
+    }
+})
+
 export default usersRouter;
+
