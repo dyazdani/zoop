@@ -2,13 +2,17 @@ import express, { Request, Response, NextFunction } from "express";
 import path from "path";
 import { PrismaClient } from "@prisma/client";
 require('dotenv').config();
+import authenticateJWT from "./utils/auth";
+
 
 const prisma = new PrismaClient();
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "../public")));
+app.use(authenticateJWT);
 
 app.get("/", (req: Request, res: Response, next: NextFunction): void => {
   try {
