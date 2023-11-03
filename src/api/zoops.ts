@@ -38,7 +38,6 @@ zoopsRouter.post("/", requireUser, async (req, res, next): Promise<void> => {
         try {
             const {content, receiverId} = req.body;
             const authorId = req.user?.id
-            console.log(authorId)
             const zoop = await prisma.zoop.create({
                 data: {
                     content,
