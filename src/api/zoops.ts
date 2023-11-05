@@ -118,4 +118,25 @@ zoopsRouter.post("/:id/faves", requireUser, async (req: any, res, next): Promise
     }
 })
 
+  // DELETE /api/zoops/:id/faves
+  zoopsRouter.delete("/:id/faves", requireUser, async (req: any, res, next): Promise<void> => {
+    const userId = req.user?.id;
+
+    try {
+        const { id } = req.params;
+        const fave = await prisma.fave.findFirstOrThrow({
+            where: {
+                zoopId: Number(id), 
+                faverId: Number(userId)
+            }
+        })
+        
+        res.send({fave});
+
+    } catch (e) {
+        next(e);
+    }
+})
+
+
 export default zoopsRouter;
