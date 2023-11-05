@@ -55,17 +55,30 @@ zoopsRouter.post("/", requireUser, async (req, res, next): Promise<void> => {
 
 // PUT /api/zoops/:id
 zoopsRouter.put("/:id", requireUser, async (req, res, next)=> {
-    try {
-        const {id} = req.params;
-        const {content} = req.body;
-        const zoop = await prisma.zoop.update({
-            where: {id: Number(id)},
-            data: {content}
-        })
-        res.send({zoop});
-    } catch (e) {
-        next(e);
+    const userId = req.user?.id;
+    const {id} = req.params;
+
+    const zoop = await prisma.zoop.findUniqueOrThrow({
+        where: {id: Number(id)}
+    });
+
+    if (zoop.authorId === userId) {
+        try {
+            const {content} = req.body;
+            const zoop = await prisma.zoop.update({
+                where: {id: Number(id)},
+                data: {content}
+            })
+            res.send({zoop});
+        } catch (e) {
+            next(e);
+        }
+    } else {
+        res.status(403)
+            .send({message: "Only author of zoop can delete zoop"}) 
     }
+
+
 })
 
 
