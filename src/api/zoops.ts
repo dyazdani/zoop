@@ -17,7 +17,7 @@ zoopsRouter.get("/", async (req, res, next): Promise<void> => {
   }
 })
 
-// Get /api/zoops/:id
+// GET /api/zoops/:id
 zoopsRouter.get("/:id", async (req, res, next) => {
   try {
     const zoopId = Number(req.params.id);
