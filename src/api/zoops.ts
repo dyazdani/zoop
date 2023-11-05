@@ -109,29 +109,4 @@ zoopsRouter.delete(`/:id`, requireUser, async (req, res, next) => {
     }
   })
 
-  // POST /api/zoops/:id/faves
-zoopsRouter.post("/:id/faves", requireUser, async (req: any, res, next): Promise<void> => {
-    try {
-        const id = Number(req.params.id);
-        const zoop = await prisma.zoop.findUniqueOrThrow({
-            where: {id: id}
-        });
-        const faverId = Number(req.user.id);
-        if (Number(zoop.authorId) !== faverId) {
-            const fave = await prisma.fave.create({
-                data: {
-                    faverId: faverId,
-                    zoopId: id
-                }
-            })
-            res.send({fave});
-        } else {
-            res.status(403)
-                .send({message: 'Cannot fave your own Zoops'})
-        }
-    } catch (e) {
-        next(e);
-    }
-})
-
 export default zoopsRouter;
