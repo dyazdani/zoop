@@ -75,7 +75,7 @@ zoopsRouter.put("/:id", requireUser, async (req, res, next)=> {
         }
     } else {
         res.status(403)
-            .send({message: "Only author of zoop can delete zoop"}) 
+            .send({message: "Only author of zoop can update zoop"}) 
     }
 
 
