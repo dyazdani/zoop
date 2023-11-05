@@ -52,7 +52,7 @@ favesRouter.delete("/:id", requireUser, async (req: any, res, next): Promise<voi
                 }
             })
 
-            res.send({deletedFave});
+            res.send({success: true});
         } else {
             res.status(403)
                 .send({message: "Only author of fave can delete fave"});
