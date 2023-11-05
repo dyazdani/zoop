@@ -58,11 +58,14 @@ zoopsRouter.put("/:id", requireUser, async (req, res, next)=> {
     const userId = req.user?.id;
     const {id} = req.params;
 
-    const zoop = await prisma.zoop.findUniqueOrThrow({
+    const zoop = await prisma.zoop.findUnique({
         where: {id: Number(id)}
     });
 
-    if (zoop.authorId === userId) {
+    if (!zoop) {
+        res.status(404)
+            .send({name: "NotFound", message: "Zoop with ID not found"})
+    } else if (zoop.authorId === userId) {
         try {
             const {content} = req.body;
             const zoop = await prisma.zoop.update({
