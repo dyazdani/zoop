@@ -17,7 +17,7 @@ zoopsRouter.get("/", async (req, res, next): Promise<void> => {
   }
 })
 
-// Get /api/zoops/:id
+// GET /api/zoops/:id
 zoopsRouter.get("/:id", async (req, res, next) => {
   try {
     const zoopId = Number(req.params.id);
@@ -55,17 +55,33 @@ zoopsRouter.post("/", requireUser, async (req, res, next): Promise<void> => {
 
 // PUT /api/zoops/:id
 zoopsRouter.put("/:id", requireUser, async (req, res, next)=> {
-    try {
-        const {id} = req.params;
-        const {content} = req.body;
-        const zoop = await prisma.zoop.update({
-            where: {id: Number(id)},
-            data: {content}
-        })
-        res.send({zoop});
-    } catch (e) {
-        next(e);
+    const userId = req.user?.id;
+    const {id} = req.params;
+
+    const zoop = await prisma.zoop.findUnique({
+        where: {id: Number(id)}
+    });
+
+    if (!zoop) {
+        res.status(404)
+            .send({name: "NotFound", message: "Zoop with ID not found"})
+    } else if (zoop.authorId === userId) {
+        try {
+            const {content} = req.body;
+            const zoop = await prisma.zoop.update({
+                where: {id: Number(id)},
+                data: {content}
+            })
+            res.send({zoop});
+        } catch (e) {
+            next(e);
+        }
+    } else {
+        res.status(403)
+            .send({message: "Only author of zoop can update zoop"}) 
     }
+
+
 })
 
 
