@@ -14,6 +14,9 @@ apiRouter.get("/", (req, res, next): void => {
 import zoopsRouter from "./zoops";
 apiRouter.use("/zoops", zoopsRouter);
 
+import favesRouter from "./faves";
+apiRouter.use("/faves", favesRouter);
+
 import usersRouter from './users';
 apiRouter.use("/users", usersRouter);
 
