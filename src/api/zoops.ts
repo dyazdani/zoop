@@ -124,14 +124,18 @@ zoopsRouter.post("/:id/faves", requireUser, async (req: any, res, next): Promise
 
     try {
         const { id } = req.params;
-        const fave = await prisma.fave.findFirstOrThrow({
+        const fave = await prisma.fave.findFirst({
             where: {
                 zoopId: Number(id), 
                 faverId: Number(userId)
             }
         })
         
-        res.send({fave});
+        if (!fave) {
+            next({name: "NotFound", message: "Could not find fave"})
+        } else {
+            res.send({fave});
+        }
 
     } catch (e) {
         next(e);
