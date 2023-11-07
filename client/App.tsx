@@ -9,6 +9,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<ZoopsIndex />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<div>Register Here</div>} />
       </Routes>
     </>
   )
