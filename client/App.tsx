@@ -1,8 +1,15 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import ZoopsIndex from './components/ZoopsIndex'
 
 const App: React.FC = () => {
-  return <h1>Zoop is cool</h1>;
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<ZoopsIndex />} />
+      </Routes>
+    </>
+  )
 };
 
 export default App;
