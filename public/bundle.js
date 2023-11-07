@@ -116,7 +116,17 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
   \************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
-eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nconst react_router_dom_1 = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/dist/index.js\");\nconst ZoopsIndex_1 = __importDefault(__webpack_require__(/*! ./components/ZoopsIndex */ \"./client/components/ZoopsIndex.tsx\"));\nconst App = () => {\n    return (react_1.default.createElement(react_1.default.Fragment, null,\n        react_1.default.createElement(react_router_dom_1.Routes, null,\n            react_1.default.createElement(react_router_dom_1.Route, { path: \"/\", element: react_1.default.createElement(ZoopsIndex_1.default, null) }))));\n};\nexports[\"default\"] = App;\n\n\n//# sourceURL=webpack://zoop/./client/App.tsx?");
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nconst react_router_dom_1 = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/dist/index.js\");\nconst ZoopsIndex_1 = __importDefault(__webpack_require__(/*! ./components/ZoopsIndex */ \"./client/components/ZoopsIndex.tsx\"));\nconst LoginPage_1 = __importDefault(__webpack_require__(/*! ./components/LoginPage */ \"./client/components/LoginPage.tsx\"));\nconst App = () => {\n    return (react_1.default.createElement(react_1.default.Fragment, null,\n        react_1.default.createElement(react_router_dom_1.Routes, null,\n            react_1.default.createElement(react_router_dom_1.Route, { path: \"/\", element: react_1.default.createElement(ZoopsIndex_1.default, null) }),\n            react_1.default.createElement(react_router_dom_1.Route, { path: \"/login\", element: react_1.default.createElement(LoginPage_1.default, null) }))));\n};\nexports[\"default\"] = App;\n\n\n//# sourceURL=webpack://zoop/./client/App.tsx?");
+
+/***/ }),
+
+/***/ "./client/components/LoginPage.tsx":
+/*!*****************************************!*\
+  !*** ./client/components/LoginPage.tsx ***!
+  \*****************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nconst LoginPage = () => {\n    return (react_1.default.createElement(\"div\", null, \"I am the Login Page\"));\n};\nexports[\"default\"] = LoginPage;\n\n\n//# sourceURL=webpack://zoop/./client/components/LoginPage.tsx?");
 
 /***/ }),
 
