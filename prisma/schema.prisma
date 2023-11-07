@@ -45,4 +45,6 @@ model Fave {
 
   zoop   Zoop @relation("Zoop", fields: [zoopId], references: [id])
   zoopId Int
+
+  @@unique([faverId, zoopId])
 }
