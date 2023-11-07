@@ -1,7 +1,8 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes} from "react-router-dom";
 import ZoopsIndex from './components/ZoopsIndex';
 import LoginPage from "./components/LoginPage";
+import ZoopsShow from "./components/ZoopsShow";
 
 const App: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ const App: React.FC = () => {
         <Route path="/" element={<ZoopsIndex />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<div>Register Here</div>} />
+        <Route path="/zoops/:id" element={<ZoopsShow />} />
       </Routes>
     </>
   )
