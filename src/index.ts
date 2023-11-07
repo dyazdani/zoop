@@ -14,16 +14,21 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(authenticateJWT);
 
-app.get("/", (req: Request, res: Response, next: NextFunction): void => {
+
+import apiRouter from "./api";
+app.use("/api", apiRouter);
+
+app.get("*", (req: Request, res: Response, next: NextFunction): void => {
   try {
-    res.send("index.html");
+    res.sendFile(path.join(__dirname, '../public/index.html'));
   } catch (error) {
     next(error);
   }
 });
 
-import apiRouter from "./api";
-app.use("/api", apiRouter);
+// app.get('*', (req,res) =>{
+//   res.sendFile(path.join(__dirname, '../public/index.html'));
+// });
 
 app.use((req, res): void => {
   res.status(404)
