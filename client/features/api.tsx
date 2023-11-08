@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import {Zoop, Fave} from '../../src/types/custom'
+import {Zoop, Fave, User} from '../../src/types/custom'
 import { RootState } from '../app/store';
 
 // Define a service using a base URL and expected endpoints
@@ -15,18 +15,26 @@ export const api = createApi({
           return headers;
         },
       }),
-    tagTypes: ['Zoop', 'Fave'],
-    endpoints: (builder) => ({
-      getAllZoops: builder.query<Zoop[], void>({
-        query: () => `/zoops`,
-        providesTags: (result, error, arg) =>
-          result
-            ? [...result.map(({ id }) => ({ type: 'Zoop' as const, id })), 'Zoop']
-            : ['Zoop']
+      tagTypes: ['CurrentUser', 'Zoop', 'Fave'],
+      endpoints: (builder) => ({
+        register: builder.mutation({
+          query: ({ username, password}) => ({
+            url: "users/register",
+            method: "POST",
+            body: { username, password },
+          }),
+          invalidatesTags: ["CurrentUser"],
+        }),
+        getAllZoops: builder.query<Zoop[], void>({
+          query: () => `/zoops`,
+          providesTags: (result, error, arg) =>
+            result
+              ? [...result.map(({ id }) => ({ type: 'Zoop' as const, id })), 'Zoop']
+              : ['Zoop']
+        }),
       }),
-    }),
   })
   
   // Export hooks for usage in functional components, which are
   // auto-generated based on the defined endpoints
-  export const { useGetAllZoopsQuery } = api
+  export const { useGetAllZoopsQuery, useRegisterMutation } = api
