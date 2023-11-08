@@ -26,10 +26,6 @@ app.get("*", (req: Request, res: Response, next: NextFunction): void => {
   }
 });
 
-// app.get('*', (req,res) =>{
-//   res.sendFile(path.join(__dirname, '../public/index.html'));
-// });
-
 app.use((req, res): void => {
   res.status(404)
     .send({ message: "Invalid Route"})
