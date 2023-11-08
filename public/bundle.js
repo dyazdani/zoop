@@ -506,7 +506,7 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexpo
   \***************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.selectCurrentUser = exports.setCredentials = void 0;\nconst toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ \"./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js\");\nconst authSlice = (0, toolkit_1.createSlice)({\n    name: 'auth',\n    initialState: { user: null, token: null },\n    reducers: {\n        setCredentials: (state, { payload: { user, token } }) => {\n            state.user = user;\n            state.token = token;\n        },\n    },\n});\nexports.setCredentials = authSlice.actions.setCredentials;\nexports[\"default\"] = authSlice.reducer;\nconst selectCurrentUser = (state) => state.auth.user;\nexports.selectCurrentUser = selectCurrentUser;\n\n\n//# sourceURL=webpack://zoop/./client/features/authSlice.tsx?");
+eval("\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nexports.selectCurrentUser = void 0;\nconst toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ \"./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js\");\nconst authSlice = (0, toolkit_1.createSlice)({\n    name: 'auth',\n    initialState: { user: null, token: null },\n    reducers: {},\n});\nexports[\"default\"] = authSlice.reducer;\nconst selectCurrentUser = (state) => state.auth.user;\nexports.selectCurrentUser = selectCurrentUser;\n\n\n//# sourceURL=webpack://zoop/./client/features/authSlice.tsx?");
 
 /***/ }),
 
