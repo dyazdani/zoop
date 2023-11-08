@@ -18,10 +18,10 @@ export const api = createApi({
       tagTypes: ['CurrentUser', 'Zoop', 'Fave'],
       endpoints: (builder) => ({
         register: builder.mutation({
-          query: ({ username, password}) => ({
+          query: ({ email, username, password }) => ({
             url: "users/register",
             method: "POST",
-            body: { username, password },
+            body: { email, username, password },
           }),
           invalidatesTags: ["CurrentUser"],
         }),
