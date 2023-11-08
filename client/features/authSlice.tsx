@@ -13,6 +13,14 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: { user: null, token: null } as AuthState,
   reducers: {},
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      api.endpoints.register.matchFulfilled,
+      (state, { payload }) => {
+        state.token = payload.token;
+      }
+    )
+  }
 })
 
 
