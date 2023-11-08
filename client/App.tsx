@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes} from "react-router-dom";
-import ZoopsList from './components/ZoopList';
 import LoginPage from "./components/LoginPage";
 import Zoop from "./components/Zoop";
 import RegisterPage from "./components/RegisterPage"
@@ -12,7 +11,6 @@ const App: React.FC = () => {
     <>
       <Routes>
         <Route path="/" element={<HomePage />}/>
-        <Route path="/zoops" element={<ZoopsList />} />
         <Route path="/zoops/:id" element={<Zoop />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
