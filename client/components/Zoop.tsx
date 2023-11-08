@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-const ZoopsShow = () => {
+const Zoop = () => {
   const { id } = useParams();
 
     return(
@@ -11,4 +11,4 @@ const ZoopsShow = () => {
     )
 }
 
-export default ZoopsShow;
+export default Zoop;
