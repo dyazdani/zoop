@@ -12,6 +12,7 @@ const App: React.FC = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<div>Register Here</div>} />
         <Route path="/zoops/:id" element={<ZoopsShow />} />
+        <Route path="/me" element={<div>This is the page for all the Zoops I received, all the Zoops I created, and all the Zoops I Fave’d</div>} />
       </Routes>
     </>
   )
