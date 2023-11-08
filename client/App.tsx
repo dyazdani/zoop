@@ -12,9 +12,8 @@ const App: React.FC = () => {
     <>
       <Routes>
         <Route path="/" element={<HomePage />}/>
-        <Route path="/zoops" element={<ZoopsList />}>
-          <Route path=":id" element={<Zoop />} />
-        </Route>
+        <Route path="/zoops" element={<ZoopsList />} />
+        <Route path="/zoops/:id" element={<Zoop />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/me" element={<MePage/>} />
