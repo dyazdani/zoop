@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes} from "react-router-dom";
-import ZoopsIndex from './components/ZoopsIndex';
+import ZoopsList from './components/ZoopList';
 import LoginPage from "./components/LoginPage";
 import ZoopsShow from "./components/ZoopsShow";
 import RegisterPage from "./components/RegisterPage"
@@ -9,7 +9,7 @@ const App: React.FC = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<ZoopsIndex />} />
+        <Route path="/zoops" element={<ZoopsList />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/zoops/:id" element={<ZoopsShow />} />
