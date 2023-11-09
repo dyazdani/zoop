@@ -4,14 +4,19 @@ import type { User } from '../../src/types/custom'
 import type { RootState } from '../app/store'
 import { api } from './api'
 
-type AuthState = {
+interface AuthState {
   user: User | null
   token: string | null
 }
 
+const initialState: AuthState = {
+  user: null,
+  token: null 
+}
+
 const authSlice = createSlice({
   name: 'auth',
-  initialState: { user: null, token: null } as AuthState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addMatcher(
