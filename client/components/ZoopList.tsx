@@ -4,10 +4,6 @@ import { useGetAllZoopsQuery}  from "../features/api";
 const ZoopsList = () => {
   const {data, isLoading, error } = useGetAllZoopsQuery() 
 
-  if (data) {
-    console.log(data)
-  }
-
   if (isLoading) {
     return <p>Loading Zoops...</p>
   }
@@ -19,7 +15,6 @@ const ZoopsList = () => {
   const zoops = data?.zoops || [];
 
   return zoops.length ? (
-    // TODO: Add logic to handle empty array/no zoops edge case?
     <>
       <h1>Zoops</h1>
       <ul>
