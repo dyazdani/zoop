@@ -11,10 +11,13 @@ const authenticateJWT = async (req: Request, res: Response, next: NextFunction) 
     if (authHeader && authHeader.startsWith("Bearer ")) {
         const token = authHeader.split(' ')[1];
         try {
-            const {id} = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+            const user = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+            
 
-            if (id) {
-                req.user = {id: Number(id)};
+            if (user) {
+                // TODO: This assignment was changed from {id: Number(id)} for user bc TS wanted all 
+                // properties defined on User type. Is this OK?
+                req.user = user;
             } else {
                 req.user = null;
             }
