@@ -11,7 +11,7 @@ export const store = configureStore({
         auth: authSliceReducer
     },
     middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(api.middleware)
+        getDefaultMiddleware().concat(api.middleware)
 })
 
 setupListeners(store.dispatch)
