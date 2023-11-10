@@ -25,16 +25,16 @@ export const api = createApi({
           }),
           invalidatesTags: ["CurrentUser"],
         }),
-        getAllZoops: builder.query<Zoop[], void>({
+        getAllZoops: builder.query<{zoops: Zoop[]}, void>({
           query: () => `/zoops`,
-          providesTags: (result, error, arg) =>
-            result
-              ? [...result.map(({ id }) => ({ type: 'Zoop' as const, id })), 'Zoop']
-              : ['Zoop']
+          providesTags: ['Zoop']
         }),
       }),
   })
   
   // Export hooks for usage in functional components, which are
   // auto-generated based on the defined endpoints
-  export const { useGetAllZoopsQuery, useRegisterMutation } = api
+  export const { 
+    useGetAllZoopsQuery, 
+    useRegisterMutation 
+  } = api
