@@ -6,9 +6,9 @@ type NavProps = {}
 const Nav = (props: NavProps) =>  {
     return(
         <>
-            <NavLink style={{marginRight: 10}} to="/">Home</NavLink>
-            <NavLink style={{marginRight: 10}} to="/login">Login</NavLink>
-            <NavLink style={{marginRight: 10}}  to="/register">Register</NavLink>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/register">Register</NavLink>
             <NavLink to="/me">Me</NavLink>
         </>
     );
