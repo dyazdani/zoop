@@ -1,24 +1,23 @@
 import React, { useState } from "react";
-import { useRegisterMutation } from "../features/api";
+import { useLocation } from "react-router-dom";
 
-const AuthForm = () => {
-  const [register, { isLoading, isError, data }] = useRegisterMutation();
+
+const AuthForm = ({ handleSubmit }) => {
+  const { pathname } = useLocation();
+  console.log(pathname)
 
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    register({ email, username, password });
-  };
+  
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h1>Login or Register</h1>
-        {isError && <p>Oops, there was an error. Try again?</p>}
+        <h1>{pathname === '/register' ? "Register" : "Login"}</h1>
+        {/* {isError && <p>Oops, there was an error. Try again?</p>} */}
         <label htmlFor="email">Email</label>
         <input
           type="email"
@@ -55,9 +54,9 @@ const AuthForm = () => {
           value={confirmPassword}
         />
 
-        <button disabled={isLoading} type="submit">
+        {/* <button disabled={isLoading} type="submit"> */}
           Register
-        </button>
+        {/* </button> */}
       </form>
     </>
   );

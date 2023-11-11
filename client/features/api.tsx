@@ -47,5 +47,6 @@ export const api = createApi({
   
   export const { 
     useGetAllZoopsQuery, 
-    useRegisterMutation 
+    useRegisterMutation,
+    useLoginMutation 
   } = api
