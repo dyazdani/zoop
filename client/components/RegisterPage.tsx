@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRegisterMutation } from "../features/api";
 
 const RegisterPage = () => {
-  const [register, { isLoading, isError, data }] = useRegisterMutation();
+  const [register, { isLoading, isError, data}] = useRegisterMutation();
 
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
