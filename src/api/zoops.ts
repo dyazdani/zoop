@@ -12,7 +12,21 @@ zoopsRouter.get("/", async (req, res, next): Promise<void> => {
   try {
     const zoops = await prisma.zoop.findMany({
         include: {
-            faves: true
+            faves: {
+                include: {
+                    faver: {
+                        select: {
+                            id: true,
+                            email: true,
+                            dateCreated: true,
+                            username: true,
+                            zoopsWritten: true,
+                            zoopsReceived: true,
+                            faves: true
+                        }
+                    }
+                }
+            }
         }
     });
     res.send({zoops});
