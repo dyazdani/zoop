@@ -25,6 +25,14 @@ export const api = createApi({
           }),
           invalidatesTags: ["CurrentUser"],
         }),
+        login: builder.mutation({
+          query: ({ email, password }) => ({
+            url: "users/login",
+            method: "POST",
+            body: { email, password },
+          }),
+          invalidatesTags: ["CurrentUser"],
+        }),
         getAllZoops: builder.query<{zoops: Zoop[]}, void>({
           query: () => `/zoops`,
           providesTags: ['Zoop']
@@ -39,5 +47,6 @@ export const api = createApi({
   
   export const { 
     useGetAllZoopsQuery, 
-    useRegisterMutation 
+    useRegisterMutation,
+    useLoginMutation 
   } = api
