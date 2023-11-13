@@ -13,7 +13,6 @@ const LoginPage = () => {
   };
 
   return (
-    <>
       <form onSubmit={handleSubmit}>
         <h1>Login</h1>
         {isError && <p>Oops, there was an error logging in. Try again?</p>}
@@ -40,7 +39,6 @@ const LoginPage = () => {
           Login
         </button>
       </form>
-    </>
   );
 };
 

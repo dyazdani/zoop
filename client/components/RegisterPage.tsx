@@ -15,7 +15,6 @@ const RegisterPage = () => {
   };
 
   return (
-    <>
       <form onSubmit={handleSubmit}>
         <h1>Register</h1>
         {isError && <p>Oops, there was an error creating an account. Try again?</p>}
@@ -60,7 +59,6 @@ const RegisterPage = () => {
           Register
         </button>
       </form>
-    </>
   );
 };
 
