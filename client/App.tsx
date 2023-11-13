@@ -12,6 +12,7 @@ import Nav from "./components/Nav";
 const App: React.FC = () => {
   const token = useSelector((state: RootState) => state.auth.token);
 
+  
   if (token) {
     console.log(token, "token");
   }
