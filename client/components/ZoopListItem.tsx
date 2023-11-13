@@ -1,4 +1,4 @@
-import { Fave } from '../../src/types/custom';
+import { Fave } from '@prisma/client';
 import React from "react";
 
 type ZoopListItemProps = {
@@ -14,7 +14,7 @@ const ZoopListItem = ({ authorId, receiverId, content, faves}: ZoopListItemProps
             <div>Author ID: {authorId}</div>
             <div>Receiver ID: {receiverId}</div>
             <div>{content}</div>
-            {/* <div>faves: {faves}</div> */}
+            <div>faves: {faves.length}</div>
         </>
     );
 }

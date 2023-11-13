@@ -3,13 +3,13 @@ import { useGetAllZoopsQuery } from "../features/api";
 import ZoopListItem from "./ZoopListItem";
 
 const ZoopsList = () => {
-  const { data, isLoading, error } = useGetAllZoopsQuery();
+  const { data, isLoading, isError } = useGetAllZoopsQuery();
 
   if (isLoading) {
     return <p>Loading Zoops...</p>;
   }
 
-  if (error) {
+  if (isError) {
     return <p>Oops! Error loading Zoops :-(</p>;
   }
 
@@ -20,6 +20,7 @@ const ZoopsList = () => {
       <h1>Zoops</h1>
 
       {zoops.map((zoop) => {
+        console.log(zoop, "A ZOOP")
         return (
           <ZoopListItem
             key={zoop.id}

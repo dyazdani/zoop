@@ -10,7 +10,11 @@ const zoopsRouter = express.Router();
 // GET /api/zoops
 zoopsRouter.get("/", async (req, res, next): Promise<void> => {
   try {
-    const zoops = await prisma.zoop.findMany();
+    const zoops = await prisma.zoop.findMany({
+        include: {
+            faves: true
+        }
+    });
     res.send({zoops});
   } catch (e) {
     next(e);
