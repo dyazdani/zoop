@@ -16,6 +16,8 @@ export interface Fave {
 }
 
 export interface Zoop {
+        receiver: User
+        author: User
         id: number
         dateCreated: Date
         dateUpdated?: Date

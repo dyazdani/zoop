@@ -1,6 +1,7 @@
 import React from "react";
 import { useGetAllZoopsQuery } from "../features/api";
 import ZoopListItem from "./ZoopListItem";
+import { Zoop, User, Fave } from "@prisma/client";
 
 const ZoopsList = () => {
   const { data, isLoading, isError } = useGetAllZoopsQuery();
@@ -21,11 +22,14 @@ const ZoopsList = () => {
 
       {zoops.map((zoop) => {
         console.log(zoop, "A ZOOP")
+        // TODO: import types from Prisma instead of src/types/custom.ts
         return (
           <ZoopListItem
             key={zoop.id}
             authorId={zoop.authorId}
+            author={zoop.author.username}
             receiverId={zoop.receiverId}
+            receiver={zoop.receiver.username}
             content={zoop.content}
             faves={zoop.faves}
           />
