@@ -1,5 +1,6 @@
 import React from "react";
 import { useGetAllZoopsQuery}  from "../features/api";
+import ZoopListItem from "./ZoopListItem";
 
 const ZoopsList = () => {
   const {data, isLoading, error } = useGetAllZoopsQuery() 
@@ -16,6 +17,7 @@ const ZoopsList = () => {
 
   return zoops.length ? (
     <>
+      <ZoopListItem />
       <h1>Zoops</h1>
       <ul>
         {zoops.map(zoop => {
