@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Box } from "@mui/material";
+import { TextField, Box, Typography } from "@mui/material";
 import { useRegisterMutation } from "../features/api";
 
 const RegisterPage = () => {
@@ -19,7 +19,9 @@ const RegisterPage = () => {
       <Box 
         component="form"
         onSubmit={handleSubmit}>
-        <h1>Register</h1>
+        <Typography
+          component="h1"
+        >Register</Typography>
         {isError && <p>Oops, there was an error creating an account. Try again?</p>}
 
         <label htmlFor="email">Email</label>
