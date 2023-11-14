@@ -33,7 +33,7 @@ const LoginPage = () => {
       onSubmit={handleSubmit}
       autoComplete="off"
     >
-      <Typography component="h1">Login</Typography>
+      <Typography component="h2">Login</Typography>
       {isError && <Typography 
         paragraph={true}
       >

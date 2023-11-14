@@ -38,7 +38,7 @@ const RegisterPage = () => {
         onSubmit={handleSubmit}
         autoComplete="off"
       >
-        <Typography component="h1">Register</Typography>
+        <Typography component="h2">Register</Typography>
         {isError && <Typography 
           paragraph={true}
         >
