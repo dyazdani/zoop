@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { TextField, Box } from "@mui/material";
 import { useRegisterMutation } from "../features/api";
 
 const RegisterPage = () => {
@@ -15,7 +16,9 @@ const RegisterPage = () => {
   };
 
   return (
-      <form onSubmit={handleSubmit}>
+      <Box 
+        component="form"
+        onSubmit={handleSubmit}>
         <h1>Register</h1>
         {isError && <p>Oops, there was an error creating an account. Try again?</p>}
 
@@ -58,7 +61,7 @@ const RegisterPage = () => {
         <button disabled={isLoading} type="submit">
           Register
         </button>
-      </form>
+      </Box>
   );
 };
 
