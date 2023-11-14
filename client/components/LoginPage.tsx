@@ -6,8 +6,8 @@ import Typography from "@mui/material/Typography";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useLoginMutation } from "../features/api";
 
 const LoginPage = () => {
@@ -68,7 +68,7 @@ const LoginPage = () => {
                 onMouseDown={handleMouseDownPassword}
                 edge="end"
               >
-                {showPassword ? <VisibilityOff /> : <Visibility/>}
+                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon/>}
               </IconButton>
             </InputAdornment>
         }}

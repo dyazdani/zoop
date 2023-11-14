@@ -6,8 +6,8 @@ import Typography from "@mui/material/Typography";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useRegisterMutation } from "../features/api";
 
 const RegisterPage = () => {
@@ -87,7 +87,7 @@ const RegisterPage = () => {
                   onMouseDown={handleMouseDownPassword}
                   edge="end"
                 >
-                  {showPassword ? <VisibilityOff /> : <Visibility/>}
+                  {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon/>}
                 </IconButton>
               </InputAdornment>
           }}
@@ -109,7 +109,7 @@ const RegisterPage = () => {
                   onMouseDown={handleMouseDownConfirmPassword}
                   edge="end"
                 >
-                  {showConfirmPassword ? <VisibilityOff /> : <Visibility/>}
+                  {showConfirmPassword ? <VisibilityOffIcon /> : <VisibilityIcon/>}
                 </IconButton>
               </InputAdornment>
           }}
