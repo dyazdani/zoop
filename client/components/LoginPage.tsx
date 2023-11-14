@@ -41,16 +41,14 @@ const LoginPage = () => {
       </Typography>}
 
       <TextField
-        id="email"
         label="Email"
         type="email"
         required
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={e => setEmail(e.target.value)}
         value={email}
       />
 
       <TextField
-        id="password"
         label="Password"
         type={showPassword ? "text" : "password"}
         required
@@ -67,7 +65,7 @@ const LoginPage = () => {
               </IconButton>
             </InputAdornment>
         }}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={e => setPassword(e.target.value)}
         value={password}
       />
 

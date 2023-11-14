@@ -28,6 +28,7 @@ const RegisterPage = () => {
       register({ email, username, password });
       navigate("/")
     } else {
+      //TODO: Change this to a React error that is displayed in the UI
       alert("Password confirmation does not match");
     }
   };
@@ -46,25 +47,22 @@ const RegisterPage = () => {
         </Typography>}
 
         <TextField
-          id="email"
           label="Email"
           type="email"
           required
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
           value={email}
         />
 
         <TextField
-          id="username"
           label="Username"
           type="text"
           required
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={e => setUsername(e.target.value)}
           value={username}
         />
 
         <TextField
-          id="password"
           label="Password"
           type={showPassword ? "text" : "password"}
           required
@@ -81,12 +79,11 @@ const RegisterPage = () => {
                 </IconButton>
               </InputAdornment>
           }}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={e => setPassword(e.target.value)}
           value={password}
         />
 
         <TextField
-          id="confirmPassword"
           label="Confirm Password"
           type={showConfirmPassword ? "text" : "password"}
           required
@@ -103,7 +100,7 @@ const RegisterPage = () => {
                 </IconButton>
               </InputAdornment>
           }}
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          onChange={e => setConfirmPassword(e.target.value)}
           value={confirmPassword}
         />
 
