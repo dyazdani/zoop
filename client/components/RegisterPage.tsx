@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { 
   TextField, 
   Box, 
@@ -15,6 +16,8 @@ import { useRegisterMutation } from "../features/api";
 
 const RegisterPage = () => {
   const [register, { isLoading, isError, data}] = useRegisterMutation();
+
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -37,7 +40,7 @@ const RegisterPage = () => {
     e.preventDefault();
     if (password === confirmPassword) {
       register({ email, username, password });
-      // TODO: Send user to home page after successful registration
+      navigate("/")
     } else {
       alert("Password confirmation does not match");
     }
