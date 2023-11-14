@@ -19,10 +19,10 @@ const RegisterPage = () => {
       <Box 
         component="form"
         onSubmit={handleSubmit}>
-        <Typography
-          component="h1"
-        >Register</Typography>
-        {isError && <p>Oops, there was an error creating an account. Try again?</p>}
+        <Typography component="h1">Register</Typography>
+        {isError && <Typography 
+          paragraph={true}
+        >Oops, there was an error creating an account. Try again?</Typography>}
 
         <label htmlFor="email">Email</label>
         <input
