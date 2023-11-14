@@ -21,11 +21,6 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     login({ email, password });
@@ -64,9 +59,9 @@ const LoginPage = () => {
             <InputAdornment position="end">
               <IconButton
                 aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
+                onClick={() => setShowPassword((show) => !show)}
+                onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) => e.preventDefault()}
+              edge="end"
               >
                 {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon/>}
               </IconButton>

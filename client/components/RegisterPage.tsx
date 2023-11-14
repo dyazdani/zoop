@@ -22,16 +22,6 @@ const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };
-
-  const handleClickShowConfirmPassword = () => setShowConfirmPassword((show) => !show);
-  const handleMouseDownConfirmPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-  };  
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password === confirmPassword) {
@@ -83,8 +73,8 @@ const RegisterPage = () => {
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
+                  onClick={() => setShowPassword((show) => !show)}
+                  onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) => e.preventDefault()}
                   edge="end"
                 >
                   {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon/>}
@@ -105,8 +95,8 @@ const RegisterPage = () => {
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle confirm password visibility"
-                  onClick={handleClickShowConfirmPassword}
-                  onMouseDown={handleMouseDownConfirmPassword}
+                  onClick={() => setShowConfirmPassword((show) => !show)}
+                  onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) => e.preventDefault()}
                   edge="end"
                 >
                   {showConfirmPassword ? <VisibilityOffIcon /> : <VisibilityIcon/>}
