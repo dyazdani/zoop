@@ -2,13 +2,15 @@ import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 import authSliceReducer from '../features/authSlice';
+import zoopSliceReducer from '../features/zoopSlice';
 
 import api from '../features/api'
 
 export const store = configureStore({
     reducer: {
         [api.reducerPath]: api.reducer,
-        auth: authSliceReducer
+        auth: authSliceReducer,
+        zoop: zoopSliceReducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(api.middleware)

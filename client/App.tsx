@@ -11,10 +11,14 @@ import Nav from "./components/Nav";
 
 const App: React.FC = () => {
   const token = useSelector((state: RootState) => state.auth.token);
-
+  const zoops = useSelector((state: RootState) => state.zoop.zoops);
   
   if (token) {
     console.log(token, "token");
+  }
+
+  if (zoops) {
+    console.log(zoops, "ZOOPS FROM STATE");
   }
 
   return (
