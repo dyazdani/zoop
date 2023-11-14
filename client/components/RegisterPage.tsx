@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { 
-  TextField, 
-  Box, 
-  Typography, 
-  InputAdornment,
-  IconButton,
-  Button
-} from "@mui/material";
-import {
-  Visibility,
-  VisibilityOff
-} from "@mui/icons-material";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import InputAdornment from "@mui/material/InputAdornment";
+import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useRegisterMutation } from "../features/api";
 
 const RegisterPage = () => {
