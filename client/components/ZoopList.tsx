@@ -15,6 +15,7 @@ const ZoopsList = () => {
   
 
   const zoops = data?.zoops || [];
+  console.log(zoops, "ZOOPS")
 
   return zoops.length ? (
     <>
@@ -22,6 +23,7 @@ const ZoopsList = () => {
 
       {zoops.map((zoop) => {
         // TODO: import types from Prisma instead of src/types/custom.ts
+
         return (
           <ZoopListItem
             key={zoop.id}

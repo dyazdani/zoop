@@ -20,7 +20,7 @@ export interface Zoop {
         author: User
         id: number
         dateCreated: Date
-        dateUpdated?: Date
+        dateUpdated: Date
         content: string
         authorId: number
         receiverId: number
