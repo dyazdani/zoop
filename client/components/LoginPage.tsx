@@ -59,7 +59,7 @@ const LoginPage = () => {
                 aria-label="toggle password visibility"
                 onClick={() => setShowPassword((show) => !show)}
                 onMouseDown={(e: React.MouseEvent<HTMLButtonElement>) => e.preventDefault()}
-              edge="end"
+                edge="end"
               >
                 {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon/>}
               </IconButton>
