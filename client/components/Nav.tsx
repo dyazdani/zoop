@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import SendIcon from '@mui/icons-material/Send'
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { selectCurrentUser } from "../features/authSlice";
@@ -36,47 +37,47 @@ const Nav = (props: NavProps) =>  {
                     component="div" 
                     sx={{ flexGrow: 1 }}
                 >
-                    ZOOP
+                    ZOOP - - - - - - - <SendIcon/>
                 </Typography>
+
                 {isLoggedIn && (
-            <div>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={e => setAnchorEl(e.currentTarget)}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={e => setAnchorEl(null)}
-              >
-                <MenuItem 
-                    onClick={e => {
-                        setAnchorEl(null);
-                        navigate("/me");
-                    }}
-                > 
-                    Profile
-                </MenuItem>
-                {/* TODO: Create a logout action that happens for the onClick for the Logout MenuItem */}
-                <MenuItem>Logout</MenuItem>
-              </Menu>
-            </div>
+                    <div>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={e => setAnchorEl(e.currentTarget)}
+                            color="inherit"
+                        >
+                            <AccountCircle />
+                        </IconButton>
+                        <Menu
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                            }}
+                            open={Boolean(anchorEl)}
+                            onClose={e => setAnchorEl(null)}
+                        >
+                            <MenuItem 
+                                onClick={e => {
+                                    setAnchorEl(null);
+                                    navigate("/me");
+                                }}
+                            > 
+                                Profile
+                            </MenuItem>
+                            {/* TODO: Create a logout action that happens for the onClick for the Logout MenuItem */}
+                            <MenuItem>Logout</MenuItem>
+                        </Menu>
+                    </div>
           )}
 
 
