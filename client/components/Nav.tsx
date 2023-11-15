@@ -31,7 +31,13 @@ const Nav = (props: NavProps) =>  {
                 >
                     <MenuIcon />                
                 </IconButton>
-
+                <Typography 
+                    variant="h6" 
+                    component="div" 
+                    sx={{ flexGrow: 1 }}
+                >
+                    ZOOP
+                </Typography>
                 {isLoggedIn && (
             <div>
               <IconButton
