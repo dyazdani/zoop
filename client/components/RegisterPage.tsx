@@ -28,7 +28,7 @@ const RegisterPage = () => {
       register({ email, username, password });
       navigate("/")
     } else {
-      //TODO: Change this to a React error that is displayed in the UI
+      //TODO (GitHub Issue #69): Change this to a React error that is displayed in the UI
       alert("Password confirmation does not match");
     }
   };
