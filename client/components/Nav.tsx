@@ -4,6 +4,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import Box from '@mui/material/Box';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import SendIcon from '@mui/icons-material/Send'
@@ -21,8 +22,17 @@ const Nav = () =>  {
 
     return (
         <>
-            <AppBar position="static">
-                <Toolbar>
+            <AppBar 
+                position="static"
+            >
+                <Toolbar
+                    sx={{
+                        display: "flex", 
+                        justifyContent: "space-between",
+                        flexDirection: "row",
+                        flexWrap: "nowrap"
+                    }}
+                >
                     <IconButton
                         size="large"
                         edge="start"
@@ -78,13 +88,32 @@ const Nav = () =>  {
                             </> 
                         )}
                     </Menu>
-                    <Typography 
-                        variant="h6" 
-                        component="div" 
-                        sx={{ flexGrow: 1 }}
+                    <Box
+                        component="div"
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center"
+                        }}
                     >
-                        ZOOP - - - - - - - <SendIcon/>
-                    </Typography>
+                        <Typography 
+                            variant="h6" 
+                            component="div"
+                            sx={{pr: 1}} 
+                        >
+                            ZOOP
+                        </Typography>
+                        <Typography
+                            variant="h6"
+                            component="div"
+                        >
+                            - - - -  
+                        </Typography>
+                        <Box
+                            sx={{pt: .25}}
+                        >            
+                            <SendIcon />   
+                        </Box>
+                    </Box>
 
                     {isLoggedIn && (
                         <div>
