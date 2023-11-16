@@ -16,7 +16,7 @@ import {useNavigate} from "react-router-dom";
 
 import { RootState} from "../app/store";
 import { 
-    usePostZoopMutation, 
+    useSendZoopMutation, 
     useGetAllUsersQuery,
     useGetMeQuery
 }  from "../features/api";
@@ -33,7 +33,7 @@ const SendZoopDialog = () => {
 
     const currentUser = useGetMeQuery().data;
 
-    const [postZoop, { isLoading: isPostZoopLoading, isError, data: zoopData }] = usePostZoopMutation();
+    const [sendZoop, { isLoading: isPostZoopLoading, isError, data: zoopData }] = useSendZoopMutation();
     const {data: usersData, isLoading: isGetAllUsersLoading, error } = useGetAllUsersQuery(); 
 
     const navigate = useNavigate();
@@ -45,7 +45,7 @@ const SendZoopDialog = () => {
         } else if (!isGetAllUsersLoading && usersData) {
             const [recipient] = usersData.users.filter(user => user.username === username);
             if (recipient && currentUser) {
-                postZoop({
+                sendZoop({
                     content: content,
                     authorId: currentUser.user.id,
                     receiverId: recipient.id
