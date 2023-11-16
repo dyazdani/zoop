@@ -32,6 +32,18 @@ usersRouter.get("/me", requireUser, async (req, res, next): Promise<void> => {
     }
 })
 
+// GET /api/users
+usersRouter.get("/", requireUser, async (req, res, next): Promise<void> => {
+    if (req.user) {
+        try {
+            const users = await prisma.user.findMany();
+            res.send({users});
+        } catch (e) {
+            next(e);
+        }
+    }
+})
+
 // POST /api/users/register
 usersRouter.post("/register", async (req, res, next) => {
     try {

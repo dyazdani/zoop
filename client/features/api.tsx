@@ -4,40 +4,48 @@ import { RootState } from '../app/store';
 
 // Define a service using a base URL and expected endpoints
 export const api = createApi({
-    reducerPath: 'api',
-    baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:3000/api', 
-        prepareHeaders: (headers: Headers, { getState }) => {
-          const token = (getState() as RootState).auth.token;
-          if (token) {
-            headers.set("Authorization", `Bearer ${token}`);
-          }
-          return headers;
-        },
+  reducerPath: 'api',
+  baseQuery: fetchBaseQuery({
+      baseUrl: 'http://localhost:3000/api', 
+      prepareHeaders: (headers: Headers, { getState }) => {
+        const token = (getState() as RootState).auth.token;
+        if (token) {
+          headers.set("Authorization", `Bearer ${token}`);
+        }
+        return headers;
+      },
+    }),
+    tagTypes: ['CurrentUser', 'Zoop', 'Fave', 'User'],
+    endpoints: (builder) => ({
+      register: builder.mutation({
+        query: ({ email, username, password }) => ({
+          url: "users/register",
+          method: "POST",
+          body: { email, username, password },
+        }),
+        invalidatesTags: ["CurrentUser"],
       }),
-      tagTypes: ['CurrentUser', 'Zoop', 'Fave'],
-      endpoints: (builder) => ({
-        register: builder.mutation({
-          query: ({ email, username, password }) => ({
-            url: "users/register",
-            method: "POST",
-            body: { email, username, password },
-          }),
-          invalidatesTags: ["CurrentUser"],
+      login: builder.mutation({
+        query: ({ email, password }) => ({
+          url: "users/login",
+          method: "POST",
+          body: { email, password },
         }),
-        login: builder.mutation({
-          query: ({ email, password }) => ({
-            url: "users/login",
-            method: "POST",
-            body: { email, password },
-          }),
-          invalidatesTags: ["CurrentUser"],
-        }),
-        getAllZoops: builder.query<{zoops: Zoop[]}, void>({
-          query: () => `/zoops`,
-          providesTags: ['Zoop']
-        }),
+        invalidatesTags: ["CurrentUser"],
       }),
+      getAllZoops: builder.query<{zoops: Zoop[]}, void>({
+        query: () => `/zoops`,
+        providesTags: ['Zoop']
+      }),
+      postZoop: builder.mutation({
+        query: ({content, authorId, receiverId}) => ({
+          url: "/zoops",
+          method: "POST",
+          body: {content, authorId, receiverId},
+        }),
+        invalidatesTags: ["Zoop"],
+      }),
+    }),
   })
   
   // Export hooks for usage in functional components, which are
@@ -48,5 +56,6 @@ export const api = createApi({
   export const { 
     useGetAllZoopsQuery, 
     useRegisterMutation,
-    useLoginMutation 
+    useLoginMutation,
+    usePostZoopMutation 
   } = api
