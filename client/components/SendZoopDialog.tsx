@@ -67,7 +67,7 @@ const SendZoopDialog = () => {
                     disabled={!token}
                     sx={{
                         position: "absolute",
-                        bottom: 25,
+                        top: 25,
                         right: 25
                     }}
                     onClick={() => setOpen(true)}
