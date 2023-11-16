@@ -3,7 +3,7 @@ import React from "react";
 import Zoop from "./Zoop";
 
 type ZoopListItemProps = {
-  zoopId: number
+  zoopId: number;
   author: string;
   receiver: string;
   content: string;
@@ -21,14 +21,14 @@ const ZoopListItem = ({
 }: ZoopListItemProps) => {
   return (
     <>
-      <Zoop
-        zoopId={zoopId}
-        author={author}
-        receiver={receiver}
-        content={content}
-        faves={faves}
-        dateCreated={dateCreated}
-      />
+        <Zoop 
+          zoopId={zoopId}
+          author={author}
+          receiver={receiver}
+          content={content}
+          faves={faves}
+          dateCreated={dateCreated}
+        />
     </>
   );
 };

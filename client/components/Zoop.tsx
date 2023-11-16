@@ -40,18 +40,18 @@ const Zoop = ({ zoopId, author, receiver, content, faves, dateCreated }: ZoopPro
         </Stack>
         <Card>
           <CardContent>
-            <Stack direction="row" justifyContent="space-around">
+            <Stack direction="row" justifyContent="space-between" alignItems="center">
               <IconButton>
-                <AccountBoxIcon sx={{ fontSize: 40 }} />
+                <AccountBoxIcon sx={{ fontSize: 100 }} />
               </IconButton>
               <Typography variant="body1">{content}</Typography>
               <IconButton>
-                <AccountBoxIcon sx={{ fontSize: 40 }} />
+                <AccountBoxIcon sx={{ fontSize: 100 }} />
               </IconButton>
             </Stack>
           </CardContent>
         </Card>
-        <Stack direction="row" justifyContent="space-between">
+        <Stack direction="row" justifyContent="space-between" alignItems="center">
           <FaveButton zoopId={zoopId} faves={faves} />
           <Typography variant="body2">{formattedDate}</Typography>
         </Stack>
