@@ -45,7 +45,7 @@ export const api = createApi({
         }),
         invalidatesTags: ["Zoop"],
       }),
-      getAllUsers: builder.query<{users: User[]}, void>({
+      getAllUsers: builder.query<{users: {user: User}[]}, void>({
         query: () => `/users`,
         providesTags: ['User']
       }),

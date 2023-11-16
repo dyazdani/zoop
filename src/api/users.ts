@@ -34,13 +34,11 @@ usersRouter.get("/me", requireUser, async (req, res, next): Promise<void> => {
 
 // GET /api/users
 usersRouter.get("/", async (req, res, next): Promise<void> => {
-    // if (req.user) {
-        try {
-            const users = await prisma.user.findMany();
-            res.send({users});
-        } catch (e) {
-            next(e);
-        // }
+    try {
+        const users = await prisma.user.findMany();
+        res.send({users: users.map(user => ({user: excludePassword(user)}))});
+    } catch (e) {
+        next(e);
     }
 })
 
@@ -65,10 +63,7 @@ usersRouter.post("/register", async (req, res, next) => {
         
         res.send({
             token,
-            user: {
-                ...user,
-                password: undefined
-            }
+            user: excludePassword(user)
         });
     })
     } catch (e) {
@@ -99,10 +94,7 @@ usersRouter.post("/login", async (req, res, next) => {
                 
                 res.send({
                     token,
-                    user: {
-                        ...user,
-                        password: undefined
-                    }
+                    user: excludePassword(user)
                 });
             } else {
                 next({name: "IncorrectPassword", message: "The password you entered is incorrect"})
