@@ -121,7 +121,7 @@ const SendZoopDialog = () => {
                             margin="dense"
                             label="Content"
                             type="text"
-                            placeholder="e.g., Zoop is the new hotness."  
+                            placeholder="What do you want to say?"  
                             onChange={(e) => setContent(e.target.value)}
                             value={content}    
                         />    
