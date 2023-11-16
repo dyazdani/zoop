@@ -5,6 +5,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import Tooltip from "@mui/material/Tooltip";
 import Fab from "@mui/material/Fab";
 import SendIcon from "@mui/icons-material/Send";
 
@@ -13,15 +14,20 @@ const SendZoopDialog = () => {
 
     return (
         <>
-        <Fab
-            sx={{
-                position: "absolute",
-                bottom: 25,
-                right: 25
-            }}
-            onClick={() => setOpen(true)}
-        > <SendIcon />
-        </Fab>
+        <Tooltip 
+            title="Send a Zoop"
+        >
+            <Fab
+                sx={{
+                    position: "absolute",
+                    bottom: 25,
+                    right: 25
+                }}
+                onClick={() => setOpen(true)}
+            > <SendIcon />
+            </Fab>
+        </Tooltip>
+        
         <Dialog
             open={open}
             onClose={() => setOpen(false)}
