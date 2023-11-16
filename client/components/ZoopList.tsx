@@ -30,6 +30,7 @@ const ZoopsList = () => {
             return (
               <ZoopListItem
                 key={zoop.id}
+                zoopId={zoop.id}
                 author={zoop.author.username}
                 receiver={zoop.receiver.username}
                 content={zoop.content}

@@ -3,6 +3,7 @@ import React from "react";
 import Zoop from "./Zoop";
 
 type ZoopListItemProps = {
+  zoopId: number
   author: string;
   receiver: string;
   content: string;
@@ -11,6 +12,7 @@ type ZoopListItemProps = {
 };
 
 const ZoopListItem = ({
+  zoopId,
   author,
   receiver,
   content,
@@ -20,6 +22,7 @@ const ZoopListItem = ({
   return (
     <>
       <Zoop
+        zoopId={zoopId}
         author={author}
         receiver={receiver}
         content={content}

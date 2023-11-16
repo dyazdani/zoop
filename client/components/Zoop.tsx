@@ -1,5 +1,6 @@
 import React from "react";
 import { Fave } from "@prisma/client";
+import FaveButton from "./FaveButton";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -7,11 +8,10 @@ import Typography from "@mui/material/Typography";
 import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Stack from "@mui/material/Stack";
-import Paper from "@mui/material/Paper";
 
 type ZoopProps = {
+  zoopId: number;
   author: string;
   receiver: string;
   content: string;
@@ -19,7 +19,7 @@ type ZoopProps = {
   dateCreated: Date;
 };
 
-const Zoop = ({ author, receiver, content, faves, dateCreated }: ZoopProps) => {
+const Zoop = ({ zoopId, author, receiver, content, faves, dateCreated }: ZoopProps) => {
   const date = new Date(dateCreated);
   const formattedDate = date.toLocaleDateString("en-US", {
     month: "long",
@@ -52,14 +52,7 @@ const Zoop = ({ author, receiver, content, faves, dateCreated }: ZoopProps) => {
           </CardContent>
         </Card>
         <Stack direction="row" justifyContent="space-between">
-          <Paper variant="outlined">
-            <Stack direction="row" alignItems="center">
-              <IconButton>
-                <StarBorderIcon />
-              </IconButton>
-              <Typography variant="body2">{faves.length}</Typography>
-            </Stack>
-          </Paper>
+          <FaveButton zoopId={zoopId} faves={faves} />
           <Typography variant="body2">{formattedDate}</Typography>
         </Stack>
       </Stack>
