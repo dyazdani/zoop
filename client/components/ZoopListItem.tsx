@@ -1,10 +1,20 @@
 import { Fave } from "@prisma/client";
 import React from "react";
 
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+import SendIcon from "@mui/icons-material/Send";
+import IconButton from "@mui/material/IconButton";
+// import AccountCircle from '@mui/icons-material/AccountCircle';
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import Container from "@mui/material/Container";
+import Stack from "@mui/material/Stack";
+
 type ZoopListItemProps = {
-  authorId: number;
   author: string;
-  receiverId: number;
   receiver: string;
   content: string;
   faves: Fave[];
@@ -12,9 +22,7 @@ type ZoopListItemProps = {
 };
 
 const ZoopListItem = ({
-  authorId,
   author,
-  receiverId,
   receiver,
   content,
   faves,
@@ -29,13 +37,41 @@ const ZoopListItem = ({
 
   return (
     <>
-      <div>Author ID: {authorId}</div>
-      <div>Author: {author}</div>
-      <div>Receiver ID: {receiverId}</div>
-      <div>Receiver: {receiver}</div>
-      <div>{content}</div>
-      <div>faves: {faves.length}</div>
-      <div>{formattedDate}</div>
+      <Container maxWidth="md">
+        <Stack direction="row" justifyContent="space-between">
+          <Typography>{author}</Typography>
+          <SendIcon />
+          <Typography>{receiver}</Typography>
+        </Stack>
+        <Card>
+          <CardContent>
+            <Stack direction="row" justifyContent="space-around">
+              <IconButton>
+                <AccountBoxIcon />
+              </IconButton>
+              <Typography>{content}</Typography>
+              <IconButton>
+                <AccountBoxIcon />
+              </IconButton>
+            </Stack>
+          </CardContent>
+        </Card>
+        <Stack direction="row" justifyContent="space-between">
+          <Box
+            sx={{
+              border: "1px solid black",
+              maxWidth: "2.5rem",
+              borderRadius: "3px",
+            }}
+          >
+            <Stack direction="row">
+              <StarBorderIcon />
+              <Typography>{faves.length}</Typography>
+            </Stack>
+          </Box>
+          <Typography>{formattedDate}</Typography>
+        </Stack>
+      </Container>
     </>
   );
 };

@@ -27,9 +27,7 @@ const ZoopsList = () => {
         return (
           <ZoopListItem
             key={zoop.id}
-            authorId={zoop.authorId}
             author={zoop.author.username}
-            receiverId={zoop.receiverId}
             receiver={zoop.receiver.username}
             content={zoop.content}
             faves={zoop.faves}
