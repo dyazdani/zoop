@@ -8,7 +8,6 @@ import Fab from "@mui/material/Fab";
 import Link from "@mui/material/Link";
 import SendIcon from "@mui/icons-material/Send";
 import TextField from "@mui/material/TextField";
-import Tooltip from "@mui/material/Tooltip";
 import React, {
     useState,
 } from "react";
@@ -61,22 +60,18 @@ const SendZoopDialog = () => {
         
     }
 
-    return ( //TODO: MUI suggests adding a wrapper element so that Tooltip works when Fab is disabled
+    return (
         <>
-            <Tooltip 
-                title="Send a Zoop"
-            >
-                <Fab
-                    disabled={!token}
-                    sx={{
-                        position: "absolute",
-                        bottom: 25,
-                        right: 25
-                    }}
-                    onClick={() => setOpen(true)}
-                > <SendIcon />
-                </Fab>
-            </Tooltip>
+            <Fab
+                disabled={!token}
+                sx={{
+                    position: "absolute",
+                    bottom: 25,
+                    right: 25
+                }}
+                onClick={() => setOpen(true)}
+            > <SendIcon />
+            </Fab>
 
             {/* Render a success dialog if Zoop was sent and successfully integrated into DB,
                 or an input dialog if Zoop has not yet been sent */}
