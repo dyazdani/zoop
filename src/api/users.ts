@@ -66,8 +66,8 @@ usersRouter.post("/register", async (req, res, next) => {
         res.send({
             token,
             user: {
-                email: user.email,
-                username: user.username
+                ...user,
+                password: undefined
             }
         });
     })
@@ -100,8 +100,8 @@ usersRouter.post("/login", async (req, res, next) => {
                 res.send({
                     token,
                     user: {
-                        email: user.email,
-                        username: user.username
+                        ...user,
+                        password: undefined
                     }
                 });
             } else {

@@ -1,12 +1,6 @@
-export type User = {
-        id: number
-        email: string
-        dateCreated: Date
-        username: string        
-        zoopsWritten: Zoop[]
-        zoopsReceived: Zoop[]
-        faves: Fave[]
-}
+import type { User as UserFromPrisma} from '@prisma/client';
+
+export type User = Omit<UserFromPrisma, "password">;
 
 export interface Fave {
         id: number

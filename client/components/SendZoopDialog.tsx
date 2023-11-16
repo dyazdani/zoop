@@ -46,19 +46,12 @@ const SendZoopDialog = () => {
             // TODO: How best to render a message about this error in UI?
         } else {
             const [recipient] = usersData.users.filter(user => user.username === username);
-            if (recipient) {
+            if (recipient && currentUser) {
                 postZoop({
                     content: content,
-                    authorId: currentUser?.user.id,
+                    authorId: currentUser.user.id,
                     receiverId: recipient.id
                 })
-                .unwrap()
-                .then((payload) => {
-                    console.log('fulfilled', payload);
-                    setLastZoopSentId(payload.zoop.id)
-                })
-                .catch((error) => console.error('rejected', error));
-              
                 setZoopSent(true)
             } else {
                 throw new Error('No such user exists. Please select a different username');
@@ -88,7 +81,7 @@ const SendZoopDialog = () => {
 
             {/* Render a success dialog if Zoop was sent and successfully integrated into DB,
                 or an input dialog if Zoop has not yet been sent */}
-            {zoopSent ? (
+            {zoopData?.zoop ? (
                 <Dialog
                     open={open}
                     onClose={() => setOpen(false)}
@@ -98,7 +91,7 @@ const SendZoopDialog = () => {
                         <DialogContentText> 
                             <Link
                                 component="button"
-                                onClick={() => navigate(`/zoops/${lastZoopSentId}`)}
+                                onClick={() => navigate(`/zoops/${zoopData.zoop.id}`)}
                             > 
                                 Go to this page to view your Zoop.
                             </Link>

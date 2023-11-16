@@ -37,7 +37,7 @@ export const api = createApi({
         query: () => `/zoops`,
         providesTags: ['Zoop']
       }),
-      postZoop: builder.mutation({
+      postZoop: builder.mutation<{zoop: Zoop}, {content: string, authorId: number, receiverId: number}>({
         query: ({content, authorId, receiverId}) => ({
           url: "/zoops",
           method: "POST",
