@@ -37,12 +37,14 @@ const SendZoopDialog = () => {
                     placeholder="Username"    
                 />
                 <TextField
-                    autoFocus
                     required
+                    fullWidth
+                    multiline
+                    minRows={5}
                     margin="dense"
                     label="Content"
                     type="text"
-                    placeholder="e.g., Zoop is the zoopiest of all apps."    
+                    placeholder="e.g., Zoop is the new hotness."    
                 />    
             </DialogContent>
             <DialogActions>
