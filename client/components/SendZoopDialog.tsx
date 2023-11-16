@@ -35,15 +35,15 @@ const SendZoopDialog = () => {
     const currentUser = useGetMeQuery().data;
 
     const [postZoop, { isLoading: isPostZoopLoading, isError, data: zoopData }] = usePostZoopMutation();
-    const {data: usersData, isLoading: isGetAllUsersLoading, error } = useGetAllUsersQuery() 
+    const {data: usersData, isLoading: isGetAllUsersLoading, error } = useGetAllUsersQuery(); 
 
     const navigate = useNavigate();
 
     const handleSendZoopClick = () => {
-        if (!usersData) {
+        if (!isGetAllUsersLoading && !usersData) {
             throw new Error('No users to send Zoop to');
             // TODO: How best to render a message about this error in UI?
-        } else {
+        } else if (!isGetAllUsersLoading && usersData) {
             const [recipient] = usersData.users.filter(user => user.username === username);
             if (recipient && currentUser) {
                 postZoop({
