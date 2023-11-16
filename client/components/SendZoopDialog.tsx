@@ -62,16 +62,19 @@ const SendZoopDialog = () => {
 
     return (
         <>
-            <Fab
-                disabled={!token}
-                sx={{
-                    position: "absolute",
-                    bottom: 25,
-                    right: 25
-                }}
-                onClick={() => setOpen(true)}
-            > <SendIcon />
-            </Fab>
+            {token && (
+                <Fab
+                    disabled={!token}
+                    sx={{
+                        position: "absolute",
+                        bottom: 25,
+                        right: 25
+                    }}
+                    onClick={() => setOpen(true)}
+                > <SendIcon />
+                </Fab>
+            )}
+
 
             {/* Render a success dialog if Zoop was sent and successfully integrated into DB,
                 or an input dialog if Zoop has not yet been sent */}
