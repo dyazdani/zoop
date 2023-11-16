@@ -90,7 +90,7 @@ const SendZoopDialog = () => {
                                 component="button"
                                 onClick={() => navigate(`/zoops/${zoopData.zoop.id}`)}
                             > 
-                                Go to this page to view your Zoop.
+                                Go to Zoop.
                             </Link>
                         </DialogContentText>
 
@@ -101,7 +101,7 @@ const SendZoopDialog = () => {
                     open={open}
                     onClose={() => setOpen(false)}
                 >
-                    <DialogTitle>Compose a Zoop</DialogTitle>
+                    <DialogTitle>Send Zoop</DialogTitle>
                     <DialogContent>
                         <TextField
                             autoFocus
