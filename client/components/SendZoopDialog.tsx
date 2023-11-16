@@ -88,12 +88,14 @@ const SendZoopDialog = () => {
                         <DialogContentText> 
                             <Link
                                 component="button"
-                                onClick={() => navigate(`/zoops/${zoopData.zoop.id}`)}
+                                onClick={() => {
+                                    navigate(`/zoops/${zoopData.zoop.id}`)
+                                    setOpen(false);
+                                }}
                             > 
                                 Go to Zoop.
                             </Link>
                         </DialogContentText>
-
                     </DialogContent>
                 </Dialog>
             ) : (
