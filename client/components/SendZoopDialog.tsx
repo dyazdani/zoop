@@ -1,27 +1,26 @@
-import React, {
-    useState,
-    useEffect 
-} from "react";
-import {useNavigate} from "react-router-dom";
+import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
+import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText"
-import DialogActions from "@mui/material/DialogActions";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Tooltip from "@mui/material/Tooltip";
+import DialogTitle from "@mui/material/DialogTitle";
 import Fab from "@mui/material/Fab";
+import Link from "@mui/material/Link";
 import SendIcon from "@mui/icons-material/Send";
+import TextField from "@mui/material/TextField";
+import Tooltip from "@mui/material/Tooltip";
+import React, {
+    useState,
+} from "react";
+import { useSelector } from "react-redux";
+import {useNavigate} from "react-router-dom";
+
+import { RootState} from "../app/store";
 import { 
     usePostZoopMutation, 
     useGetAllUsersQuery,
     useGetMeQuery
 }  from "../features/api";
-import { useSelector } from "react-redux";
-import { RootState} from "../app/store";
-import type { User } from '../../src/types/custom'
 
 const SendZoopDialog = () => {
     const [open, setOpen] = useState(false);
