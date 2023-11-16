@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes} from "react-router-dom";
 import { useSelector } from "react-redux";
 import LoginPage from "./components/LoginPage";
-import Zoop from "./components/Zoop";
+import ZoopPage from "./components/ZoopPage";
 import RegisterPage from "./components/RegisterPage";
 import { RootState } from "./app/store";
 import MePage from "./components/MePage";
@@ -21,7 +21,7 @@ const App: React.FC = () => {
       <Nav />
       <Routes>
         <Route path="/" element={<HomePage />}/>
-        <Route path="/zoops/:id" element={<Zoop />} />
+        <Route path="/zoops/:id" element={<ZoopPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/me" element={<MePage/>} />
