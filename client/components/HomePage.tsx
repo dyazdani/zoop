@@ -9,7 +9,6 @@ const HomePage = () => {
         <>
             <div>I am the Home Page</div>
             <ZoopList />
-            <SendZoopDialog />
         </>
     )
 }

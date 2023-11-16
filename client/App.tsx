@@ -8,6 +8,7 @@ import { RootState } from "./app/store";
 import MePage from "./components/MePage";
 import HomePage from "./components/HomePage";
 import Nav from "./components/Nav";
+import SendZoopDialog from "./components/SendZoopDialog";
 
 const App: React.FC = () => {
   const token = useSelector((state: RootState) => state.auth.token);
@@ -19,6 +20,9 @@ const App: React.FC = () => {
 
   return (
     <>
+      {token && (
+        <SendZoopDialog />
+      )}
       <Nav />
       <Routes>
         <Route path="/" element={<HomePage />}/>
