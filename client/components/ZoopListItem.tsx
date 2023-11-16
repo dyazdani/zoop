@@ -1,7 +1,7 @@
 import { Fave } from "@prisma/client";
 import React from "react";
 
-import Box from "@mui/material/Box";
+// import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -10,8 +10,8 @@ import IconButton from "@mui/material/IconButton";
 // import AccountCircle from '@mui/icons-material/AccountCircle';
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
+import Paper from "@mui/material/Paper";
 
 type ZoopListItemProps = {
   author: string;
@@ -37,41 +37,40 @@ const ZoopListItem = ({
 
   return (
     <>
-      <Container maxWidth="md">
+      <Stack spacing={2}>
         <Stack direction="row" justifyContent="space-between">
-          <Typography>{author}</Typography>
-          <SendIcon />
-          <Typography>{receiver}</Typography>
+          <Typography variant="h6">{author}</Typography>
+          <Stack direction="row" alignItems="center">
+            <Typography variant="h6">- - - -</Typography>
+            <SendIcon />
+          </Stack>
+          <Typography variant="h6">{receiver}</Typography>
         </Stack>
         <Card>
           <CardContent>
             <Stack direction="row" justifyContent="space-around">
               <IconButton>
-                <AccountBoxIcon />
+                <AccountBoxIcon sx={{ fontSize: 40 }}/>
               </IconButton>
-              <Typography>{content}</Typography>
+              <Typography variant="body1">{content}</Typography>
               <IconButton>
-                <AccountBoxIcon />
+                <AccountBoxIcon sx={{ fontSize: 40 }}/>
               </IconButton>
             </Stack>
           </CardContent>
         </Card>
         <Stack direction="row" justifyContent="space-between">
-          <Box
-            sx={{
-              border: "1px solid black",
-              maxWidth: "2.5rem",
-              borderRadius: "3px",
-            }}
-          >
-            <Stack direction="row">
-              <StarBorderIcon />
-              <Typography>{faves.length}</Typography>
+          <Paper variant="outlined">
+            <Stack direction="row" alignItems="center">
+              <IconButton>
+                <StarBorderIcon />
+              </IconButton>
+              <Typography variant="body2">{faves.length}</Typography>
             </Stack>
-          </Box>
-          <Typography>{formattedDate}</Typography>
+          </Paper>
+          <Typography variant="body2">{formattedDate}</Typography>
         </Stack>
-      </Container>
+      </Stack>
     </>
   );
 };
