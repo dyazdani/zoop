@@ -3,6 +3,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
+import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Fab from "@mui/material/Fab";
 import SendIcon from "@mui/icons-material/Send";
@@ -27,8 +28,35 @@ const SendZoopDialog = () => {
         >
             <DialogTitle>Compose a Zoop</DialogTitle>
             <DialogContent>
+                <TextField
+                    autoFocus
+                    required
+                    margin="dense"
+                    label="Recipient"
+                    type="text"
+                    placeholder="Username"    
+                />
+                <TextField
+                    autoFocus
+                    required
+                    margin="dense"
+                    label="Content"
+                    type="text"
+                    placeholder="e.g., Zoop is the zoopiest of all apps."    
+                />    
             </DialogContent>
-
+            <DialogActions>
+                <Button
+                    variant="contained"
+                    endIcon={<SendIcon />}
+                    onClick={() => {
+                        setOpen(false);
+                        // TODO: redux action that adds Zoop to database
+                    }}
+                >
+                    Send Zoop
+                </Button>
+            </DialogActions>
         </Dialog>
         </>
         )
