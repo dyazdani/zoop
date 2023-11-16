@@ -1,4 +1,7 @@
-import React, {useState } from "react";
+import React, {
+    useState,
+    useEffect 
+} from "react";
 import {useNavigate} from "react-router-dom";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -16,7 +19,9 @@ import {
     useGetAllUsersQuery,
     useGetMeQuery
 }  from "../features/api";
-
+import { useSelector } from "react-redux";
+import { RootState} from "../app/store";
+import type { User } from '../../src/types/custom'
 
 const SendZoopDialog = () => {
     const [open, setOpen] = useState(false);
@@ -24,8 +29,11 @@ const SendZoopDialog = () => {
     const [content, setContent] = useState("");
     const [zoopSent, setZoopSent] = useState(false);
     const [lastZoopSentId, setLastZoopSentId] = useState<number | null>(null);
-    const [currentUser, setCurrentUser] = useState(useGetMeQuery().data);
 
+    // Variable used for authorization
+    const token = useSelector((state: RootState) => state.auth.token);
+
+    const currentUser = useGetMeQuery().data;
 
     const [postZoop, { isLoading: isPostZoopLoading, isError, data: zoopData }] = usePostZoopMutation();
     const {data: usersData, isLoading: isGetAllUsersLoading, error } = useGetAllUsersQuery() 
@@ -61,13 +69,13 @@ const SendZoopDialog = () => {
         
     }
 
-    return (
+    return ( //TODO: MUI suggests adding a wrapper element so that Tooltip works when Fab is disabled
         <>
-            {/*TODO: Disable this button if user is not logged in */}
             <Tooltip 
                 title="Send a Zoop"
             >
                 <Fab
+                    disabled={!token}
                     sx={{
                         position: "absolute",
                         bottom: 25,
@@ -85,15 +93,14 @@ const SendZoopDialog = () => {
                     open={open}
                     onClose={() => setOpen(false)}
                 >
-                    <DialogTitle>Compose a Zoop</DialogTitle>
+                    <DialogTitle>Zoop Sent!</DialogTitle>
                     <DialogContent>
                         <DialogContentText> 
-                            Zoop sent! 
                             <Link
                                 component="button"
                                 onClick={() => navigate(`/zoops/${lastZoopSentId}`)}
                             > 
-                                View your Zoop.
+                                Go to this page to view your Zoop.
                             </Link>
                         </DialogContentText>
 
