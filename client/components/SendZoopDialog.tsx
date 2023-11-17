@@ -37,6 +37,10 @@ const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
         console.error(zoopError);
     }
 
+    if (zoopData) {
+        console.log(zoopData);
+    }
+
     const handleSendZoopClick = () => {
         if (!isGetAllUsersLoading && !usersData) {
             throw new Error('No users to send Zoop to');
@@ -48,10 +52,6 @@ const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
                     authorId: currentUser.user.id,
                     receiverId: recipient.user.id
                 })
-                // TODO: figure out why zoopData is undefined.
-                if (!isSendZoopLoading && zoopData) {
-                    console.log("zoopData: ", zoopData);
-                }
             } else {
                 throw new Error('No such user exists. Please select a different username');
             }  
