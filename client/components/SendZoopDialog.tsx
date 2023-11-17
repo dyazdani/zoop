@@ -6,6 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 import { 
     useGetAllUsersQuery, 
@@ -14,6 +15,7 @@ import {
 } from "../features/api";
 import { Zoop } from "../../src/types/custom";
 import ZoopSentDialog from "./ZoopSentDialog";
+import { RootState } from "../app/store";
 
 export interface SendZoopDialogProps {
     open: boolean
@@ -24,7 +26,7 @@ const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
     const [username, setUsername] = useState("");
     const [content, setContent] = useState("");
 
-    const currentUser = useGetMeQuery().data;
+    const currentUser = useSelector((state: RootState) => state.auth.user)
 
     const [sendZoop, { isLoading: isSendZoopLoading, isError, data: zoopData, error: zoopError }] = useSendZoopMutation();
     const {data: usersData, isLoading: isGetAllUsersLoading, error: userError } = useGetAllUsersQuery(); 
@@ -49,7 +51,7 @@ const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
             if (recipient && currentUser) {
                 sendZoop({
                     content: content,
-                    authorId: currentUser.user.id,
+                    authorId: currentUser.id,
                     receiverId: recipient.user.id
                 })
             } else {
