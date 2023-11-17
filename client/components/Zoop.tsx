@@ -10,7 +10,6 @@ import IconButton from "@mui/material/IconButton";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Stack from "@mui/material/Stack";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import Box from "@mui/material/Box";
 
 type ZoopProps = {
   zoopId: number;
