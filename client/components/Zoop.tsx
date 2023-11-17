@@ -9,6 +9,8 @@ import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Stack from "@mui/material/Stack";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import Box from "@mui/material/Box";
 
 type ZoopProps = {
   zoopId: number;
@@ -19,7 +21,14 @@ type ZoopProps = {
   dateCreated: Date;
 };
 
-const Zoop = ({ zoopId, author, receiver, content, faves, dateCreated }: ZoopProps) => {
+const Zoop = ({
+  zoopId,
+  author,
+  receiver,
+  content,
+  faves,
+  dateCreated,
+}: ZoopProps) => {
   const date = new Date(dateCreated);
   const formattedDate = date.toLocaleDateString("en-US", {
     month: "long",
@@ -31,27 +40,35 @@ const Zoop = ({ zoopId, author, receiver, content, faves, dateCreated }: ZoopPro
     <>
       <Stack spacing={2}>
         <Stack direction="row" justifyContent="space-between">
-          <Typography variant="h6">{author}</Typography>
+          <Stack direction="row" alignItems="center">
+            <IconButton>
+              <AccountCircle fontSize="large"/>
+            </IconButton>
+            <Typography variant="h6">{author}</Typography>
+          </Stack>
           <Stack direction="row" alignItems="center">
             <Typography variant="h6">- - - -</Typography>
             <SendIcon />
           </Stack>
-          <Typography variant="h6">{receiver}</Typography>
+          <Stack direction="row" alignItems="center">
+            <Typography variant="h6">{receiver}</Typography>
+            <IconButton>
+              <AccountCircle fontSize="large"/>
+            </IconButton>
+          </Stack>
         </Stack>
         <Card>
           <CardContent>
-            <Stack direction="row" justifyContent="space-between" alignItems="center">
-              <IconButton>
-                <AccountBoxIcon sx={{ fontSize: 100 }} />
-              </IconButton>
+            <Stack direction="row" justifyContent="center" alignItems="start">
               <Typography variant="body1">{content}</Typography>
-              <IconButton>
-                <AccountBoxIcon sx={{ fontSize: 100 }} />
-              </IconButton>
             </Stack>
           </CardContent>
         </Card>
-        <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <FaveButton zoopId={zoopId} faves={faves} />
           <Typography variant="body2">{formattedDate}</Typography>
         </Stack>
