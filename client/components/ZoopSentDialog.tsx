@@ -9,19 +9,18 @@ import { Zoop } from "../../src/types/custom";
 
 
 export interface ZoopSentDialogProps {
-    isZoopSent: boolean
-    sentZoop: Zoop | null
+    sentZoop: Zoop
+    onClose: () => void
 }
 
-const ZoopSentDialog = ({isZoopSent, sentZoop}: ZoopSentDialogProps) => {
-    const [open, setOpen] = useState(isZoopSent);
+const ZoopSentDialog = ({sentZoop, onClose}: ZoopSentDialogProps) => {
     
     const navigate = useNavigate()
 
     return (
         <Dialog
-            open={open}
-            onClose={() => setOpen(false)}
+            open={true}
+            onClose={onClose}
         >
             <DialogTitle>Zoop Sent!</DialogTitle>
             <DialogContent>
@@ -29,8 +28,8 @@ const ZoopSentDialog = ({isZoopSent, sentZoop}: ZoopSentDialogProps) => {
                     <Link
                         component="button"
                         onClick={() => {
-                            navigate(`/zoops/${sentZoop?.id}`)
-                            setOpen(false);
+                            navigate(`/zoops/${sentZoop.id}`)
+                            onClose();
                         }}
                     > 
                         Go to Zoop.

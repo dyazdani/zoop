@@ -13,25 +13,31 @@ import {
     useSendZoopMutation 
 } from "../features/api";
 import { Zoop } from "../../src/types/custom";
+import ZoopSentDialog from "./ZoopSentDialog";
 
 export interface SendZoopDialogProps {
-    openDialog: boolean
-    isZoopSent: () => void
-    sentZoop: (zoop: Zoop) => void;
+    open: boolean
+    onClose: () => void
 }
 
-const SendZoopDialog = ({openDialog, isZoopSent, sentZoop}: SendZoopDialogProps) => {
+const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
     const [username, setUsername] = useState("");
     const [content, setContent] = useState("");
-    const [open, setOpen] = useState(openDialog);
 
     const currentUser = useGetMeQuery().data;
 
-    const [sendZoop, { isLoading: isSendZoopLoading, isError, data: zoopData }] = useSendZoopMutation();
-    const {data: usersData, isLoading: isGetAllUsersLoading, error } = useGetAllUsersQuery(); 
+    const [sendZoop, { isLoading: isSendZoopLoading, isError, data: zoopData, error: zoopError }] = useSendZoopMutation();
+    const {data: usersData, isLoading: isGetAllUsersLoading, error: userError } = useGetAllUsersQuery(); 
+
+    if (userError) {
+        console.error(userError);
+    }
+
+    if (zoopError) {
+        console.error(zoopError);
+    }
 
     const handleSendZoopClick = () => {
-        setOpen(false);
         if (!isGetAllUsersLoading && !usersData) {
             throw new Error('No users to send Zoop to');
         } else if (!isGetAllUsersLoading && usersData) {
@@ -42,11 +48,9 @@ const SendZoopDialog = ({openDialog, isZoopSent, sentZoop}: SendZoopDialogProps)
                     authorId: currentUser.user.id,
                     receiverId: recipient.user.id
                 })
-                isZoopSent();
                 // TODO: figure out why zoopData is undefined.
                 if (!isSendZoopLoading && zoopData) {
                     console.log("zoopData: ", zoopData);
-                    sentZoop(zoopData.zoop);
                 }
             } else {
                 throw new Error('No such user exists. Please select a different username');
@@ -54,10 +58,18 @@ const SendZoopDialog = ({openDialog, isZoopSent, sentZoop}: SendZoopDialogProps)
         }  
     }
 
+    if (zoopData) {
+        return (
+            <ZoopSentDialog
+                sentZoop={zoopData.zoop}
+                onClose={onClose}
+            />
+        )
+    }
     return (
         <Dialog
             open={open}
-            onClose={() => setOpen(false)}
+            onClose={onClose}
         >
             <DialogTitle>Send Zoop</DialogTitle>
             <DialogContent>

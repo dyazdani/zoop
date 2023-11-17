@@ -11,16 +11,10 @@ import ZoopSentDialog from "./ZoopSentDialog";
 import { Zoop } from "../../src/types/custom";
 
 const SendZoopButton = () => {
-    const [open, setOpen] = useState(false);
-    const [isZoopSent, setIsZoopSent] = useState(false);
-    const [sentZoop, setSentZoop] = useState<Zoop | null>(null)
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     // Variable used for authorization
     const token = useSelector((state: RootState) => state.auth.token);
-
-    const handleSetSentZoop = (zoop: Zoop) => {
-        setSentZoop(zoop);
-    }
 
     return (
         <>
@@ -32,24 +26,16 @@ const SendZoopButton = () => {
                         top: 25,
                         right: 25
                     }}
-                    onClick={() => setOpen(true)}
+                    onClick={() => setIsDialogOpen(true)}
                 > <SendIcon />
                 </Fab>
             )}
 
 
-            {open && (
+            {isDialogOpen && (
                 <SendZoopDialog 
-                    openDialog={open}
-                    isZoopSent={() => setIsZoopSent(true)}
-                    sentZoop={handleSetSentZoop}
-                />
-            )}
-            
-            {isZoopSent && (
-                <ZoopSentDialog
-                    isZoopSent={isZoopSent}
-                    sentZoop={sentZoop}
+                    open={isDialogOpen}
+                    onClose={() => setIsDialogOpen(false)}
                 />
             )}
             
