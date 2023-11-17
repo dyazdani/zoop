@@ -1,5 +1,4 @@
 import React from "react";
-import SendZoopDialog from "./SendZoopDialog";
 
 const MePage = () => {
   return (
