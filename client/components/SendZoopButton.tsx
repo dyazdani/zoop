@@ -1,4 +1,4 @@
-import Fab from "@mui/material/Fab";
+import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import React, {
     useState,
@@ -7,8 +7,6 @@ import { useSelector } from "react-redux";
 
 import { RootState} from "../app/store";
 import SendZoopDialog from "./SendZoopDialog";
-import ZoopSentDialog from "./ZoopSentDialog";
-import { Zoop } from "../../src/types/custom";
 
 const SendZoopButton = () => {
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -19,16 +17,17 @@ const SendZoopButton = () => {
     return (
         <>
             {token && (
-                <Fab
+                <Button
                     disabled={!token}
+                    variant="contained"
                     sx={{
                         position: "absolute",
                         top: 25,
                         right: 25
                     }}
                     onClick={() => setIsDialogOpen(true)}
-                > <SendIcon />
-                </Fab>
+                >Send Zoop  ----<SendIcon />
+                </Button>
             )}
 
 
