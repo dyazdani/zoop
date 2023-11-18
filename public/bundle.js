@@ -1076,17 +1076,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./node_modules/@mui/material/Paper/index.js":
-/*!***************************************************!*\
-  !*** ./node_modules/@mui/material/Paper/index.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* reexport safe */ _Paper__WEBPACK_IMPORTED_MODULE_0__[\"default\"]),\n/* harmony export */   getPaperUtilityClass: () => (/* reexport safe */ _paperClasses__WEBPACK_IMPORTED_MODULE_1__.getPaperUtilityClass),\n/* harmony export */   paperClasses: () => (/* reexport safe */ _paperClasses__WEBPACK_IMPORTED_MODULE_1__[\"default\"])\n/* harmony export */ });\n/* harmony import */ var _Paper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Paper */ \"./node_modules/@mui/material/Paper/Paper.js\");\n/* harmony import */ var _paperClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./paperClasses */ \"./node_modules/@mui/material/Paper/paperClasses.js\");\n'use client';\n\n\n\n\n\n//# sourceURL=webpack://zoop/./node_modules/@mui/material/Paper/index.js?");
-
-/***/ }),
-
 /***/ "./node_modules/@mui/material/Paper/paperClasses.js":
 /*!**********************************************************!*\
   !*** ./node_modules/@mui/material/Paper/paperClasses.js ***!
@@ -3193,7 +3182,7 @@ eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nconst StarBorder_1 = __importDefault(__webpack_require__(/*! @mui/icons-material/StarBorder */ \"./node_modules/@mui/icons-material/StarBorder.js\"));\nconst Paper_1 = __importDefault(__webpack_require__(/*! @mui/material/Paper */ \"./node_modules/@mui/material/Paper/index.js\"));\nconst IconButton_1 = __importDefault(__webpack_require__(/*! @mui/material/IconButton */ \"./node_modules/@mui/material/IconButton/index.js\"));\nconst Typography_1 = __importDefault(__webpack_require__(/*! @mui/material/Typography */ \"./node_modules/@mui/material/Typography/index.js\"));\nconst Stack_1 = __importDefault(__webpack_require__(/*! @mui/material/Stack */ \"./node_modules/@mui/material/Stack/index.js\"));\nconst FaveButton = ({ zoopId, faves }) => {\n    return (react_1.default.createElement(react_1.default.Fragment, null,\n        react_1.default.createElement(Paper_1.default, { variant: \"outlined\", sx: { width: 60, height: \"100%\" } },\n            react_1.default.createElement(Stack_1.default, { direction: \"row\", alignItems: \"center\" },\n                react_1.default.createElement(IconButton_1.default, null,\n                    react_1.default.createElement(StarBorder_1.default, null)),\n                react_1.default.createElement(Typography_1.default, { variant: \"body2\" }, faves.length)))));\n};\nexports[\"default\"] = FaveButton;\n\n\n//# sourceURL=webpack://zoop/./client/components/FaveButton.tsx?");
+eval("\nvar __importDefault = (this && this.__importDefault) || function (mod) {\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\n};\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\nconst react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\nconst StarBorder_1 = __importDefault(__webpack_require__(/*! @mui/icons-material/StarBorder */ \"./node_modules/@mui/icons-material/StarBorder.js\"));\nconst Typography_1 = __importDefault(__webpack_require__(/*! @mui/material/Typography */ \"./node_modules/@mui/material/Typography/index.js\"));\nconst Stack_1 = __importDefault(__webpack_require__(/*! @mui/material/Stack */ \"./node_modules/@mui/material/Stack/index.js\"));\nconst Button_1 = __importDefault(__webpack_require__(/*! @mui/material/Button */ \"./node_modules/@mui/material/Button/index.js\"));\nconst FaveButton = ({ zoopId, faves }) => {\n    return (react_1.default.createElement(react_1.default.Fragment, null,\n        react_1.default.createElement(Button_1.default, { variant: \"outlined\" },\n            react_1.default.createElement(Stack_1.default, { direction: \"row\", alignItems: \"center\" },\n                react_1.default.createElement(StarBorder_1.default, null),\n                react_1.default.createElement(Typography_1.default, { variant: \"body2\" }, faves.length)))));\n};\nexports[\"default\"] = FaveButton;\n\n\n//# sourceURL=webpack://zoop/./client/components/FaveButton.tsx?");
 
 /***/ }),
 
