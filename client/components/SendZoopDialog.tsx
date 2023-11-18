@@ -1,4 +1,5 @@
 import SendIcon from "@mui/icons-material/Send"
+import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -10,10 +11,8 @@ import { useSelector } from "react-redux";
 
 import { 
     useGetAllUsersQuery, 
-    useGetMeQuery, 
     useSendZoopMutation 
 } from "../features/api";
-import { Zoop } from "../../src/types/custom";
 import ZoopSentDialog from "./ZoopSentDialog";
 import { RootState } from "../app/store";
 
@@ -23,7 +22,7 @@ export interface SendZoopDialogProps {
 }
 
 const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
-    const [username, setUsername] = useState("");
+    const [username, setUsername] = useState<{label: string, id: number} | null>(null);
     const [content, setContent] = useState("");
 
     const currentUser = useSelector((state: RootState) => state.auth.user)
@@ -31,23 +30,12 @@ const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
     const [sendZoop, { isLoading: isSendZoopLoading, isError, data: zoopData, error: zoopError }] = useSendZoopMutation();
     const {data: usersData, isLoading: isGetAllUsersLoading, error: userError } = useGetAllUsersQuery(); 
 
-    if (userError) {
-        console.error(userError);
-    }
-
-    if (zoopError) {
-        console.error(zoopError);
-    }
-
-    if (zoopData) {
-        console.log(zoopData);
-    }
 
     const handleSendZoopClick = () => {
         if (!isGetAllUsersLoading && !usersData) {
             throw new Error('No users to send Zoop to');
         } else if (!isGetAllUsersLoading && usersData) {
-            const [recipient] = usersData.users.filter(el => el.user.username === username);
+            const [recipient] = usersData.users.filter(el => el.user.username === username?.label);
             if (recipient && currentUser) {
                 sendZoop({
                     content: content,
@@ -68,6 +56,11 @@ const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
             />
         )
     }
+    
+    const usernames = usersData ? 
+        usersData.users.map(userObject => ({label: userObject.user.username, id: userObject.user.id})) : 
+        [];
+
     return (
         <Dialog
             open={open}
@@ -75,15 +68,12 @@ const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
         >
             <DialogTitle>Send Zoop</DialogTitle>
             <DialogContent>
-                <TextField
-                    autoFocus
-                    required
-                    margin="dense"
-                    label="Recipient"
-                    type="text"
-                    placeholder="Username"
-                    onChange={(e) => setUsername(e.target.value)}
-                    value={username}    
+                <Autocomplete
+                    disablePortal
+                    options={usernames}
+                    renderInput={(params) => <TextField {...params} label="Username" />}
+                    isOptionEqualToValue={(option, value) => option.id === value.id}
+                    onChange={(e, value, reason) => setUsername(value)}
                 />
                 <TextField
                     required
