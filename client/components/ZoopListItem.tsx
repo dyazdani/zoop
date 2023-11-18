@@ -1,8 +1,7 @@
 import { Fave } from "@prisma/client";
 import React from "react";
 import Zoop from "./Zoop";
-
-import Link from "@mui/material/Link";
+import { Link } from "react-router-dom";
 
 type ZoopListItemProps = {
   zoopId: number;
@@ -22,7 +21,7 @@ const ZoopListItem = ({
   dateCreated,
 }: ZoopListItemProps) => {
   return (
-    <Link href={`/zoops/${zoopId}`} color="inherit" underline="none">
+    <Link to={`/zoops/${zoopId}`} style={{ textDecoration: "none" }}>
       <Zoop
         zoopId={zoopId}
         author={author}
@@ -31,7 +30,7 @@ const ZoopListItem = ({
         faves={faves}
         dateCreated={dateCreated}
       />
-    </Link>
+     </Link>
   );
 };
 

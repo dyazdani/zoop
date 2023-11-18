@@ -21,7 +21,7 @@ const ZoopsList = () => {
 
   return zoops.length ? (
     <>
-      <Container maxWidth="md" sx={{ marginTop: 10 }}>
+      <Container maxWidth="md" sx={{ marginTop: 10}}>
         <Stack spacing={7}>
           {zoops.map((zoop) => {
             // TODO: import types from Prisma instead of src/types/custom.ts
