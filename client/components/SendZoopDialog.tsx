@@ -22,7 +22,7 @@ export interface SendZoopDialogProps {
 }
 
 const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
-    const [username, setUsername] = useState<{label: string, id: number} | null>(null);
+    const [selectedUser, setSelectedUser] = useState<{label: string, id: number} | null>(null);
     const [content, setContent] = useState("");
 
     const currentUser = useSelector((state: RootState) => state.auth.user)
@@ -35,7 +35,7 @@ const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
         if (!isGetAllUsersLoading && !usersData) {
             throw new Error('No users to send Zoop to');
         } else if (!isGetAllUsersLoading && usersData) {
-            const [recipient] = usersData.users.filter(el => el.user.username === username?.label);
+            const [recipient] = usersData.users.filter(el => el.user.username === selectedUser?.label);
             if (recipient && currentUser) {
                 sendZoop({
                     content: content,
@@ -73,7 +73,7 @@ const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
                     options={usernames}
                     renderInput={(params) => <TextField {...params} label="Username" />}
                     isOptionEqualToValue={(option, value) => option.id === value.id}
-                    onChange={(e, value, reason) => setUsername(value)}
+                    onChange={(e, value, reason) => setSelectedUser(value)}
                 />
                 <TextField
                     required
