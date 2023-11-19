@@ -40,7 +40,9 @@ const Nav = () =>  {
                         onClick={e => setAccountCircleAnchorEl(e.currentTarget)}
                         color="inherit"
                     >
-                        <AccountCircle />
+                        <AccountCircle 
+                            fontSize='large'
+                        />
                     </IconButton>
                     <Menu
                         anchorEl={accountCircleAnchorEl}
