@@ -10,14 +10,16 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import React, {useState} from "react";
 import { NavLink, useNavigate} from "react-router-dom";
-import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { logout } from '../features/authSlice';
 import {RootState} from '../app/store'
 
 const Nav = () =>  {
     const [accountCircleAnchorEl, setAccountCircleAnchorEl] = useState<null | HTMLElement>(null);
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     
     const currentUser = useSelector((state: RootState) => state.auth.user)
 
@@ -75,8 +77,15 @@ const Nav = () =>  {
                         > 
                             Profile
                         </MenuItem>
-                        {/* TODO: Create a logout action that happens for the onClick for the Logout MenuItem */}
-                        <MenuItem>Logout</MenuItem>
+                        <MenuItem
+                            onClick={e => {
+                                setAccountCircleAnchorEl(null);
+                                dispatch(logout());
+                                navigate("/");
+                            }}
+                        >
+                            Logout
+                        </MenuItem>
                     </Menu>
                 </Box>
                 
