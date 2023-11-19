@@ -34,8 +34,7 @@ const Nav = () =>  {
                     <IconButton
                         size="large"
                         aria-label="account of current user"
-                        // TODO: change this aria prop
-                        aria-controls="menu-appbar"
+                        aria-controls="menu-account"
                         aria-haspopup="true"
                         onClick={e => setAccountCircleAnchorEl(e.currentTarget)}
                         color="inherit"
@@ -45,6 +44,7 @@ const Nav = () =>  {
                         />
                     </IconButton>
                     <Menu
+                        id="menu-account"
                         anchorEl={accountCircleAnchorEl}
                         anchorOrigin={{
                         vertical: 'top',
