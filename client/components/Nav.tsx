@@ -1,161 +1,118 @@
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button'
+import ButtonGroup from '@mui/material/ButtonGroup'
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import SendIcon from '@mui/icons-material/Send'
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import React, {useState} from "react";
 import { NavLink, useNavigate} from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import Box from '@mui/material/Box';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import SendIcon from '@mui/icons-material/Send'
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
+
 import { selectCurrentUser } from "../features/authSlice";
 
 
 const Nav = () =>  {
-    const [menuIconAnchorEl, setMenuIconAnchorEl] = useState<null | HTMLElement>(null);
     const [accountCircleAnchorEl, setAccountCircleAnchorEl] = useState<null | HTMLElement>(null);
 
     const navigate = useNavigate();
+    //TODO: Change this to const currentUser = useSelector((state: RootState) => state.auth.user) for auth
     const isLoggedIn = !!selectCurrentUser;
 
     return (
         <>
-            <AppBar 
-                position="static"
+            <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
             >
-                <Toolbar
-                    sx={{
-                        display: "flex", 
-                        justifyContent: "space-between",
-                        flexDirection: "row",
-                        flexWrap: "nowrap"
-                    }}
+                <Box
+                    component="div"
                 >
                     <IconButton
                         size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
+                        aria-label="account of current user"
+                        // TODO: change this aria prop
                         aria-controls="menu-appbar"
                         aria-haspopup="true"
-                        onClick={e => setMenuIconAnchorEl(e.currentTarget)}
+                        onClick={e => setAccountCircleAnchorEl(e.currentTarget)}
+                        color="inherit"
                     >
-                        <MenuIcon />                
+                        <AccountCircle />
                     </IconButton>
                     <Menu
-                        anchorEl={menuIconAnchorEl}
+                        anchorEl={accountCircleAnchorEl}
                         anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
+                        vertical: 'top',
+                        horizontal: 'right',
                         }}
                         keepMounted
                         transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
+                        vertical: 'top',
+                        horizontal: 'right',
                         }}
-                        open={Boolean(menuIconAnchorEl)}
-                        onClose={e => setMenuIconAnchorEl(null)}
+                        open={Boolean(accountCircleAnchorEl)}
+                        onClose={e => setAccountCircleAnchorEl(null)}
                     >
                         <MenuItem 
                             onClick={e => {
-                                setMenuIconAnchorEl(null);
-                                navigate("/");
+                                setAccountCircleAnchorEl(null);
+                                navigate("/me");
                             }}
                         > 
-                            Home
+                            Profile
                         </MenuItem>
-                        {!isLoggedIn && (
-                            <>
-                                <MenuItem 
-                                    onClick={e => {
-                                        setMenuIconAnchorEl(null);
-                                        navigate("/login");
-                                    }}
-                                > 
-                                    Login
-                                </MenuItem>
-                                <MenuItem 
-                                    onClick={e => {
-                                        setMenuIconAnchorEl(null);
-                                        navigate("/register");
-                                    }}
-                                > 
-                                    Register
-                                </MenuItem>
-                            </> 
-                        )}
+                        {/* TODO: Create a logout action that happens for the onClick for the Logout MenuItem */}
+                        <MenuItem>Logout</MenuItem>
                     </Menu>
-                    <Box
+                </Box>
+                
+                <Stack
+                    direction="row"
+                    justifyContent="space-between"
+                    alignItems="center"
+                >
+                    <Typography 
+                        variant="h1" 
                         component="div"
-                        sx={{
-                            display: "flex",
-                            justifyContent: "center"
-                        }}
                     >
-                        <Typography 
-                            variant="h6" 
-                            component="div"
-                            sx={{pr: 1}} 
-                        >
-                            ZOOP
-                        </Typography>
+                        ZOOP
+                    </Typography>
+                    <Stack
+                        direction="row"
+                        alignItems="center"
+                    >
                         <Typography
-                            variant="h6"
+                            variant="h1"
                             component="div"
-                        >
+                            aria-label="presentation"
+                        > 
                             - - - -  
                         </Typography>
-                        <Box
-                            sx={{pt: .25}}
-                        >            
-                            <SendIcon />   
-                        </Box>
-                    </Box>
+                        <SendIcon 
+                            sx={{
+                                fontSize: 80
+                            }}
+                        />
+                    </Stack>
+                </Stack>
+                
+                <Box component='div'>
+                    {/* TODO: Only render this button if user is not logged in */}
+                    <ButtonGroup
+                        variant='contained'
+                        aria-label='contained button group'
+                    >
+                        <Button color='primary'>Login</Button>
+                        <Button color='secondary'>Sign Up</Button>
+                    </ButtonGroup>
+                
+                </Box>
 
-                    {isLoggedIn && (
-                        <div>
-                            <IconButton
-                                size="large"
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={e => setAccountCircleAnchorEl(e.currentTarget)}
-                                color="inherit"
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                            <Menu
-                                anchorEl={accountCircleAnchorEl}
-                                anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                                }}
-                                open={Boolean(accountCircleAnchorEl)}
-                                onClose={e => setAccountCircleAnchorEl(null)}
-                            >
-                                <MenuItem 
-                                    onClick={e => {
-                                        setAccountCircleAnchorEl(null);
-                                        navigate("/me");
-                                    }}
-                                > 
-                                    Profile
-                                </MenuItem>
-                                {/* TODO: Create a logout action that happens for the onClick for the Logout MenuItem */}
-                                <MenuItem>Logout</MenuItem>
-                            </Menu>
-                        </div>
-                    )}
-                </Toolbar>
-            </AppBar>
+            </Stack>
+            {/* TODO: move this to App.tsx */}
             <NavLink to="/">Home</NavLink>
             <NavLink to="/login">Login</NavLink>
             <NavLink to="/register">Register</NavLink>
