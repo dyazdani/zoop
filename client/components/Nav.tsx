@@ -105,8 +105,18 @@ const Nav = () =>  {
                         variant='contained'
                         aria-label='contained button group'
                     >
-                        <Button color='primary'>Login</Button>
-                        <Button color='secondary'>Sign Up</Button>
+                        <Button 
+                            color='primary'
+                            onClick={() => {navigate('/login')}}
+                        >
+                            Login
+                        </Button>
+                        <Button 
+                            color='secondary'
+                            onClick={() => {navigate('/register')}}
+                        >
+                            Sign Up
+                        </Button>
                     </ButtonGroup>
                 
                 </Box>
