@@ -78,7 +78,14 @@ const Nav = () =>  {
                 >
                     <Typography 
                         variant="h1" 
-                        component="div"
+                        component="button"
+                        type='button'
+                        sx={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            cursor: "pointer"
+                        }}
+                        onClick={() => {navigate('/')}}
                     >
                         ZOOP
                     </Typography>
