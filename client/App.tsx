@@ -7,7 +7,7 @@ import RegisterPage from "./components/RegisterPage";
 import { RootState } from "./app/store";
 import MePage from "./components/MePage";
 import HomePage from "./components/HomePage";
-import Nav from "./components/Nav";
+import AppHeader from "./components/AppHeader";
 
 const App: React.FC = () => {
   const token = useSelector((state: RootState) => state.auth.token);
@@ -19,7 +19,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      <Nav />
+      <AppHeader />
       <Routes>
         <Route path="/" element={<HomePage />}/>
         <Route path="/zoops/:id" element={<Zoop />} />
