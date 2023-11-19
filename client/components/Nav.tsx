@@ -10,16 +10,17 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import React, {useState} from "react";
 import { NavLink, useNavigate} from "react-router-dom";
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 
-import { selectCurrentUser } from "../features/authSlice";
-
+import {RootState} from '../app/store'
 
 const Nav = () =>  {
     const [accountCircleAnchorEl, setAccountCircleAnchorEl] = useState<null | HTMLElement>(null);
 
     const navigate = useNavigate();
-    //TODO: Change this to const currentUser = useSelector((state: RootState) => state.auth.user) for auth
-    const isLoggedIn = !!selectCurrentUser;
+    
+    const currentUser = useSelector((state: RootState) => state.auth.user)
+
 
     return (
         <>
@@ -38,10 +39,18 @@ const Nav = () =>  {
                         aria-haspopup="true"
                         onClick={e => setAccountCircleAnchorEl(e.currentTarget)}
                         color="inherit"
+                        disabled={!currentUser}
                     >
                         <AccountCircle 
                             fontSize='large'
-                        />
+                        /> 
+                        {!currentUser && (
+                            <Typography
+                                variant='h5'
+                            >
+                                Please Log In
+                            </Typography>
+                        )}
                     </IconButton>
                     <Menu
                         id="menu-account"
@@ -109,27 +118,26 @@ const Nav = () =>  {
                 </Stack>
                 
                 <Box component='div'>
-                    {/* TODO: Only render this button if user is not logged in */}
-                    <ButtonGroup
-                        variant='contained'
-                        aria-label='contained button group'
-                    >
-                        <Button 
-                            color='primary'
-                            onClick={() => {navigate('/login')}}
+                    {!currentUser && (
+                        <ButtonGroup
+                            variant='contained'
+                            aria-label='contained button group'
                         >
-                            Login
-                        </Button>
-                        <Button 
-                            color='secondary'
-                            onClick={() => {navigate('/register')}}
-                        >
-                            Sign Up
-                        </Button>
-                    </ButtonGroup>
-                
+                            <Button 
+                                color='primary'
+                                onClick={() => {navigate('/login')}}
+                            >
+                                Login
+                            </Button>
+                            <Button 
+                                color='secondary'
+                                onClick={() => {navigate('/register')}}
+                            >
+                                Sign Up
+                            </Button>
+                        </ButtonGroup>
+                    )}
                 </Box>
-
             </Stack>
             {/* TODO: move this to App.tsx */}
             <NavLink to="/">Home</NavLink>
