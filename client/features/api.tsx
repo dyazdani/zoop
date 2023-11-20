@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import {Zoop, Fave, User} from '../../src/types/custom'
+import {Zoop, Fave, User, ZoopWithDetails} from '../../src/types/custom'
 import { RootState } from '../app/store';
 
 // Define a service using a base URL and expected endpoints
@@ -33,7 +33,7 @@ export const api = createApi({
           }),
           invalidatesTags: ["CurrentUser"],
         }),
-        getAllZoops: builder.query<{zoops: Zoop[]}, void>({
+        getAllZoops: builder.query<{zoops: ZoopWithDetails[]}, void>({
           query: () => `/zoops`,
           providesTags: ['Zoop']
         }),

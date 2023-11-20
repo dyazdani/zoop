@@ -1,34 +1,19 @@
-import { Fave } from "@prisma/client";
 import React from "react";
-import Zoop from "./Zoop";
+import ZoopDetails from "./ZoopDetails";
 import { Link } from "react-router-dom";
+import { ZoopWithDetails } from "../../src/types/custom";
 
 type ZoopListItemProps = {
-  zoopId: number;
-  author: string;
-  receiver: string;
-  content: string;
-  faves: Fave[];
-  dateCreated: Date;
+  zoop: ZoopWithDetails
 };
 
 const ZoopListItem = ({
-  zoopId,
-  author,
-  receiver,
-  content,
-  faves,
-  dateCreated,
+  zoop
 }: ZoopListItemProps) => {
   return (
-    <Link to={`/zoops/${zoopId}`} style={{ textDecoration: "none" }}>
-      <Zoop
-        zoopId={zoopId}
-        author={author}
-        receiver={receiver}
-        content={content}
-        faves={faves}
-        dateCreated={dateCreated}
+    <Link to={`/zoops/${zoop.id}`} style={{ textDecoration: "none" }}>
+      <ZoopDetails
+        zoop={zoop}
       />
      </Link>
   );

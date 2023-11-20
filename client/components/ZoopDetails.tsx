@@ -1,40 +1,29 @@
 import React from "react";
-import { Fave } from "@prisma/client";
+import { Zoop } from "@prisma/client";
 import FaveButton from "./FaveButton";
+import { ZoopWithDetails } from "../../src/types/custom";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import Stack from "@mui/material/Stack";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 
 type ZoopProps = {
-  zoopId: number;
-  author: string;
-  receiver: string;
-  content: string;
-  faves: Fave[];
-  dateCreated: Date;
+ zoop: ZoopWithDetails
 };
 
 const Zoop = ({
-  zoopId,
-  author,
-  receiver,
-  content,
-  faves,
-  dateCreated,
+  zoop
 }: ZoopProps) => {
-  const date = new Date(dateCreated);
+  const date = new Date(zoop.dateCreated);
   const formattedDate = date.toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
   });
-
   return (
     <>
       <Stack spacing={2}>
@@ -43,14 +32,14 @@ const Zoop = ({
             <IconButton>
               <AccountCircle fontSize="large"/>
             </IconButton>
-            <Typography variant="h6">{author}</Typography>
+            <Typography variant="h6">{zoop.author.username}</Typography>
           </Stack>
           <Stack direction="row" alignItems="center">
             <Typography variant="h6">- - - -</Typography>
             <SendIcon />
           </Stack>
           <Stack direction="row" alignItems="center">
-            <Typography variant="h6">{receiver}</Typography>
+            <Typography variant="h6">{zoop.receiver.username}</Typography>
             <IconButton>
               <AccountCircle fontSize="large"/>
             </IconButton>
@@ -59,7 +48,7 @@ const Zoop = ({
         <Card>
           <CardContent>
             <Stack direction="row" justifyContent="center" alignItems="start">
-              <Typography variant="body1">{content}</Typography>
+              <Typography variant="body1">{zoop.content}</Typography>
             </Stack>
           </CardContent>
         </Card>
@@ -68,7 +57,7 @@ const Zoop = ({
           justifyContent="space-between"
           alignItems="center"
         >
-          <FaveButton zoopId={zoopId} faves={faves} />
+          <FaveButton zoopId={zoop.id} faves={zoop.faves} />
           <Typography variant="body2">{formattedDate}</Typography>
         </Stack>
       </Stack>

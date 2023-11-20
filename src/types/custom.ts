@@ -16,6 +16,15 @@ export interface Fave {
 }
 
 export interface Zoop {
+        id: number
+        dateCreated: Date
+        dateUpdated?: Date
+        content: string
+        authorId: number
+        receiverId: number
+}
+
+export interface ZoopWithDetails {
         receiver: User
         author: User
         id: number
