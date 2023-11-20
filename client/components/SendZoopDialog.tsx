@@ -33,7 +33,7 @@ const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
 
     const handleSendZoopClick = () => {
         if (!isGetAllUsersLoading && !usersData) {
-            throw new Error('No users to send Zoop to');
+            console.error('No users to send Zoop to');
         } else if (!isGetAllUsersLoading && usersData) {
             const [recipient] = usersData.users.filter(el => el.user.username === selectedUser?.label);
             if (recipient && currentUser) {
@@ -43,7 +43,7 @@ const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
                     receiverId: recipient.user.id
                 })
             } else {
-                throw new Error('No such user exists. Please select a different username');
+                console.error('No such user exists. Please select a different username');
             }  
         }  
     }
