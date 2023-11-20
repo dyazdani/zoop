@@ -72,8 +72,8 @@ const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
                     disablePortal
                     options={usernames}
                     renderInput={(params) => <TextField {...params} label="Username" />}
-                    isOptionEqualToValue={(option, value) => option.id === value.id}
                     onChange={(e, value, reason) => setSelectedUser(value)}
+                    value={selectedUser}
                 />
                 <TextField
                     required
