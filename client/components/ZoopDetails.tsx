@@ -1,5 +1,4 @@
 import React from "react";
-import { Zoop } from "@prisma/client";
 import FaveButton from "./FaveButton";
 import { ZoopWithDetails } from "../../src/types/custom";
 
@@ -15,14 +14,16 @@ type ZoopProps = {
  zoop: ZoopWithDetails
 };
 
-const Zoop = ({
+const ZoopDetails = ({
   zoop
 }: ZoopProps) => {
-  const date = new Date(zoop.dateCreated);
-  const formattedDate = date.toLocaleDateString("en-US", {
-    month: "long",
+  const dateCreated = new Date(zoop.dateCreated);
+  const formattedDate = dateCreated.toLocaleString("en-US", {
+    month: "short",
     day: "numeric",
     year: "numeric",
+    hour: "numeric",
+    minute: "numeric",
   });
   return (
     <>
@@ -65,4 +66,4 @@ const Zoop = ({
   );
 };
 
-export default Zoop;
+export default ZoopDetails;
