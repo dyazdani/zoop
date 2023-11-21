@@ -53,10 +53,7 @@ usersRouter.post("/register", async (req, res, next) => {
         
         res.send({
             token,
-            user: {
-                email: user.email,
-                username: user.username
-            }
+            user: excludePassword(user)
         });
     })
     } catch (e) {
@@ -87,10 +84,7 @@ usersRouter.post("/login", async (req, res, next) => {
                 
                 res.send({
                     token,
-                    user: {
-                        email: user.email,
-                        username: user.username
-                    }
+                    user: excludePassword(user)
                 });
             } else {
                 next({name: "IncorrectPassword", message: "The password you entered is incorrect"})
