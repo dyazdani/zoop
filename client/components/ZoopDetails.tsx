@@ -11,12 +11,10 @@ import Stack from "@mui/material/Stack";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 
 type ZoopProps = {
- zoop: ZoopWithDetails
+  zoop: ZoopWithDetails;
 };
 
-const ZoopDetails = ({
-  zoop
-}: ZoopProps) => {
+const ZoopDetails = ({ zoop }: ZoopProps) => {
   const dateCreated = new Date(zoop.dateCreated);
   const formattedDate = dateCreated.toLocaleString("en-US", {
     month: "short",
@@ -31,7 +29,7 @@ const ZoopDetails = ({
         <Stack direction="row" justifyContent="space-between">
           <Stack direction="row" alignItems="center">
             <IconButton>
-              <AccountCircle fontSize="large"/>
+              <AccountCircle fontSize="large" />
             </IconButton>
             <Typography variant="h6">{zoop.author.username}</Typography>
           </Stack>
@@ -42,7 +40,7 @@ const ZoopDetails = ({
           <Stack direction="row" alignItems="center">
             <Typography variant="h6">{zoop.receiver.username}</Typography>
             <IconButton>
-              <AccountCircle fontSize="large"/>
+              <AccountCircle fontSize="large" />
             </IconButton>
           </Stack>
         </Stack>

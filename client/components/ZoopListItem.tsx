@@ -4,18 +4,14 @@ import { Link } from "react-router-dom";
 import { ZoopWithDetails } from "../../src/types/custom";
 
 type ZoopListItemProps = {
-  zoop: ZoopWithDetails
+  zoop: ZoopWithDetails;
 };
 
-const ZoopListItem = ({
-  zoop
-}: ZoopListItemProps) => {
+const ZoopListItem = ({ zoop }: ZoopListItemProps) => {
   return (
     <Link to={`/zoops/${zoop.id}`} style={{ textDecoration: "none" }}>
-      <ZoopDetails
-        zoop={zoop}
-      />
-     </Link>
+      <ZoopDetails zoop={zoop} />
+    </Link>
   );
 };
 

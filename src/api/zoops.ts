@@ -1,13 +1,14 @@
 import express, { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
+import { prismaExclude } from "prisma-exclude";
 import requireUser from "../utils/requireUser";
 
 const prisma = new PrismaClient();
+const exclude = prismaExclude(prisma);
 
 const zoopsRouter = express.Router();
 
 // GET /api/zoops
-// TODO: Remove Unnecessary feilds from selections? 
 zoopsRouter.get("/", async (req, res, next): Promise<void> => {
   try {
     const zoops = await prisma.zoop.findMany({
@@ -15,39 +16,15 @@ zoopsRouter.get("/", async (req, res, next): Promise<void> => {
         faves: {
           include: {
             faver: {
-              select: {
-                id: true,
-                email: true,
-                dateCreated: true,
-                username: true,
-                zoopsWritten: true,
-                zoopsReceived: true,
-                faves: true,
-              },
+              select: exclude("user", ["password"]),
             },
           },
         },
         author: {
-          select: {
-            id: true,
-            email: true,
-            dateCreated: true,
-            username: true,
-            zoopsWritten: true,
-            zoopsReceived: true,
-            faves: true,
-          },
+          select: exclude("user", ["password"]),
         },
         receiver: {
-          select: {
-            id: true,
-            email: true,
-            dateCreated: true,
-            username: true,
-            zoopsWritten: true,
-            zoopsReceived: true,
-            faves: true,
-          },
+          select: exclude("user", ["password"]),
         },
       },
     });
