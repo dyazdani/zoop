@@ -13,7 +13,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 type ZoopProps = {
   zoop: ZoopWithDetails;
 };
-
+// TODO: import library to make dates more user friendly. Moment.js?
 const ZoopDetails = ({ zoop }: ZoopProps) => {
   const dateCreated = new Date(zoop.dateCreated);
   const formattedDate = dateCreated.toLocaleString("en-US", {
