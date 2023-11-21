@@ -9,7 +9,7 @@ type ZoopListItemProps = {
 
 const ZoopListItem = ({ zoop }: ZoopListItemProps) => {
   return (
-    <Link to={`/zoops/${zoop.id}`} style={{ textDecoration: "none" }}>
+    <Link to={`/zoops/${zoop.id}`} style={{ textDecoration: "none", color: "inherit" }}>
       <ZoopDetails zoop={zoop} />
     </Link>
   );
