@@ -10,6 +10,10 @@ import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import { Link } from "react-router-dom";
+import MoreButton from "./MoreButton";
+import { useSelector } from 'react-redux';
+
 
 
 type ZoopProps = {
@@ -17,6 +21,8 @@ type ZoopProps = {
 };
 // TODO: import library to make dates more user friendly. Moment.js?
 const ZoopDetails = ({ zoop }: ZoopProps) => {
+
+  const currentUser = useSelector((state: RootState) => state.auth.user);
 
   const dateCreated = new Date(zoop.dateCreated);
   const formattedDate = dateCreated.toLocaleString("en-US", {
@@ -26,6 +32,7 @@ const ZoopDetails = ({ zoop }: ZoopProps) => {
     hour: "numeric",
     minute: "numeric",
   });
+
   return (
     <>
       <Stack spacing={2}>
@@ -47,13 +54,32 @@ const ZoopDetails = ({ zoop }: ZoopProps) => {
             </IconButton>
           </Stack>
         </Stack>
-        <Card>
-          <CardContent>
-            <Stack direction="row" justifyContent="center" alignItems="start">
-              <Typography variant="body1">{zoop.content}</Typography>
-            </Stack>
-          </CardContent>
-        </Card>
+
+          <Card>
+            <CardContent>
+              {/* TODO: Replace 4 in "currentUser.id === 4" with zoop.authorId. 4 is being used
+              for testing because currently because cannot currently log into DB user accounts to 
+              have auth for updating seeded Zoops */}
+              {currentUser && currentUser.id === 4 && (
+                <Stack direction="row" justifyContent="end">
+                  <MoreButton 
+                      zoopId={zoop.id}
+                      authorId={zoop.authorId}
+                      receiverId={zoop.receiverId}
+                      content={zoop.content}
+                  />
+                </Stack>
+              )}
+              <Link
+                to={`/zoops/${zoop.id}`}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <Stack direction="row" justifyContent="center" alignItems="start">
+                  <Typography variant="body1">{zoop.content}</Typography>
+                </Stack>
+              </Link>
+            </CardContent>
+          </Card>        
         <Stack
           direction="row"
           justifyContent="space-between"

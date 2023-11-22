@@ -25,7 +25,7 @@ const MoreButton = ({zoopId, authorId, receiverId, content}: MoreButtonProps) =>
     return (
         <>
             <IconButton
-                size="large"
+                size="medium"
                 aria-label="more zoop options"
                 aria-controls="menu-zoop"
                 aria-haspopup="true"
@@ -33,7 +33,7 @@ const MoreButton = ({zoopId, authorId, receiverId, content}: MoreButtonProps) =>
                 color="inherit"
             >
                 <MoreHorizIcon 
-                    fontSize='large'
+                    fontSize='medium'
                 /> 
             </IconButton>
             <Menu
