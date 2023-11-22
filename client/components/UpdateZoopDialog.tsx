@@ -34,7 +34,6 @@ const UpdateZoopDialog = ({open, onClose, zoopId, content}: UpdateZoopDialogProp
 
     const [updateZoop, { isLoading, isError, data, error }] = useUpdateZoopMutation();
 
-    //TODO: No way to test updating zoop because can't log in as db seen users and can't make zoop in this branch
     const handleUpdateZoopClick = async () => {
         const zoop = await updateZoop({
             id: zoopId,
