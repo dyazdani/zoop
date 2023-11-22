@@ -1,20 +1,38 @@
 import express, {Request, Response, NextFunction} from "express";
 import { PrismaClient } from "@prisma/client";
+import { prismaExclude } from "prisma-exclude";
 import requireUser from "../utils/requireUser";
 
 const prisma = new PrismaClient();
+const exclude = prismaExclude(prisma);
 
 const zoopsRouter = express.Router();
 
 
 // GET /api/zoops
 zoopsRouter.get("/", async (req, res, next): Promise<void> => {
-  try {
-    const zoops = await prisma.zoop.findMany();
-    res.send({zoops});
-  } catch (e) {
-    next(e);
-  }
+    try {
+        const zoops = await prisma.zoop.findMany({
+          include: {
+            faves: {
+              include: {
+                faver: {
+                  select: exclude("user", ["password"]),
+                },
+              },
+            },
+            author: {
+              select: exclude("user", ["password"]),
+            },
+            receiver: {
+              select: exclude("user", ["password"]),
+            },
+          },
+        });
+        res.send({ zoops });
+      } catch (e) {
+        next(e);
+      }
 })
 
 // GET /api/zoops/:id
