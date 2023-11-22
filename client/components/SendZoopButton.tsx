@@ -14,6 +14,10 @@ const SendZoopButton = () => {
     // Variable used for authorization
     const token = useSelector((state: RootState) => state.auth.token);
 
+    if (!token) {
+        return null
+    }
+
     return (
         <>
             {token && (
