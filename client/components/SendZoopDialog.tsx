@@ -9,7 +9,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import Snackbar from '@mui/material/Snackbar'
 import TextField from "@mui/material/TextField";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 
 import { 
@@ -34,14 +34,20 @@ const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
 
     const currentUser = useSelector((state: RootState) => state.auth.user)
     
+    const [sendZoop, { isLoading: isSendZoopLoading, isError, data: zoopData, error: zoopError }] = useSendZoopMutation();
+    const {data: usersData, isLoading: isGetAllUsersLoading, error: userError } = useGetAllUsersQuery(); 
+
+    const userOptions = useMemo(() => {
+        return usersData ? 
+          usersData.users.map(userObject => ({label: userObject.user.username, id: userObject.user.id})) : 
+          [];
+    }, [usersData])
+
     if (!currentUser) {
         console.error("User not logged in should not have access to send zoop dialog");
         navigate('/login');
         return null;
     }
-
-    const [sendZoop, { isLoading: isSendZoopLoading, isError, data: zoopData, error: zoopError }] = useSendZoopMutation();
-    const {data: usersData, isLoading: isGetAllUsersLoading, error: userError } = useGetAllUsersQuery(); 
 
     const handleSendZoopClick = () => {
         if (!isGetAllUsersLoading && !usersData) {
@@ -75,10 +81,6 @@ const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
             />
         )
     }
-    
-    const usernames = usersData ? 
-        usersData.users.map(userObject => ({label: userObject.user.username, id: userObject.user.id})) : 
-        [];
 
     return (
         <>
@@ -90,7 +92,7 @@ const SendZoopDialog = ({open, onClose}: SendZoopDialogProps) => {
                 <DialogContent>
                     <Autocomplete
                         disablePortal
-                        options={usernames}
+                        options={userOptions}
                         renderInput={(params) => <TextField {...params} label="Username" />}
                         onChange={(e, value, reason) => setSelectedUser(value)}
                         value={selectedUser}
