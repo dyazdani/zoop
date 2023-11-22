@@ -38,7 +38,7 @@ const UpdateZoopDialog = ({open, onClose, zoopId, content}: UpdateZoopDialogProp
     const handleUpdateZoopClick = async () => {
         const zoop = await updateZoop({
             id: zoopId,
-            content: content
+            content: contentForUpdate
         }) 
 
         if (error) {

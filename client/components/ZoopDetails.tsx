@@ -57,10 +57,7 @@ const ZoopDetails = ({ zoop }: ZoopProps) => {
 
           <Card>
             <CardContent>
-              {/* TODO: Replace 4 in "currentUser.id === 4" with zoop.authorId. 4 is being used
-              for testing because currently because cannot currently log into DB user accounts to 
-              have auth for updating seeded Zoops */}
-              {currentUser && currentUser.id === 4 && (
+              {currentUser && currentUser.id === zoop.authorId && (
                 <Stack direction="row" justifyContent="end">
                   <MoreButton 
                       zoopId={zoop.id}
