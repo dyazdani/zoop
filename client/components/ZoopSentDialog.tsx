@@ -1,11 +1,12 @@
+import Button from '@mui/material/Button';
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Link from "@mui/material/Link";
-import React, {useState} from "react";
-import { useNavigate } from "react-router-dom";
+import {Link} from "react-router-dom";
+import React from "react";
 import { Zoop } from "../../src/types/custom";
+import { Typography } from '@mui/material';
 
 
 export interface ZoopSentDialogProps {
@@ -15,7 +16,6 @@ export interface ZoopSentDialogProps {
 
 const ZoopSentDialog = ({sentZoop, onClose}: ZoopSentDialogProps) => {
     
-    const navigate = useNavigate()
 
     return (
         <Dialog
@@ -26,14 +26,19 @@ const ZoopSentDialog = ({sentZoop, onClose}: ZoopSentDialogProps) => {
             <DialogContent>
                 <DialogContentText> 
                     <Link
-                        component="button"
-                        onClick={() => {
-                            navigate(`/zoops/${sentZoop.id}`)
-                            onClose();
-                        }}
-                    > 
-                        Go to Zoop.
+                        to={`/zoops/${sentZoop.id}`}    
+                    >
+                        <Button
+                            type="button"
+                            variant='contained'
+                            onClick={() => {
+                                onClose();
+                            }}
+                        > 
+                            <Typography>Go to Zoop</Typography>
+                        </Button>
                     </Link>
+                    
                 </DialogContentText>
             </DialogContent>
         </Dialog>
