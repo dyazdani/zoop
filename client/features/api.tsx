@@ -37,14 +37,6 @@ export const api = createApi({
           query: () => `/zoops`,
           providesTags: ['Zoop']
         }),
-        updateZoop: builder.mutation<{zoop: Zoop}, {id: number, content: string}>({
-          query: ({id, content}) => ({
-            url: `/zoops/${id}`,
-            method: "PUT",
-            body: {content},
-          }),
-          invalidatesTags: ["Zoop"],
-        }),
       }),
   })
   
@@ -56,6 +48,5 @@ export const api = createApi({
   export const { 
     useGetAllZoopsQuery, 
     useRegisterMutation,
-    useLoginMutation,
-    useUpdateZoopMutation 
+    useLoginMutation
   } = api

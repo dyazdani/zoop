@@ -7,30 +7,28 @@ import React, { useState }from 'react';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '../app/store';
-import UpdateZoopDialog from '../components/UpdateZoopDialog';
 
-export interface MoreButtonProps {
-    zoopId: number
-    authorId: number
-    receiverId: number
-    content: string
-}
-
-const MoreButton = ({zoopId, authorId, receiverId, content}: MoreButtonProps) => {
-    const [moreMenuAnchorEl, setMoreMenuAnchorEl] = useState<null | HTMLElement>(null);
-    const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState(false);
+const MoreButton = () => {
+    const [moreIconAnchorEl, setMoreIconAnchorEl] = useState<null | HTMLElement>(null);
 
     const currentUser = useSelector((state: RootState) => state.auth.user);
 
+    if (!currentUser) {
+        console.log('currentUser value is falsy: ', currentUser)
+    }
+
     return (
-        <>
+        <Box
+            component="div"
+        >
             <IconButton
                 size="large"
                 aria-label="more zoop options"
                 aria-controls="menu-zoop"
                 aria-haspopup="true"
-                onClick={e => setMoreMenuAnchorEl(e.currentTarget)}
+                onClick={e => setMoreIconAnchorEl(e.currentTarget)}
                 color="inherit"
+                disabled={!currentUser}
             >
                 <MoreHorizIcon 
                     fontSize='large'
@@ -38,7 +36,7 @@ const MoreButton = ({zoopId, authorId, receiverId, content}: MoreButtonProps) =>
             </IconButton>
             <Menu
                 id="menu-zoop"
-                anchorEl={moreMenuAnchorEl}
+                anchorEl={moreIconAnchorEl}
                 anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
@@ -48,35 +46,25 @@ const MoreButton = ({zoopId, authorId, receiverId, content}: MoreButtonProps) =>
                 vertical: 'top',
                 horizontal: 'right',
                 }}
-                open={Boolean(moreMenuAnchorEl)}
-                onClose={e => setMoreMenuAnchorEl(null)}
+                open={Boolean(moreIconAnchorEl)}
+                onClose={e => setMoreIconAnchorEl(null)}
             >
-                
                 <MenuItem 
                     onClick={e => {
-                        setMoreMenuAnchorEl(null);
-                        setIsUpdateDialogOpen(true);
+                        setMoreIconAnchorEl(null);
                     }}
                 > 
-                    Update
+                    Edit
                 </MenuItem>
-                <MenuItem 
+                <MenuItem
                     onClick={e => {
-                        setMoreMenuAnchorEl(null);
+                        setMoreIconAnchorEl(null);
                     }}
-                > 
+                >
                     Delete
                 </MenuItem>
             </Menu>
-
-                <UpdateZoopDialog
-                    zoopId={zoopId}
-                    content={content}
-                    open={isUpdateDialogOpen}
-                    onClose={() => {setIsUpdateDialogOpen(false)}}
-                />            
-        </>
-        
+            </Box>
     )
 
 }
