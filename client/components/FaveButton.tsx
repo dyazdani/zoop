@@ -12,8 +12,13 @@ type FaveButtonProps = {
 };
 
 const FaveButton = ({ zoop }: FaveButtonProps) => {
+
+  const handleClick = ((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+  })
+  
   return (
-      <Button variant="outlined">
+      <Button variant="outlined" onClick={(e) => handleClick(e)}>
         <Stack direction="row" alignItems="center">
           <StarBorderIcon />
           <Typography variant="body2">{zoop.faves.length}</Typography>
