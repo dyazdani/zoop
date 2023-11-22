@@ -20,7 +20,6 @@ const ZoopsList = () => {
   console.log(zoops, "ZOOPS");
 
   return zoops.length ? (
-    <>
       <Container maxWidth="md" sx={{ marginTop: 10}}>
         <Stack spacing={7}>
           {zoops.map((zoop) => {
@@ -35,7 +34,6 @@ const ZoopsList = () => {
           })}
         </Stack>
       </Container>
-    </>
   ) : (
     <h1>No Zoops to show</h1>
   );

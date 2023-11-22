@@ -24,7 +24,6 @@ const ZoopDetails = ({ zoop }: ZoopProps) => {
     minute: "numeric",
   });
   return (
-    <>
       <Stack spacing={2}>
         <Stack direction="row" justifyContent="space-between">
           <Stack direction="row" alignItems="center">
@@ -60,7 +59,6 @@ const ZoopDetails = ({ zoop }: ZoopProps) => {
           <Typography variant="body2">{formattedDate}</Typography>
         </Stack>
       </Stack>
-    </>
   );
 };
 
