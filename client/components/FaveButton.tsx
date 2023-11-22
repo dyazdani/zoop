@@ -13,14 +13,12 @@ type FaveButtonProps = {
 
 const FaveButton = ({ zoopId, faves }: FaveButtonProps) => {
   return (
-    <>
       <Button variant="outlined">
         <Stack direction="row" alignItems="center">
           <StarBorderIcon />
           <Typography variant="body2">{faves.length}</Typography>
         </Stack>
       </Button>
-    </>
   );
 };
 
