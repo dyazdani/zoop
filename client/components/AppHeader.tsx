@@ -48,7 +48,7 @@ const Nav = () =>  {
                         /> 
                         {!currentUser && (
                             <Typography
-                                variant='h5'
+                                variant='h6'
                             >
                                 Please Log In
                             </Typography>
