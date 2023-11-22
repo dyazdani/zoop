@@ -30,7 +30,9 @@ const SendZoopButton = () => {
                         right: 25
                     }}
                     onClick={() => setIsDialogOpen(true)}
-                >Send Zoop  ----<SendIcon />
+                    endIcon={<SendIcon />}
+                >
+                    Send Zoop
                 </Button>
             )}
 
