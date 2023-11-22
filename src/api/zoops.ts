@@ -42,6 +42,21 @@ zoopsRouter.get("/:id", async (req, res, next) => {
       where: {
         id: zoopId,
       },
+      include: {
+        faves: {
+          include: {
+            faver: {
+              select: exclude("user", ["password"]),
+            },
+          },
+        },
+        author: {
+          select: exclude("user", ["password"]),
+        },
+        receiver: {
+          select: exclude("user", ["password"]),
+        },
+      },
     });
     res.send({ zoop });
   } catch (e) {

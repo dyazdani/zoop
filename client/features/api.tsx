@@ -37,7 +37,7 @@ export const api = createApi({
           query: () => `/zoops`,
           providesTags: ['Zoop']
       }),
-      getZoop: builder.query<{zoop: ZoopWithDetails}, string | undefined>({
+      getZoop: builder.query<{zoop: ZoopWithDetails}, string>({
         query: (id) => `/zoops/${id}`,
         providesTags: ["Zoop"]
       }),
