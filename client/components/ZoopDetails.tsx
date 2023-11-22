@@ -56,7 +56,7 @@ const ZoopDetails = ({ zoop }: ZoopProps) => {
           justifyContent="space-between"
           alignItems="center"
         >
-          <FaveButton zoopId={zoop.id} faves={zoop.faves} />
+          <FaveButton zoop={zoop} />
           <Typography variant="body2">{formattedDate}</Typography>
         </Stack>
       </Stack>
