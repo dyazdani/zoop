@@ -3,14 +3,13 @@ import { useGetZoopQuery } from "../features/api";
 import { useParams } from "react-router-dom";
 import ZoopDetails from "./ZoopDetails";
 import { skipToken } from "@reduxjs/toolkit/query";
+import FaveList from "./FaveList";
 
 type ZoopPageProps = {};
 
-// TODO: string currently allowed to be undefined. allow?
 const ZoopPage = (props: ZoopPageProps) => {
   const { id } = useParams();
 
-  // const { token } = useParams<{token?: string}>();
   const { isLoading, isError, data } = useGetZoopQuery(id ?? skipToken);
 
   if (isLoading) {
@@ -26,7 +25,10 @@ const ZoopPage = (props: ZoopPageProps) => {
   console.log(zoop, "A ZOOP");
 
   return zoop && (
-    <ZoopDetails zoop={zoop} />
+    <>
+      <ZoopDetails zoop={zoop} />
+      <FaveList zoop={zoop} />
+    </>
   )
 };
 
