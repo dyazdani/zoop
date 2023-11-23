@@ -27,10 +27,10 @@ const ZoopPage = (props: ZoopPageProps) => {
   return (
     zoop && (
       <>
-        <Container maxWidth="lg" sx={{ marginTop: 10}}>
+        <Container maxWidth="md" sx={{ marginTop: 10}}>
           <ZoopDetails zoop={zoop} />
         </Container>
-        <Container maxWidth="sm" sx={{ marginTop: 10}}>
+        <Container maxWidth="md" sx={{ marginTop: 10}}>
           <FaveList zoop={zoop} />
         </Container>
       </>

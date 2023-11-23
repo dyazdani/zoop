@@ -11,7 +11,7 @@ type FaveListItemProps = {
 };
 
 const FaveListItem = ({ fave }: FaveListItemProps) => {
-    // TODO: Import library to format dates
+  // TODO: Import library to format dates
   const dateCreated = new Date(fave.dateCreated);
   const formattedDate = dateCreated.toLocaleString("en-US", {
     month: "short",

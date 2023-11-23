@@ -1,19 +1,26 @@
 import React from "react";
 import FaveListItem from "./FaveListItem";
-import { FaveWithDetails, ZoopWithDetails } from "../../src/types/custom";
+import { ZoopWithDetails } from "../../src/types/custom";
 
-import Stack from "@mui/material/Stack";
+// import Stack from "@mui/material/Stack";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 
 type FaveListProps = {
   zoop: ZoopWithDetails;
 };
+
 const FaveList = ({ zoop }: FaveListProps) => {
   return (
-      <Stack alignItems="center" spacing={1} sx={{ marginTop: 10 }}>
-        {zoop.faves.map((fave) => {
-          return <FaveListItem fave={fave} key={fave.faverId} />;
-        })}
-      </Stack>
+    <List disablePadding={true}>
+      {zoop.faves.map((fave) => {
+        return (
+          <ListItem>
+            <FaveListItem fave={fave} key={fave.faverId} />;
+          </ListItem>
+        );
+      })}
+    </List>
   );
 };
 
