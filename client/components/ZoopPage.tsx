@@ -5,6 +5,8 @@ import ZoopDetails from "./ZoopDetails";
 import { skipToken } from "@reduxjs/toolkit/query";
 import FaveList from "./FaveList";
 
+import Container from "@mui/material/Container";
+
 type ZoopPageProps = {};
 
 const ZoopPage = (props: ZoopPageProps) => {
@@ -24,12 +26,18 @@ const ZoopPage = (props: ZoopPageProps) => {
   const zoop = data?.zoop;
   console.log(zoop, "A ZOOP");
 
-  return zoop && (
-    <>
-      <ZoopDetails zoop={zoop} />
-      <FaveList zoop={zoop} />
-    </>
-  )
+  return (
+    zoop && (
+      <>
+        <Container maxWidth="lg" sx={{ marginTop: 10}}>
+          <ZoopDetails zoop={zoop} />
+        </Container>
+        <Container maxWidth="sm" sx={{ marginTop: 10}}>
+          <FaveList zoop={zoop} />
+        </Container>
+      </>
+    )
+  );
 };
 
 export default ZoopPage;
