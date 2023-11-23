@@ -22,9 +22,7 @@ const ZoopPage = (props: ZoopPageProps) => {
     return <p>Oops! Error loading Your Zoop :-(</p>;
   }
 
-  console.log(data, "THE DATA");
   const zoop = data?.zoop;
-  console.log(zoop, "A ZOOP");
 
   return (
     zoop && (
