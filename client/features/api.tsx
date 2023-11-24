@@ -37,6 +37,10 @@ export const api = createApi({
           query: () => `/zoops`,
           providesTags: ['Zoop']
       }),
+      getZoop: builder.query<{zoop: ZoopWithDetails}, string>({
+        query: (id) => `/zoops/${id}`,
+        providesTags: ["Zoop"]
+      }),
       sendZoop: builder.mutation<{zoop: Zoop}, {content: string, authorId: number, receiverId: number}>({
         query: ({content, authorId, receiverId}) => ({
           url: "/zoops",
@@ -62,7 +66,8 @@ export const api = createApi({
   export default api;
   
   export const { 
-    useGetAllZoopsQuery, 
+    useGetAllZoopsQuery,
+    useGetZoopQuery, 
     useRegisterMutation,
     useLoginMutation,
     useSendZoopMutation,
