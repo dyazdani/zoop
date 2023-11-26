@@ -41,10 +41,12 @@ const UpdateZoopDialog = ({open, onClose, zoop}: UpdateZoopDialogProps) => {
             content: contentForUpdate
         }) 
 
+        onClose();
+
         if (error) {
             console.error(error)
         } else {
-            console.log('updated Zoop: ', updateZoop)
+            console.log('updated Zoop: ', updatedZoop)
         }
 
     }
