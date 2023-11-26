@@ -3,6 +3,8 @@ import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import UpdateZoopDialog from './UpdateZoopDialog';
 import { ZoopWithDetails } from '../../src/types/custom';
+import { useSelector } from 'react-redux';
+import { RootState } from '../app/store';
 
 export interface UpdateZoopButtonProps{
     zoop: ZoopWithDetails
@@ -10,6 +12,12 @@ export interface UpdateZoopButtonProps{
 
 const UpdateZoopButton = ({zoop}: UpdateZoopButtonProps) => {
     const [isUpdateDialogOpen, setIsUpdateDialogOpen] = useState(false);
+
+    const currentUser = useSelector((state: RootState) => state.auth.user)
+
+    if (!currentUser || currentUser.id !== zoop.authorId) {
+        return null;
+    }
 
     return (
         <>
