@@ -26,13 +26,14 @@ const UpdateZoopDialog = ({open, onClose, zoop}: UpdateZoopDialogProps) => {
 
     const currentUser = useSelector((state: RootState) => state.auth.user)
     
+    const [updateZoop, { isLoading, isError, data, error }] = useUpdateZoopMutation();
+
     if (!currentUser) {
         console.error("User not logged in does not have access to update zoop dialog");
         navigate('/login');
         return null;
     }
 
-    const [updateZoop, { isLoading, isError, data, error }] = useUpdateZoopMutation();
 
     const handleUpdateZoopClick = async () => {
         const updatedZoop = await updateZoop({
