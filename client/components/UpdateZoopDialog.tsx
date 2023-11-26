@@ -11,16 +11,16 @@ import { useSelector } from "react-redux";
 import { useUpdateZoopMutation } from "../features/api";
 import { RootState } from "../app/store";
 import { useNavigate } from "react-router-dom";
+import { ZoopWithDetails } from "../../src/types/custom";
 
 export interface UpdateZoopDialogProps {
     open: boolean
     onClose: () => void
-    zoopId: number
-    content: string
+    zoop: ZoopWithDetails
 }
 
-const UpdateZoopDialog = ({open, onClose, zoopId, content}: UpdateZoopDialogProps) => {
-    const [contentForUpdate, setContentForUpdate] = useState(content);
+const UpdateZoopDialog = ({open, onClose, zoop}: UpdateZoopDialogProps) => {
+    const [contentForUpdate, setContentForUpdate] = useState(zoop.content);
 
     const navigate = useNavigate();
 
@@ -35,15 +35,15 @@ const UpdateZoopDialog = ({open, onClose, zoopId, content}: UpdateZoopDialogProp
     const [updateZoop, { isLoading, isError, data, error }] = useUpdateZoopMutation();
 
     const handleUpdateZoopClick = async () => {
-        const zoop = await updateZoop({
-            id: zoopId,
+        const updatedZoop = await updateZoop({
+            id: zoop.id,
             content: contentForUpdate
         }) 
 
         if (error) {
             console.error(error)
         } else {
-            console.log('updated Zoop: ', zoop)
+            console.log('updated Zoop: ', updateZoop)
         }
 
     }

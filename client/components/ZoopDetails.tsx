@@ -11,14 +11,14 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { Link } from "react-router-dom";
-import MoreButton from "./MoreButton";
 import { useSelector } from 'react-redux';
-
-
+import { ButtonGroup } from "@mui/material";
+import UpdateZoopButton from "./UpdateZoopButton";
 
 type ZoopProps = {
   zoop: ZoopWithDetails;
 };
+
 // TODO: import library to make dates more user friendly. Moment.js?
 const ZoopDetails = ({ zoop }: ZoopProps) => {
 
@@ -59,12 +59,11 @@ const ZoopDetails = ({ zoop }: ZoopProps) => {
             <CardContent>
               {currentUser && currentUser.id === zoop.authorId && (
                 <Stack direction="row" justifyContent="end">
-                  <MoreButton 
-                      zoopId={zoop.id}
-                      authorId={zoop.authorId}
-                      receiverId={zoop.receiverId}
-                      content={zoop.content}
-                  />
+                  <ButtonGroup>
+                    <UpdateZoopButton 
+                      zoop={zoop}
+                    />
+                    </ ButtonGroup>
                 </Stack>
               )}
               <Link
