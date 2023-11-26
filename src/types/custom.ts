@@ -27,5 +27,13 @@ export interface ZoopWithDetails {
         content: string
         authorId: number
         receiverId: number
-        faves: Fave[]
+        faves: FaveWithDetails[]
+}
+
+export interface FaveWithDetails {
+        id: number
+        dateCreated: Date
+        faver: User
+        faverId: number
+        zoopId: number
 }
