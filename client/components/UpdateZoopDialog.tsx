@@ -12,6 +12,7 @@ import { useUpdateZoopMutation } from "../features/api";
 import { RootState } from "../app/store";
 import { useNavigate } from "react-router-dom";
 import { ZoopWithDetails } from "../../src/types/custom";
+import UpdateSnackbar from "./UpdateSnackbar";
 
 export interface UpdateZoopDialogProps {
     open: boolean
@@ -21,6 +22,7 @@ export interface UpdateZoopDialogProps {
 
 const UpdateZoopDialog = ({open, onClose, zoop}: UpdateZoopDialogProps) => {
     const [contentForUpdate, setContentForUpdate] = useState(zoop.content);
+    const [isSuccessSnackbarOpen, setIsSuccessSnackbarOpen] = useState(false);
 
     const navigate = useNavigate();
 
@@ -49,36 +51,49 @@ const UpdateZoopDialog = ({open, onClose, zoop}: UpdateZoopDialogProps) => {
             console.log('updated Zoop: ', updatedZoop)
         }
 
+        if (updatedZoop) {
+            setIsSuccessSnackbarOpen(true);
+        }
     }
 
     return (
-        <Dialog
-            open={open}
-            onClose={onClose}
-        >
-            <DialogTitle>Update Zoop</DialogTitle>
-            <DialogContent>
-                <TextField
-                    required
-                    fullWidth
-                    multiline
-                    margin="dense"
-                    label="Content"
-                    type="text"
-                    onChange={(e) => setContentForUpdate(e.target.value)}
-                    value={contentForUpdate}    
-                />    
-            </DialogContent>
-            <DialogActions>
-                <Button
-                    variant="contained"
-                    endIcon={<SendIcon />}
-                    onClick={handleUpdateZoopClick}
-                >
-                    Update Zoop
-                </Button>
-            </DialogActions>
-        </Dialog>
+        <>
+            <Dialog
+                open={open}
+                onClose={onClose}
+            >
+                <DialogTitle>Update Zoop</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        required
+                        fullWidth
+                        multiline
+                        margin="dense"
+                        label="Content"
+                        type="text"
+                        onChange={(e) => setContentForUpdate(e.target.value)}
+                        value={contentForUpdate}    
+                    />    
+                </DialogContent>
+                <DialogActions>
+                    <Button
+                        variant="contained"
+                        endIcon={<SendIcon />}
+                        onClick={handleUpdateZoopClick}
+                    >
+                        Update Zoop
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            {isSuccessSnackbarOpen && (
+                <UpdateSnackbar 
+                    open={isSuccessSnackbarOpen}
+                    onClose={() => setIsSuccessSnackbarOpen(false)}
+                />
+            )}
+        </>
+        
     )
 
 }
