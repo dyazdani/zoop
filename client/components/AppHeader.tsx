@@ -88,43 +88,11 @@ const Nav = () =>  {
                         </MenuItem>
                     </Menu>
                 </Box>
-                
-                <Stack
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                >
-                    <Typography 
-                        variant="h1" 
-                        component="button"
-                        type='button'
-                        sx={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            cursor: "pointer"
-                        }}
-                        onClick={() => {navigate('/')}}
-                    >
-                        ZOOP
-                    </Typography>
-                    <Stack
-                        direction="row"
-                        alignItems="center"
-                    >
-                        <Typography
-                            variant="h1"
-                            component="div"
-                            aria-label="presentation"
-                        > 
-                            - - - -  
-                        </Typography>
-                        <SendIcon 
-                            sx={{
-                                fontSize: 80
-                            }}
-                        />
-                    </Stack>
-                </Stack>
+
+                <NavLink to="/" >
+                    <img src="/images/Zoop_logo_withtext.svg"/>
+                </NavLink>
+
                 
                 <Box component='div'>
                     {!currentUser && (
