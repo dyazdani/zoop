@@ -11,6 +11,7 @@ type FaveListProps = {
 };
 
 const FaveList = ({ zoop }: FaveListProps) => {
+  
   return (
     <List disablePadding={true}>
       {zoop.faves.map((fave) => {
