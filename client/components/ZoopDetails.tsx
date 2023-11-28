@@ -10,7 +10,6 @@ import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import { Link } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import { ButtonGroup } from "@mui/material";
 import UpdateZoopButton from "./UpdateZoopButton";
@@ -66,14 +65,9 @@ const ZoopDetails = ({ zoop }: ZoopProps) => {
                     </ ButtonGroup>
                 </Stack>
               )}
-              <Link
-                to={`/zoops/${zoop.id}`}
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
                 <Stack direction="row" justifyContent="center" alignItems="start">
                   <Typography variant="body1">{zoop.content}</Typography>
                 </Stack>
-              </Link>
             </CardContent>
           </Card>        
         <Stack

@@ -13,6 +13,7 @@ import { RootState } from "../app/store";
 import { useNavigate } from "react-router-dom";
 import { ZoopWithDetails } from "../../src/types/custom";
 import UpdateSnackbar from "./UpdateSnackbar";
+import Stack from "@mui/material/Stack";
 
 export interface UpdateZoopDialogProps {
     open: boolean
@@ -58,33 +59,38 @@ const UpdateZoopDialog = ({open, onClose, zoop}: UpdateZoopDialogProps) => {
 
     return (
         <>
-            <Dialog
-                open={open}
-                onClose={onClose}
+            <Stack
+                onClick={(e) => e.stopPropagation()}
             >
-                <DialogTitle>Update Zoop</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        required
-                        fullWidth
-                        multiline
-                        margin="dense"
-                        label="Content"
-                        type="text"
-                        onChange={(e) => setContentForUpdate(e.target.value)}
-                        value={contentForUpdate}    
-                    />    
-                </DialogContent>
-                <DialogActions>
-                    <Button
-                        variant="contained"
-                        endIcon={<SendIcon />}
-                        onClick={handleUpdateZoopClick}
-                    >
-                        Update Zoop
-                    </Button>
-                </DialogActions>
-            </Dialog>
+                <Dialog
+                    open={open}
+                    onClose={onClose}
+                >
+                    <DialogTitle>Update Zoop</DialogTitle>
+                    <DialogContent>
+                        <TextField
+                            required
+                            fullWidth
+                            multiline
+                            margin="dense"
+                            label="Content"
+                            type="text"
+                            onChange={(e) => setContentForUpdate(e.target.value)}
+                            value={contentForUpdate}    
+                        />    
+                    </DialogContent>
+                    <DialogActions>
+                        <Button
+                            variant="contained"
+                            endIcon={<SendIcon />}
+                            onClick={handleUpdateZoopClick}
+                        >
+                            Update Zoop
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </Stack>
+            
 
             {isSuccessSnackbarOpen && (
                 <UpdateSnackbar 

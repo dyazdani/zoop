@@ -23,7 +23,10 @@ const UpdateZoopButton = ({zoop}: UpdateZoopButtonProps) => {
         <>
             <IconButton 
                 aria-label='update'
-                onClick={() => setIsUpdateDialogOpen(true)}
+                onClick={(e) => {
+                    e.preventDefault();
+                    setIsUpdateDialogOpen(true);
+                }}
             >
                 <EditIcon />
             </IconButton>
