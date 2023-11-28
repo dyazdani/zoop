@@ -53,7 +53,7 @@ const ZoopDetails = ({ zoop }: ZoopProps) => {
         </Stack>
         <Card>
           <CardContent>
-          {currentUser && currentUser.id === zoop.authorId && (
+          {currentUser && (currentUser.id === zoop.authorId || currentUser.id === zoop.receiver.id) && (
                 <Stack direction="row" justifyContent="end">
                   <ButtonGroup>
                     <DeleteZoopButton zoop={zoop} />
