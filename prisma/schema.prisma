@@ -43,7 +43,7 @@ model Fave {
   faver   User @relation("Faver", fields: [faverId], references: [id])
   faverId Int
 
-  zoop   Zoop @relation("Zoop", fields: [zoopId], references: [id])
+  zoop   Zoop @relation("Zoop", fields: [zoopId], references: [id], onDelete: Cascade)
   zoopId Int
 
   @@unique([faverId, zoopId])
