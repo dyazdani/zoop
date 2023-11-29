@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { Box } from "@mui/material";
 
 
 export interface UpdateSnackbarProps {
@@ -18,19 +19,27 @@ const UpdateSnackbar = ({open, onClose}: UpdateSnackbarProps) => {
 
     }
     return (
-        <Snackbar 
-            open={open} 
-            autoHideDuration={6000} 
-            onClose={handleClose}
+        <Box 
+            component="div"
+            onClick={(e) => {
+                e.stopPropagation()
+            }}
         >
-            <MuiAlert 
-                onClose={handleClose} 
-                severity="success" 
-                sx={{ width: '100%' }}
+            <Snackbar 
+                open={open} 
+                autoHideDuration={6000} 
+                onClose={handleClose}
             >
-                Zoop updated!
-            </MuiAlert>
-        </Snackbar>
+                <MuiAlert 
+                    onClose={handleClose} 
+                    severity="success" 
+                    sx={{ width: '100%' }}
+                >
+                    Zoop updated!
+                </MuiAlert>
+            </Snackbar>
+        </Box>
+        
     )
 }
 
