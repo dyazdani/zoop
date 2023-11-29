@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { ZoopWithDetails } from "../../src/types/custom";
 import UpdateSnackbar from "./UpdateSnackbar";
 import Stack from "@mui/material/Stack";
+import { Box } from "@mui/material";
 
 export interface UpdateZoopDialogProps {
     open: boolean
@@ -59,7 +60,8 @@ const UpdateZoopDialog = ({open, onClose, zoop}: UpdateZoopDialogProps) => {
 
     return (
         <>
-            <Stack
+            <Box
+                component="div"
                 onClick={(e) => e.stopPropagation()}
             >
                 <Dialog
@@ -89,7 +91,7 @@ const UpdateZoopDialog = ({open, onClose, zoop}: UpdateZoopDialogProps) => {
                         </Button>
                     </DialogActions>
                 </Dialog>
-            </Stack>
+            </Box>
             
 
             {isSuccessSnackbarOpen && (
