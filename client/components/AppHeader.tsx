@@ -15,7 +15,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../features/authSlice';
 import {RootState} from '../app/store'
 
-const Nav = () =>  {
+const AppHeader = () =>  {
     const [accountCircleAnchorEl, setAccountCircleAnchorEl] = useState<null | HTMLElement>(null);
 
     const navigate = useNavigate();
@@ -121,4 +121,4 @@ const Nav = () =>  {
     );
 }
 
-export default Nav;
+export default AppHeader;
