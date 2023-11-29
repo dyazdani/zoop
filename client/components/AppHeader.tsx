@@ -116,11 +116,6 @@ const Nav = () =>  {
                     )}
                 </Box>
             </Stack>
-            {/* TODO: move this to App.tsx */}
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/login">Login</NavLink>
-            <NavLink to="/register">Register</NavLink>
-            <NavLink to="/me">Me</NavLink>
         </>
         
     );
