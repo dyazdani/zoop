@@ -11,7 +11,8 @@ export interface UpdateSnackbarProps {
 
 const UpdateSnackbar = ({open, onClose}: UpdateSnackbarProps) => {
 
-    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+        event.preventDefault();
         if (reason === 'clickaway') {
             return;
         }
@@ -19,16 +20,19 @@ const UpdateSnackbar = ({open, onClose}: UpdateSnackbarProps) => {
 
     }
     return (
-        <Box 
-            component="div"
-            onClick={(e) => {
-                e.stopPropagation()
-            }}
-        >
+        // <Box 
+        //     component="div"
+        //     onClick={(e) => {
+        //         e.stopPropagation()
+        //     }}
+        // >
             <Snackbar 
                 open={open} 
                 autoHideDuration={6000} 
                 onClose={handleClose}
+                onClick={(e) => {
+                    e.preventDefault()
+                }}
             >
                 <MuiAlert 
                     onClose={handleClose} 
@@ -38,7 +42,7 @@ const UpdateSnackbar = ({open, onClose}: UpdateSnackbarProps) => {
                     Zoop updated!
                 </MuiAlert>
             </Snackbar>
-        </Box>
+        // </Box>
         
     )
 }

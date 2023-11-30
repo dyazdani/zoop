@@ -91,15 +91,14 @@ const UpdateZoopDialog = ({open, onClose, zoop}: UpdateZoopDialogProps) => {
                         </Button>
                     </DialogActions>
                 </Dialog>
+                {isSuccessSnackbarOpen && (
+                    <UpdateSnackbar 
+                        open={isSuccessSnackbarOpen}
+                        onClose={() => setIsSuccessSnackbarOpen(false)}
+                    />
+            )}
             </Box>
             
-
-            {isSuccessSnackbarOpen && (
-                <UpdateSnackbar 
-                    open={isSuccessSnackbarOpen}
-                    onClose={() => setIsSuccessSnackbarOpen(false)}
-                />
-            )}
         </>
         
     )
