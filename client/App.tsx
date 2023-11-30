@@ -9,6 +9,7 @@ import MePage from "./components/MePage";
 import HomePage from "./components/HomePage";
 import Nav from "./components/Nav";
 import SendZoopButton from "./components/SendZoopButton";
+import DeleteSnackBar from "./components/DeleteSnackBar";
 
 const App: React.FC = () => {
   const token = useSelector((state: RootState) => state.auth.token);
@@ -19,6 +20,7 @@ const App: React.FC = () => {
 
   return (
     <>
+      <DeleteSnackBar />
       {token && (
         <SendZoopButton />
       )}

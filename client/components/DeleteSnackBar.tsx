@@ -1,24 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../app/store";
+import { setSnackbar } from "../features/snackbarSlice"
 
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import Box from "@mui/material/Box";
+// import Box from "@mui/material/Box";
 
-export interface DeleteSnackBarProps {
-  open: boolean;
-  onClose: () => void;
-}
+// type SnackbarType = AlertColor | undefined;
 
-const DeleteSnackBar = ({ open, onClose }: DeleteSnackBarProps) => {
+// export interface DeleteSnackBarProps {
+//   open: boolean;
+//   onClose: () => void;
+// }
+
+const DeleteSnackBar = () => {
+  const snackbarOpen = useSelector(
+    (state: RootState) => state.snackbar.snackbarOpen
+  );
+  const snackbarType = useSelector(
+    (state: RootState) => state.snackbar.snackbarType
+  );
+  const snackbarMessage = useSelector(
+    (state: RootState) => state.snackbar.snackbarMessage
+  );
+  const dispatch = useDispatch();
   const handleClose = (
     event: React.SyntheticEvent | Event,
     reason?: string
   ) => {
-    event.preventDefault();
+    // event.preventDefault();
     if (reason === "clickaway") {
       return;
     }
-    onClose();
+    dispatch(setSnackbar({snackbarOpen: false, snackbarType, snackbarMessage}));
   };
   return (
     // <Box
@@ -27,15 +42,15 @@ const DeleteSnackBar = ({ open, onClose }: DeleteSnackBarProps) => {
     //     }}
     // >
     <Snackbar
-      open={open}
+      open={snackbarOpen}
       autoHideDuration={6000}
       onClose={handleClose}
-      onClick={(e) => {
-        e.preventDefault();
-      }}
+    //   onClick={(e) => {
+    //     e.preventDefault();
+    //   }}
     >
-      <MuiAlert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-        Zoop deleted!
+      <MuiAlert onClose={handleClose} severity={snackbarType} sx={{ width: "100%" }}>
+        {snackbarMessage}
       </MuiAlert>
     </Snackbar>
     // </Box>

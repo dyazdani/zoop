@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ZoopWithDetails } from "../../src/types/custom";
 import { useDeleteZoopMutation } from "../features/api";
 import DeleteSnackBar from "./DeleteSnackBar";
+import { setSnackbar } from "../features/snackbarSlice";
+import type { RootState } from "../app/store";
 
 import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
@@ -19,15 +22,31 @@ type DeleteZoopDialogProps = {
 };
 
 const DeleteZoopDialog = ({ open, onClose, zoop }: DeleteZoopDialogProps) => {
-  const [isSuccessSnackbarOpen, setIsSuccessSnackbarOpen] = useState(false);
+  const dispatch = useDispatch();
+  const snackbarOpen = useSelector(
+    (state: RootState) => state.snackbar.snackbarOpen
+  );
+  const snackbarType = useSelector(
+    (state: RootState) => state.snackbar.snackbarType
+  );
+  const snackbarMessage = useSelector(
+    (state: RootState) => state.snackbar.snackbarMessage
+  );
+  // const [isSuccessSnackbarOpen, setIsSuccessSnackbarOpen] = useState(false);
   const [deleteZoop, { isLoading, isSuccess, isError, error }] =
     useDeleteZoopMutation();
 
   const handleDeleteZoop = () => {
     console.log("HELLOOOOO?????");
-    setIsSuccessSnackbarOpen(true);
+    // setIsSuccessSnackbarOpen(true);
     deleteZoop(zoop.id);
-
+    dispatch(
+      setSnackbar({
+        snackbarOpen: true,
+        snackbarType: "success",
+        snackbarMessage: "Zoop deleted!",
+      })
+    );
     onClose();
 
     if (isError) {
@@ -61,12 +80,12 @@ const DeleteZoopDialog = ({ open, onClose, zoop }: DeleteZoopDialogProps) => {
           </DialogActions>
         </Dialog>
 
-        {isSuccessSnackbarOpen && (
-        <DeleteSnackBar
+        {/* {isSuccessSnackbarOpen && ( */}
+          {/* <DeleteSnackBar
           open={isSuccessSnackbarOpen}
           onClose={() => setIsSuccessSnackbarOpen(false)}
-        />
-        )}
+          /> */}
+        {/* )} */}
       </Box>
     </>
   );
