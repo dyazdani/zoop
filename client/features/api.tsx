@@ -49,7 +49,7 @@ export const api = createApi({
         }),
         invalidatesTags: ["Zoop"],
       }),
-      deleteZoop: builder.mutation<{zoop: Zoop}, void>({
+      deleteZoop: builder.mutation<{zoop: Zoop}, number>({
         query: (id) => ({
           url: `/zoops/${id}`,
           method: "DELETE"
