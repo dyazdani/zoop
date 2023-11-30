@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { ZoopWithDetails } from "../../src/types/custom";
 import { useDeleteZoopMutation } from "../features/api";
+import DeleteSnackBar from "./DeleteSnackBar";
 
 import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
@@ -18,7 +19,8 @@ type DeleteZoopDialogProps = {
 };
 
 const DeleteZoopDialog = ({ open, onClose, zoop }: DeleteZoopDialogProps) => {
-  const [deleteZoop, { isLoading, isError, data, error }] =
+  const [isSuccessSnackbarOpen, setIsSuccessSnackbarOpen] = useState(false);
+  const [deleteZoop, { isLoading, isSuccess, isError, error }] =
     useDeleteZoopMutation();
 
   const handleDeleteZoop = async () => {
@@ -26,8 +28,12 @@ const DeleteZoopDialog = ({ open, onClose, zoop }: DeleteZoopDialogProps) => {
 
     onClose();
 
-    if (error) {
+    if (isError) {
       console.error(error);
+    }
+
+    if (isSuccess) {
+      setIsSuccessSnackbarOpen(true);
     }
   };
 
@@ -53,6 +59,14 @@ const DeleteZoopDialog = ({ open, onClose, zoop }: DeleteZoopDialogProps) => {
           </DialogActions>
         </Dialog>
       </Box>
+
+      {isSuccessSnackbarOpen && (
+                <DeleteSnackBar 
+                    open={isSuccessSnackbarOpen}
+                    onClose={() => setIsSuccessSnackbarOpen(false)}
+                />
+            )}
+
     </>
   );
 };
