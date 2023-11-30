@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ZoopWithDetails } from "../../src/types/custom";
 import { useDeleteZoopMutation } from "../features/api";
-// import DeleteSnackBar from "./DeleteSnackBar";
 import { setSnackbar } from "../features/snackbarSlice";
 import type { RootState } from "../app/store";
 
@@ -32,15 +31,13 @@ const DeleteZoopDialog = ({ open, onClose, zoop }: DeleteZoopDialogProps) => {
   const snackbarMessage = useSelector(
     (state: RootState) => state.snackbar.snackbarMessage
   );
-  // const [isSuccessSnackbarOpen, setIsSuccessSnackbarOpen] = useState(false);
+  
   const [deleteZoop, { isLoading, isSuccess, isError, error }] =
     useDeleteZoopMutation();
 
   const handleDeleteZoop = async () => {
-    console.log("HELLOOOOO?????");
-    // setIsSuccessSnackbarOpen(true);
+    
     const deletedZoop = await deleteZoop(zoop.id);
-
     if (deletedZoop) {
       dispatch(
         setSnackbar({
@@ -79,12 +76,6 @@ const DeleteZoopDialog = ({ open, onClose, zoop }: DeleteZoopDialogProps) => {
           </DialogActions>
         </Dialog>
 
-        {/* {isSuccessSnackbarOpen && ( */}
-        {/* <DeleteSnackBar
-          open={isSuccessSnackbarOpen}
-          onClose={() => setIsSuccessSnackbarOpen(false)}
-          /> */}
-        {/* )} */}
       </Box>
     </>
   );

@@ -5,14 +5,6 @@ import { setSnackbar } from "../features/snackbarSlice"
 
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-// import Box from "@mui/material/Box";
-
-// type SnackbarType = AlertColor | undefined;
-
-// export interface DeleteSnackBarProps {
-//   open: boolean;
-//   onClose: () => void;
-// }
 
 const DeleteSnackBar = () => {
   const snackbarOpen = useSelector(
@@ -29,31 +21,21 @@ const DeleteSnackBar = () => {
     event: React.SyntheticEvent | Event,
     reason?: string
   ) => {
-    // event.preventDefault();
     if (reason === "clickaway") {
       return;
     }
     dispatch(setSnackbar({snackbarOpen: false, snackbarType, snackbarMessage}));
   };
   return (
-    // <Box
-    //     onClick={(e) => {
-    //         e.stopPropagation()
-    //     }}
-    // >
     <Snackbar
       open={snackbarOpen}
       autoHideDuration={6000}
       onClose={handleClose}
-    //   onClick={(e) => {
-    //     e.preventDefault();
-    //   }}
     >
       <MuiAlert onClose={handleClose} severity={snackbarType} sx={{ width: "100%" }}>
         {snackbarMessage}
       </MuiAlert>
     </Snackbar>
-    // </Box>
   );
 };
 
