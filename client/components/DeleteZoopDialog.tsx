@@ -23,8 +23,10 @@ const DeleteZoopDialog = ({ open, onClose, zoop }: DeleteZoopDialogProps) => {
   const [deleteZoop, { isLoading, isSuccess, isError, error }] =
     useDeleteZoopMutation();
 
-  const handleDeleteZoop = async () => {
-    await deleteZoop(zoop.id);
+  const handleDeleteZoop = () => {
+    console.log("HELLOOOOO?????");
+    setIsSuccessSnackbarOpen(true);
+    deleteZoop(zoop.id);
 
     onClose();
 
@@ -32,9 +34,9 @@ const DeleteZoopDialog = ({ open, onClose, zoop }: DeleteZoopDialogProps) => {
       console.error(error);
     }
 
-    if (isSuccess) {
-      setIsSuccessSnackbarOpen(true);
-    }
+    // if (isSuccess) {
+    //   setIsSuccessSnackbarOpen(true);
+    // }
   };
 
   return (
@@ -58,15 +60,14 @@ const DeleteZoopDialog = ({ open, onClose, zoop }: DeleteZoopDialogProps) => {
             </Button>
           </DialogActions>
         </Dialog>
+
+        {isSuccessSnackbarOpen && (
+        <DeleteSnackBar
+          open={isSuccessSnackbarOpen}
+          onClose={() => setIsSuccessSnackbarOpen(false)}
+        />
+        )}
       </Box>
-
-      {isSuccessSnackbarOpen && (
-                <DeleteSnackBar 
-                    open={isSuccessSnackbarOpen}
-                    onClose={() => setIsSuccessSnackbarOpen(false)}
-                />
-            )}
-
     </>
   );
 };
