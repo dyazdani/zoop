@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ZoopWithDetails } from "../../src/types/custom";
 import { useDeleteZoopMutation } from "../features/api";
 import { setSnackbar } from "../features/snackbarSlice";
@@ -22,6 +23,10 @@ type DeleteZoopDialogProps = {
 
 const DeleteZoopDialog = ({ open, onClose, zoop }: DeleteZoopDialogProps) => {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  const pathMatch = pathname.match(/^\/zoops\/(.+)$/);
+  const navigate = useNavigate();
+
   const snackbarOpen = useSelector(
     (state: RootState) => state.snackbar.snackbarOpen
   );
@@ -31,12 +36,10 @@ const DeleteZoopDialog = ({ open, onClose, zoop }: DeleteZoopDialogProps) => {
   const snackbarMessage = useSelector(
     (state: RootState) => state.snackbar.snackbarMessage
   );
-  
-  const [deleteZoop, { isLoading, isSuccess, isError, error }] =
-    useDeleteZoopMutation();
+
+  const [deleteZoop, { isLoading, isError, error }] = useDeleteZoopMutation();
 
   const handleDeleteZoop = async () => {
-    
     const deletedZoop = await deleteZoop(zoop.id);
     if (deletedZoop) {
       dispatch(
@@ -48,6 +51,10 @@ const DeleteZoopDialog = ({ open, onClose, zoop }: DeleteZoopDialogProps) => {
       );
     }
     onClose();
+
+    if (pathMatch) {
+      navigate("/");
+    }
 
     if (isError) {
       console.error(error);
@@ -75,7 +82,6 @@ const DeleteZoopDialog = ({ open, onClose, zoop }: DeleteZoopDialogProps) => {
             </Button>
           </DialogActions>
         </Dialog>
-
       </Box>
     </>
   );
