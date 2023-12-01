@@ -33,8 +33,7 @@ const ZoopDetails = ({ zoop }: ZoopProps) => {
             <Typography variant="h6">{zoop.author.username}</Typography>
           </Stack>
           <Stack direction="row" alignItems="center">
-            <Typography variant="h6">- - - -</Typography>
-            <SendIcon />
+            <img src="/images/Zoop_logo_black.svg"/>
           </Stack>
           <Stack direction="row" alignItems="center">
             <Typography variant="h6">{zoop.receiver.username}</Typography>
