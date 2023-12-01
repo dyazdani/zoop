@@ -28,21 +28,13 @@ const authSlice = createSlice({
       api.endpoints.register.matchFulfilled,
       (state, { payload }) => {
         state.token = payload.token;
-<<<<<<< HEAD
-        state.user = payload.user
-=======
         state.user = payload.user;
->>>>>>> main
       }
     );
     builder.addMatcher(
       api.endpoints.login.matchFulfilled, (state, { payload }) => {
         state.token = payload.token;
-<<<<<<< HEAD
-        state.user = payload.user
-=======
         state.user = payload.user;
->>>>>>> main
       }
     );
   }
