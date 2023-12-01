@@ -6,7 +6,7 @@ import { setSnackbar } from "../features/snackbarSlice"
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
-const DeleteSnackBar = () => {
+const CustomSnackbar = () => {
   const snackbarOpen = useSelector(
     (state: RootState) => state.snackbar.snackbarOpen
   );
@@ -39,4 +39,4 @@ const DeleteSnackBar = () => {
   );
 };
 
-export default DeleteSnackBar;
+export default CustomSnackbar;
