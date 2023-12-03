@@ -1,6 +1,7 @@
 import React from "react";
 import FaveButton from "./FaveButton";
 import DeleteZoopButton from "./DeleteZoopButton";
+import UpdateZoopButton from "./UpdateZoopButton";
 import { ZoopWithDetails } from "../../src/types/custom";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
@@ -12,11 +13,12 @@ import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import ButtonGroup from "@mui/material/ButtonGroup";
+import { ButtonGroup } from "@mui/material";
 
 type ZoopProps = {
   zoop: ZoopWithDetails;
 };
+
 // TODO: import library to make dates more user friendly. Moment.js?
 const ZoopDetails = ({ zoop }: ZoopProps) => {
 
@@ -32,6 +34,7 @@ const ZoopDetails = ({ zoop }: ZoopProps) => {
   });
 
   return (
+    <>
       <Stack spacing={2}>
         <Stack direction="row" justifyContent="space-between">
           <Stack direction="row" alignItems="center">
@@ -41,8 +44,7 @@ const ZoopDetails = ({ zoop }: ZoopProps) => {
             <Typography variant="h6">{zoop.author.username}</Typography>
           </Stack>
           <Stack direction="row" alignItems="center">
-            <Typography variant="h6">- - - -</Typography>
-            <SendIcon />
+            <img src="/images/Zoop_logo_black.svg"/>
           </Stack>
           <Stack direction="row" alignItems="center">
             <Typography variant="h6">{zoop.receiver.username}</Typography>
@@ -51,20 +53,27 @@ const ZoopDetails = ({ zoop }: ZoopProps) => {
             </IconButton>
           </Stack>
         </Stack>
-        <Card>
-          <CardContent>
-          {currentUser && (currentUser.id === zoop.authorId || currentUser.id === zoop.receiver.id) && (
+          <Card>
+            <CardContent>
                 <Stack direction="row" justifyContent="end">
                   <ButtonGroup>
-                    <DeleteZoopButton zoop={zoop} />
-                    </ ButtonGroup>
+                    {currentUser && currentUser.id === zoop.authorId && (
+                    <UpdateZoopButton 
+                      zoop={zoop}
+                    />
+                     )}
+                    {currentUser && (currentUser.id === zoop.authorId || currentUser.id === zoop.receiver.id) && (
+                    <DeleteZoopButton
+                      zoop={zoop} 
+                    />
+                    )}
+                  </ ButtonGroup>
                 </Stack>
-              )}
-            <Stack direction="row" justifyContent="center" alignItems="start">
-              <Typography variant="body1">{zoop.content}</Typography>
-            </Stack>
-          </CardContent>
-        </Card>
+                <Stack direction="row" justifyContent="center" alignItems="start">
+                  <Typography variant="body1">{zoop.content}</Typography>
+                </Stack>
+            </CardContent>
+          </Card>        
         <Stack
           direction="row"
           justifyContent="space-between"
@@ -74,6 +83,7 @@ const ZoopDetails = ({ zoop }: ZoopProps) => {
           <Typography variant="body2">{formattedDate}</Typography>
         </Stack>
       </Stack>
+    </>
   );
 };
 

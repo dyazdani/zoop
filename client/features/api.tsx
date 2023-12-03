@@ -34,12 +34,20 @@ export const api = createApi({
         invalidatesTags: ["CurrentUser"],
       }),
       getAllZoops: builder.query<{zoops: ZoopWithDetails[]}, void>({
-          query: () => `/zoops`,
-          providesTags: ['Zoop']
+        query: () => `/zoops`,
+        providesTags: ['Zoop']
       }),
       getZoop: builder.query<{zoop: ZoopWithDetails}, string>({
         query: (id) => `/zoops/${id}`,
         providesTags: ["Zoop"]
+      }),
+      updateZoop: builder.mutation<{zoop: Zoop}, {id: number, content: string}>({
+        query: ({id, content}) => ({
+          url: `/zoops/${id}`,
+          method: "PUT",
+          body: {content},
+        }),
+        invalidatesTags: ["Zoop"],
       }),
       sendZoop: builder.mutation<{zoop: Zoop}, {content: string, authorId: number, receiverId: number}>({
         query: ({content, authorId, receiverId}) => ({
@@ -64,6 +72,14 @@ export const api = createApi({
         query: () => `/users/me`,
         providesTags: ['CurrentUser']
       }),
+      addFave: builder.mutation<{fave: Fave}, {faverId: number, zoopId: number}>({
+        query: ({faverId, zoopId}) => ({
+          url: "/faves",
+          method: "POST",
+          body: {faverId, zoopId},
+        }),
+        invalidatesTags: ["Fave", "Zoop"],
+      }),
     }),
   })
   
@@ -77,8 +93,10 @@ export const api = createApi({
     useGetZoopQuery, 
     useRegisterMutation,
     useLoginMutation,
+    useUpdateZoopMutation, 
     useSendZoopMutation,
     useDeleteZoopMutation,
     useGetAllUsersQuery,
-    useGetMeQuery 
+    useGetMeQuery,
+    useAddFaveMutation 
   } = api
