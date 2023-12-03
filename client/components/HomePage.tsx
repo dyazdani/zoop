@@ -5,10 +5,7 @@ const HomePage = () => {
 
    
     return (
-        <>
-            <div>I am the Home Page</div>
-            <ZoopList />
-        </>
+        <ZoopList />
     )
 }
 
