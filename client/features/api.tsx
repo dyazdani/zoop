@@ -57,6 +57,14 @@ export const api = createApi({
         query: () => `/users/me`,
         providesTags: ['CurrentUser']
       }),
+      addFave: builder.mutation<{fave: Fave}, {faverId: number, zoopId: number}>({
+        query: ({faverId, zoopId}) => ({
+          url: "/faves",
+          method: "POST",
+          body: {faverId, zoopId},
+        }),
+        invalidatesTags: ["Fave"],
+      }),
     }),
   })
   
@@ -72,5 +80,6 @@ export const api = createApi({
     useLoginMutation,
     useSendZoopMutation,
     useGetAllUsersQuery,
-    useGetMeQuery 
+    useGetMeQuery,
+    useAddFaveMutation 
   } = api
