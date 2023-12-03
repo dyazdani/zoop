@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import { ZoopWithDetails } from "../../src/types/custom";
 
 import StarBorderIcon from "@mui/icons-material/StarBorder";
@@ -15,7 +15,6 @@ type FaveButtonProps = {
 };
 
 const FaveButton = ({ zoop }: FaveButtonProps) => {
-  const [faved, setFaved] = useState(false);
 
   const currentUser = useSelector((state: RootState) => state.auth.user)
 
@@ -29,26 +28,30 @@ const FaveButton = ({ zoop }: FaveButtonProps) => {
     }] = useRemoveFaveMutation();
 
 
+  const currentUserFave = zoop.faves.filter(
+    fave => fave.faverId === currentUser?.id
+  )
 
   const handleClick = ((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    if (!isLoading && currentUser) {
-      if (!faved) {
+    if (!isLoading && !isRemoveFaveLoading && currentUser) {
+
+      if (!currentUserFave.length) {
         addFave({
           faverId: currentUser.id,
           zoopId: zoop.id
         })
-        setFaved(true)
+        console.log("Got to line 44")
       } else {
-        const faveId = zoop.faves.filter(
-            fave => fave.faverId === currentUser.id
-          )[0].id
+        console.log("Got to line 46")
 
         removeFave({
-          faveId: faveId
+          faveId: currentUserFave[0].id
         })
 
-        setFaved(false);
+        if (removeFaveData) {
+          console.log(removeFaveData)
+        }
       }
     }
   })
