@@ -9,6 +9,7 @@ import MePage from "./components/MePage";
 import HomePage from "./components/HomePage";
 import AppHeader from "./components/AppHeader";
 import SendZoopButton from "./components/SendZoopButton";
+import CustomSnackbar from "./components/CustomSnackbar";
 
 const App: React.FC = () => {
   const token = useSelector((state: RootState) => state.auth.token);
@@ -19,6 +20,7 @@ const App: React.FC = () => {
 
   return (
     <>
+      <CustomSnackbar />
       <AppHeader />
       <Routes>
         <Route path="/" element={<HomePage />}/>

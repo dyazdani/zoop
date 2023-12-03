@@ -57,6 +57,13 @@ export const api = createApi({
         }),
         invalidatesTags: ["Zoop"],
       }),
+      deleteZoop: builder.mutation<{zoop: Zoop}, number>({
+        query: (id) => ({
+          url: `/zoops/${id}`,
+          method: "DELETE"
+        }),
+        invalidatesTags: ["Zoop"],
+      }), 
       getAllUsers: builder.query<{users: {user: User}[]}, void>({
         query: () => `/users`,
         providesTags: ['User']
@@ -88,6 +95,7 @@ export const api = createApi({
     useLoginMutation,
     useUpdateZoopMutation, 
     useSendZoopMutation,
+    useDeleteZoopMutation,
     useGetAllUsersQuery,
     useGetMeQuery,
     useAddFaveMutation 
