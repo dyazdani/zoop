@@ -3,13 +3,12 @@ import { PrismaClient } from "@prisma/client";
 import authenticateJWT from "../utils/auth";
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken');
-import { prismaExclude } from "prisma-exclude";
+import excludePassword from "../utils/exclude";
 import requireUser from "../utils/requireUser";
 
 const SALT_ROUNDS = 10;
 
 const prisma = new PrismaClient();
-const exclude = prismaExclude(prisma);
 
 const {ACCESS_TOKEN_SECRET} = process.env;
 
@@ -26,7 +25,7 @@ usersRouter.get("/me", requireUser, async (req, res, next): Promise<void> => {
                 }
             });
             
-            res.send({user: exclude("user", ["password"])});
+            res.send({user: excludePassword(user)});
         } catch (e) {
             next(e);
         }
@@ -38,7 +37,7 @@ usersRouter.get("/", requireUser, async (req, res, next): Promise<void> => {
     if (req.user) {
         try {
             const users = await prisma.user.findMany();
-            res.send({users: users.map(user => ({user: exclude("user", ["password"])}))});
+            res.send({users: users.map(user => ({user: excludePassword(user)}))});
         } catch (e) {
             next(e);
         }
@@ -66,7 +65,7 @@ usersRouter.post("/register", async (req, res, next) => {
         
         res.send({
             token,
-            user: exclude("user", ["password"])
+            user: excludePassword(user)
         });
     })
     } catch (e) {
@@ -97,7 +96,7 @@ usersRouter.post("/login", async (req, res, next) => {
                 
                 res.send({
                     token,
-                    user: exclude("user", ["password"])
+                    user: excludePassword(user)
                 });
             } else {
                 next({name: "IncorrectPassword", message: "The password you entered is incorrect"})

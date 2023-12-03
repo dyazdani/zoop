@@ -7,26 +7,19 @@ import RegisterPage from "./components/RegisterPage";
 import { RootState } from "./app/store";
 import MePage from "./components/MePage";
 import HomePage from "./components/HomePage";
-import Nav from "./components/Nav";
+import AppHeader from "./components/AppHeader";
 import SendZoopButton from "./components/SendZoopButton";
 
 const App: React.FC = () => {
   const token = useSelector((state: RootState) => state.auth.token);
-  const user = useSelector((state: RootState) => state.auth.user);
-
-
+  
   if (token) {
-    console.log("token: ", token);
-    console.log("user: ", user);
-
+    console.log(token, "token");
   }
 
   return (
     <>
-      {token && (
-        <SendZoopButton />
-      )}
-      <Nav />
+      <AppHeader />
       <Routes>
         <Route path="/" element={<HomePage />}/>
         <Route path="/zoops/:id" element={<ZoopPage />} />
@@ -34,6 +27,7 @@ const App: React.FC = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/me" element={<MePage/>} />
       </Routes>
+      <SendZoopButton />
     </>
   )
 };
