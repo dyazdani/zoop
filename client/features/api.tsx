@@ -65,6 +65,14 @@ export const api = createApi({
         }),
         invalidatesTags: ["Fave", "Zoop"],
       }),
+      removeFave: builder.mutation<{success: true}, {faveId: number}>({
+        query: ({faveId}) => ({
+          url: `/faves/${faveId}`,
+          method: "DELETE",
+          body: {faveId},
+        }),
+        invalidatesTags: ["Fave", "Zoop"],
+      }),
     }),
   })
   
@@ -81,5 +89,6 @@ export const api = createApi({
     useSendZoopMutation,
     useGetAllUsersQuery,
     useGetMeQuery,
-    useAddFaveMutation 
+    useAddFaveMutation,
+    useRemoveFaveMutation  
   } = api
