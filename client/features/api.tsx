@@ -63,7 +63,7 @@ export const api = createApi({
           method: "POST",
           body: {faverId, zoopId},
         }),
-        invalidatesTags: ["Fave"],
+        invalidatesTags: ["Fave", "Zoop"],
       }),
     }),
   })
