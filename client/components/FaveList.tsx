@@ -17,7 +17,7 @@ const FaveList = ({ zoop }: FaveListProps) => {
       {zoop.faves.map((fave) => {
         return (
           <ListItem>
-            <FaveListItem fave={fave} key={fave.faverId} />;
+            <FaveListItem fave={fave} key={fave.faverId} />
           </ListItem>
         );
       })}
