@@ -6,7 +6,7 @@ import { RootState } from '../app/store';
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-      baseUrl: 'http://localhost:3000/api', 
+      baseUrl: '/api', 
       prepareHeaders: (headers: Headers, { getState }) => {
         const token = (getState() as RootState).auth.token;
         if (token) {
