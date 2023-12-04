@@ -9,7 +9,7 @@
     "build:dev": "tsc --watch --preserveWatchOutput",
     "start:dev": "nodemon dist/index.js & webpack -w",
     "dev": "concurrently 'npm run build:dev' 'npm run start:dev'",
-    "build": "tsc",
+    "build": "tsc && webpack",
     "start": "node dist/index.js"
   },
   "keywords": [],
