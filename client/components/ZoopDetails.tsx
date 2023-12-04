@@ -1,6 +1,9 @@
 import React from "react";
 import FaveButton from "./FaveButton";
+import DeleteZoopButton from "./DeleteZoopButton";
+import UpdateZoopButton from "./UpdateZoopButton";
 import { ZoopWithDetails } from "../../src/types/custom";
+import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 
 import Card from "@mui/material/Card";
@@ -10,9 +13,7 @@ import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import { useSelector } from 'react-redux';
 import { ButtonGroup } from "@mui/material";
-import UpdateZoopButton from "./UpdateZoopButton";
 
 type ZoopProps = {
   zoop: ZoopWithDetails;
@@ -52,18 +53,22 @@ const ZoopDetails = ({ zoop }: ZoopProps) => {
             </IconButton>
           </Stack>
         </Stack>
-
           <Card>
             <CardContent>
-              {currentUser && currentUser.id === zoop.authorId && (
                 <Stack direction="row" justifyContent="end">
                   <ButtonGroup>
+                    {currentUser && currentUser.id === zoop.authorId && (
                     <UpdateZoopButton 
                       zoop={zoop}
                     />
-                    </ ButtonGroup>
+                     )}
+                    {currentUser && (currentUser.id === zoop.authorId || currentUser.id === zoop.receiver.id) && (
+                    <DeleteZoopButton
+                      zoop={zoop} 
+                    />
+                    )}
+                  </ ButtonGroup>
                 </Stack>
-              )}
                 <Stack direction="row" justifyContent="center" alignItems="start">
                   <Typography variant="body1">{zoop.content}</Typography>
                 </Stack>
