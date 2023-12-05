@@ -27,8 +27,6 @@ const FaveButton = ({ zoop }: FaveButtonProps) => {
       error: removeFaveError
     }] = useRemoveFaveMutation();
 
-  console.log(currentUser)
-
   const currentUserFave = zoop.faves.find(
     fave => fave.faverId === currentUser?.id
   )
@@ -42,10 +40,7 @@ const FaveButton = ({ zoop }: FaveButtonProps) => {
           faverId: currentUser.id,
           zoopId: zoop.id
         })
-        console.log("Got to line 44")
       } else {
-        console.log("Got to line 46")
-
         removeFave({
           faveId: currentUserFave.id
         })
