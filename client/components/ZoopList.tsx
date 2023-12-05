@@ -30,8 +30,8 @@ const ZoopsList = () => {
                 key={zoop.id}
                 zoop={zoop}
               />
-            );
-          })}
+            )
+          }).reverse()}
         </Stack>
       </Container>
   ) : (
