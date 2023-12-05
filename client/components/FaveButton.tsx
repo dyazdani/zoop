@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 
-import { useAddFaveMutation} from "../features/api";
+import { useAddFaveMutation, useRemoveFaveMutation} from "../features/api";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store";
 
@@ -19,15 +19,40 @@ const FaveButton = ({ zoop }: FaveButtonProps) => {
   const currentUser = useSelector((state: RootState) => state.auth.user)
 
   const [addFave, {isLoading, data, error}] = useAddFaveMutation();
+  const [
+    removeFave, 
+    {
+      isLoading: isRemoveFaveLoading, 
+      data: removeFaveData, 
+      error: removeFaveError
+    }] = useRemoveFaveMutation();
 
+
+  const currentUserFave = zoop.faves.find(
+    fave => fave.faverId === currentUser?.id
+  )
 
   const handleClick = ((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    if (!isLoading && currentUser) {
-      addFave({
-        faverId: currentUser.id,
-        zoopId: zoop.id
-      })
+    if (!isLoading && !isRemoveFaveLoading && currentUser) {
+
+      if (!currentUserFave) {
+        addFave({
+          faverId: currentUser.id,
+          zoopId: zoop.id
+        })
+        console.log("Got to line 44")
+      } else {
+        console.log("Got to line 46")
+
+        removeFave({
+          faveId: currentUserFave[0].id
+        })
+
+        if (removeFaveData) {
+          console.log(removeFaveData)
+        }
+      }
     }
   })
   
