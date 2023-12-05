@@ -28,7 +28,7 @@ const FaveButton = ({ zoop }: FaveButtonProps) => {
     }] = useRemoveFaveMutation();
 
 
-  const currentUserFave = zoop.faves.filter(
+  const currentUserFave = zoop.faves.find(
     fave => fave.faverId === currentUser?.id
   )
 
@@ -36,7 +36,7 @@ const FaveButton = ({ zoop }: FaveButtonProps) => {
     e.preventDefault();
     if (!isLoading && !isRemoveFaveLoading && currentUser) {
 
-      if (!currentUserFave.length) {
+      if (!currentUserFave) {
         addFave({
           faverId: currentUser.id,
           zoopId: zoop.id
